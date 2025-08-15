@@ -15,16 +15,22 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button size="lg" className="text-lg px-8">
             <Mail className="mr-2 h-5 w-5" />
-            Get In Touch
+            <a href="mailto:pratik.kubal@outlook.com">
+            <span>Get In Touch</span>
+            </a>
           </Button>
           <div className="flex gap-4">
-            <Button variant="outline" size="icon">
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://github.com/pratik-kubal" target="_blank" rel="noopener noreferrer">
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
             </Button>
-            <Button variant="outline" size="icon">
-              <Linkedin className="h-5 w-5" />
-              <span className="sr-only">LinkedIn</span>
+            <Button variant="ghost" size="icon" asChild>
+              <a href="https://www.linkedin.com/in/pratik-kubal/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
             </Button>
           </div>
         </div>
