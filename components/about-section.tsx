@@ -21,7 +21,7 @@ export function AboutSection() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               With experience in modern technologies and cloud platforms, I specialize in designing robust architectures
               that can handle millions of requests while maintaining optimal performance and reliability. I have 
-              Achieved a 50% latency reduction in REST API Services, doubled document throughput of PDF processing in
+              achieved a 50% latency reduction in REST API Services, doubled document throughput of PDF processing in
               one quarter, and raised CI/CD success to 100% in two weeks by leveraging serverless architecture.
             </p>
 
