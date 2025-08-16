@@ -4,27 +4,27 @@ import { Badge } from "@/components/ui/badge"
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["Python", "Java", "JavaScript", "TypeScript", "Go", "SQL"],
+    skills: ["Python", "Java", "JavaScript", "R", "SQL", "GraphQL", "Bash", "TLA+"],
   },
   {
     title: "Frameworks & Libraries",
-    skills: ["Django", "FastAPI", "Spring Boot", "Node.js", "Express.js", "React"],
+    skills: ["Node.js", "Next.js", "React", "Angular", "Cucumber", "Cypress"],
   },
   {
     title: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Elasticsearch"],
+    skills: ["Graph Database (Gremlin)", "NoSQL (MongoDB)", "Relational (MySQL, PostgreSQL)"],
   },
   {
     title: "Cloud & DevOps",
-    skills: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform", "Jenkins"],
+    skills: ["AWS 10+ services", "CI/CD", "ZDT Deployment", "Blue-Green Deployment"],
   },
   {
     title: "Tools & Technologies",
-    skills: ["Git", "Linux", "Nginx", "RabbitMQ", "Apache Kafka", "Microservices"],
+    skills: ["Git", "Linux", "Nginx", "Microservices", "Postman", "Splunk"],
   },
   {
     title: "Architecture",
-    skills: ["REST APIs", "GraphQL", "Event-Driven", "CQRS", "Domain-Driven Design"],
+    skills: ["REST APIs", "OpenAPI", "OAuth", "MISMO"],
   },
 ]
 
