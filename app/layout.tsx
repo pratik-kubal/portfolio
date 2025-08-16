@@ -8,7 +8,7 @@ import "./globals.css"
 import SmoothScroll from "@/components/ui/smooth-scroll";
 
 export const metadata: Metadata = {
-  title: "Pratik Kubal - Backend Developer",
+  title: "Pratik Kubal - Software Developer",
   description:
     "Portfolio of Pratik Kubal, a passionate backend software developer specializing in scalable systems and modern technologies.",
   generator: "v0.app",
