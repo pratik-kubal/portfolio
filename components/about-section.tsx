@@ -39,8 +39,12 @@ export function AboutSection() {
 
           <div className="flex justify-center">
             <div className="w-80 h-80 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
-              <div className="w-64 h-64 bg-card rounded-full flex items-center justify-center">
-                <div className="text-6xl">👨‍💻</div>
+              <div className="w-64 h-64 bg-card rounded-full flex items-center justify-center overflow-hidden">
+                <img
+                  src="/profile.jpg"
+                  alt="Pratik Kubal - Backend Software Developer"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>

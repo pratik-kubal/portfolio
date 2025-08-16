@@ -16,7 +16,7 @@ const skillCategories = [
   },
   {
     title: "Cloud & DevOps",
-    skills: ["AWS 20+ services", "CI/CD", "ZDT Deployment", "Blue-Green Deployment"],
+    skills: ["AWS 10+ services", "CI/CD", "ZDT Deployment", "Blue-Green Deployment"],
   },
   {
     title: "Tools & Technologies",
