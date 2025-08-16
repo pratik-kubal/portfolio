@@ -16,7 +16,9 @@ export function AboutSection() {
 
             <p className="text-lg text-muted-foreground leading-relaxed">
               With experience in modern technologies and cloud platforms, I specialize in designing robust architectures
-              that can handle millions of requests while maintaining optimal performance and reliability.
+              that can handle millions of requests while maintaining optimal performance and reliability. I have 
+              Achieved a 50% latency reduction in REST API Services, doubled document throughput of PDF processing in
+              one quarter, and raised CI/CD success to 100% in two weeks by leveraging serverless architecture.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
@@ -28,8 +30,8 @@ export function AboutSection() {
               </Card>
               <Card>
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-primary">50+</div>
-                  <div className="text-sm text-muted-foreground">Projects Completed</div>
+                  <div className="text-2xl font-bold text-primary">10+</div>
+                  <div className="text-sm text-muted-foreground">Complex Problems Solved</div>
                 </CardContent>
               </Card>
             </div>

@@ -8,7 +8,7 @@ export function HeroSection() {
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">Pratik Kubal</h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Backend Software Developer crafting scalable systems and robust architectures
+            Software Developer crafting scalable systems and robust architectures
           </p>
         </div>
 
