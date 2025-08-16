@@ -1,8 +1,12 @@
+"use client"
 import { Card, CardContent } from "@/components/ui/card"
+import { useReveal } from "@/lib/use-reveal";
 
 export function AboutSection() {
+  const ref = useReveal();
+
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-20 px-4" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">About Me</h2>
 
