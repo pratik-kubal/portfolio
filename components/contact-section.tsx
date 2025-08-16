@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Mail, MapPin, Phone } from "lucide-react"
+import { useReveal } from "@/lib/use-reveal";
 
 export function ContactSection() {
+  const ref = useReveal();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,7 +33,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 px-4 bg-muted/30">
+    <section id="contact" className="py-20 px-4 bg-muted/30" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Get In Touch</h2>
 

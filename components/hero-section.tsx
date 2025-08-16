@@ -1,9 +1,12 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
+import { useReveal } from "@/lib/use-reveal";
 
 export function HeroSection() {
+  const ref = useReveal();
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 relative">
+    <section className="min-h-screen flex items-center justify-center px-4 relative" ref={ref}>
       <div className="max-w-4xl mx-auto text-center space-y-8">
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">Pratik Kubal</h1>

@@ -1,7 +1,9 @@
+"use client"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
+import { useReveal } from "@/lib/use-reveal";
 
 const projects = [
   {
@@ -39,8 +41,9 @@ const projects = [
 ]
 
 export function ProjectsSection() {
+  const ref = useReveal();
   return (
-    <section id="projects" className="py-20 px-4">
+    <section id="projects" className="py-20 px-4" ref={ref}>
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Featured Projects</h2>
 
