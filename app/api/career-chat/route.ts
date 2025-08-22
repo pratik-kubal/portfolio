@@ -61,26 +61,28 @@ ${context}
 User question: ${message}`;
 
   // Stream a response using the Responses API
-  const responseStream = openai.responses.stream({
-    model: "gpt-5",                    // or gpt-4.1 if you prefer
+  const response = openai.responses.stream({
+    model: "gpt-4.1",                    // or gpt-4.1 if you prefer
     input: [
       { role: "system", content: system },
       ...history,
       { role: "user", content: userPrompt },
     ],
+    stream: true
   });
 
-  // Convert the OpenAI response stream to a ReadableStream
-  const readable = new ReadableStream({
-    async pull(controller) {
-      for await (const chunk of responseStream) {
-        controller.enqueue(typeof chunk === "string" ? new TextEncoder().encode(chunk) : chunk);
+  const stream = new ReadableStream({
+    async start(controller) {
+      for await (const chunk of response) {
+        if (chunk.type === "response.content_part.done" && "text" in chunk.part) {
+          controller.enqueue(chunk.part.text);
+        }
       }
       controller.close();
     }
   });
 
-  return new Response(readable, {
+  return new Response(stream, {
     headers: { "Content-Type": "text/event-stream" },
   });
 }
