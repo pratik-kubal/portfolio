@@ -18,8 +18,8 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button size="lg" className="text-lg px-8" magneticRadius={75} disableMagneticOnTouch>
             <Mail className="mr-2 h-5 w-5" />
-            <a href="mailto:pratik.kubal@outlook.com">
-            <span>Get In Touch</span>
+            <a href="#chat">
+            <span>Ask about my career</span>
             </a>
           </Button>
           <div className="flex gap-4">
