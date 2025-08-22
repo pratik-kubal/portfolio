@@ -19,4 +19,4 @@ Java, Python, Node.js, React, AWS (Lambda, Step Functions, API GW, CFN, Neptune)
 
 # FAQs
 Preferred stack? Java + Node on AWS.  
-What am I proud of? Doubling throughput on PDF pipeline in 5 weeks.  
+What am I proud of? Doubling throughput on PDF pipeline in 5 weeks.
