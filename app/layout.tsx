@@ -5,10 +5,9 @@ import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/components/theme-provider"
 import { StarfieldBackground } from "@/components/starfield-background"
 import "./globals.css"
-import SmoothScroll from "@/components/ui/smooth-scroll";
 
 export const metadata: Metadata = {
-  title: "Pratik Kubal - Software Developer",
+  title: "Pratik Kubal - Backend Developer",
   description:
     "Portfolio of Pratik Kubal, a passionate backend software developer specializing in scalable systems and modern technologies.",
   generator: "v0.app",
@@ -31,12 +30,10 @@ html {
         `}</style>
       </head>
       <body>
-        <SmoothScroll>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-            <StarfieldBackground />
-            <div className="relative z-10">{children}</div>
-          </ThemeProvider>
-        </SmoothScroll>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <StarfieldBackground />
+          <div className="relative z-10 min-h-screen flex flex-col">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   )
