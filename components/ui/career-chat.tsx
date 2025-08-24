@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useReveal } from "@/lib/use-reveal";
+import MarkdownAsync from 'react-markdown';
 
 
 
@@ -48,12 +49,12 @@ export default function CareerChat() {
   }
 
   return (
-    <div className="bg-card rounded-2xl border p-4 max-w-2xl mx-auto" ref={ref}>
-      <div ref={boxRef} className="h-64 overflow-auto space-y-3">
+    <div id="chat" className="bg-card rounded-2xl border p-4 max-w-xxl min-h-screen flex flex-col h-full" ref={ref}>
+        <div ref={boxRef} className="p-2 overflow-hidden space-y-3 mt-auto">
         {msgs.map((m, i) => (
           <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
-            <div className={`inline-block rounded-2xl px-3 py-2 ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
-              {m.content}
+            <div className={`inline-block rounded-2xl px-3 py-2  ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+              <MarkdownAsync>{m.content}</MarkdownAsync>
             </div>
           </div>
         ))}

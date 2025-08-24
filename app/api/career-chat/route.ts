@@ -51,8 +51,10 @@ export async function POST(req: NextRequest) {
 
   // Guardrail: only answer from provided context; say "not sure" otherwise
   const system = `You are a concise career Q&A assistant for Pratik Kubal.
-Only use the 'Context' to answer questions. If the answer isn't in Context, say I'll have to ask him, you don't know.
-Prefer bullet points and concrete metrics when available.`;
+Only use the 'Context' to answer questions. The context is simplified, so you have to reframe it in your own words for a recuriter audience.
+Use Markdown formatting.
+If the answer isn't in Context, say I don't know.
+Keep the conversation going`;
 
   const userPrompt =
 `Context:
@@ -61,15 +63,19 @@ ${context}
 User question: ${message}`;
 
   // Stream a response using the Responses API
-  const response = openai.responses.stream({
-    model: "gpt-4.1",                    // or gpt-4.1 if you prefer
-    input: [
-      { role: "system", content: system },
-      ...history,
-      { role: "user", content: userPrompt },
-    ],
-    stream: true
-  });
+  // const response = openai.responses.stream({
+  //   model: "gpt-4.1",                    // or gpt-4.1 if you prefer
+  //   input: [
+  //     { role: "system", content: system },
+  //     ...history,
+  //     { role: "user", content: userPrompt },
+  //   ],
+  //   stream: true
+  // });
+  let response = [
+    { type: "response.content_part", part: { text: "This is a placeholder response. The Responses API is not yet available to the public. Please try again later." } },
+    { type: "response.content_part.done", part: { text: "*This* is a placeholder response. The Responses API is not yet available to the public. Please try again later."} }
+  ]
 
   const stream = new ReadableStream({
     async start(controller) {
