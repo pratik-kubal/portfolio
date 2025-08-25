@@ -25,15 +25,23 @@ export function HeroSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            goToChats();
+          }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+        >
           <input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask about my work, skills, projects..."
             className="w-full sm:w-96 rounded-xl border px-3 py-2"
           />
-          <Button size="lg" className="text-lg px-8" onClick={goToChats}>
+          <Button type="submit" size="lg" className="text-lg px-8">
             <span>Ask</span>
           </Button>
+        </form>
           
           <div className="flex gap-4">
             <Button variant="ghost" size="icon" asChild>
@@ -50,13 +58,6 @@ export function HeroSection() {
             </Button>
           </div>
         </div>
-
-        <Link
-          href="/chat"
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hover:text-primary transition-colors"
-        >
-          <ArrowDown className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors" />
-        </Link>
       </div>
     </section>
   )

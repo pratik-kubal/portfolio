@@ -10,6 +10,8 @@ type Msg = { role: "user" | "assistant"; content: string };
 export default function CareerChat() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
+  const [isStreaming, setIsStreaming] = useState(false);
+
   const boxRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -17,7 +19,7 @@ export default function CareerChat() {
 
   const autoSentRef = useRef(false);
 
-  useEffect(() => { boxRef.current?.scrollTo({ top: 1e6 }); }, [msgs]);
+  useEffect(() => { boxRef.current?.scrollTo({ top: 1e6, behavior: "smooth" }); }, [msgs, isStreaming]);
 
   async function send(question?: string) {
     const q = (question ?? input).trim();
@@ -27,6 +29,7 @@ export default function CareerChat() {
 
     const nextHistory = [...msgs, { role: "user" as const, content: q }];
     setMsgs(nextHistory);
+    setIsStreaming(true);
 
     const res = await fetch("/api/career-chat", {
       method: "POST",
@@ -34,11 +37,12 @@ export default function CareerChat() {
       body: JSON.stringify({ message: q, history: nextHistory }),
     });
 
+    const aiIndex = nextHistory.length;
+    setMsgs(h => [...h, { role: "assistant", content: "" }]);
+
     const reader = res.body!.getReader();
     const decoder = new TextDecoder();
     let acc = "";
-    const aiIndex = nextHistory.length;
-    setMsgs(h => [...h, { role: "assistant", content: "" }]);
 
     while (true) {
       const { done, value } = await reader.read();
@@ -50,6 +54,7 @@ export default function CareerChat() {
         return copy;
       });
     }
+    setIsStreaming(false);
   }
 
   useEffect(() => {
@@ -64,8 +69,14 @@ export default function CareerChat() {
   }, [searchParams, pathname, router]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 relative">
-      <div id="chat" className="bg-card rounded-2xl p-4 max-w-2xl flex flex-col h-128 mx-auto bg-transparent">
+    <section className="min-h-screen flex items-center justify-center px-4 py-8">
+      <div id="chat" className="
+          w-full max-w-2xl
+          bg-card/80
+          rounded-2xl bg-transparent
+          flex flex-col
+          h-[70vh] md:h-[75vh]  /* ← keeps size stable */
+        ">
           <div ref={boxRef} className="p-2 overflow-auto space-y-3 mt-auto">
           {msgs.map((m, i) => (
             <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
@@ -74,6 +85,17 @@ export default function CareerChat() {
               </div>
             </div>
           ))}
+          {isStreaming && (
+            <div className="flex justify-start">
+              <div className="bg-muted border border-border/50 text-foreground rounded-2xl px-3 py-2">
+                <span className="inline-flex gap-1 align-middle">
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce [animation-delay:-200ms]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce [animation-delay:-100ms]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce" />
+                </span>
+              </div>
+            </div>
+          )}
         </div>
         <form className="mt-3 flex gap-2" onSubmit={(e) => { e.preventDefault(); send(); }}>
           <input

@@ -5,7 +5,7 @@ export default function Chat() {
   return (
     <main className="min-h-screen">
       <Header />
-      <div className="pt-16">
+      <div>
         <CareerChat />
       </div>
     </main>
