@@ -3,20 +3,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import MarkdownAsync from 'react-markdown';
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-export default function CareerChat() {
+export default function CareerChat({ initialQuestion = "" }: { initialQuestion?: string }) {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
 
   const boxRef = useRef<HTMLDivElement>(null);
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname(); 
 
+  const router = useRouter();
   const autoSentRef = useRef(false);
 
   useEffect(() => { boxRef.current?.scrollTo({ top: 1e6, behavior: "smooth" }); }, [msgs, isStreaming]);
@@ -57,16 +55,14 @@ export default function CareerChat() {
     setIsStreaming(false);
   }
 
+  // Auto-send once if the page provided an initial question, then strip ?question
   useEffect(() => {
     if (autoSentRef.current) return;
-
-    const q = searchParams.get("question");
-    if (!q) return;
-
-    autoSentRef.current = true;          // prevent double send
-    send(q);                             // fire the chat
-    router.replace(pathname, { scroll: false }); // strip query without adding history
-  }, [searchParams, pathname, router]);
+    if (!initialQuestion) return;
+    autoSentRef.current = true;
+    send(initialQuestion);
+    router.replace("/chat", { scroll: false });
+  }, [initialQuestion, router]);
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-8">
