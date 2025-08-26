@@ -104,7 +104,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
                 ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about my work, skills, projects..."
+                placeholder="What do you want to know?"
                 className="w-full rounded-xl border border-primary/20 px-6 py-4 text-lg bg-card/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
                 disabled={isStreaming}
               />
@@ -113,7 +113,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
                 disabled={isStreaming || !input.trim()} 
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-4 py-2 bg-primary text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-all duration-200"
               >
-                {isStreaming ? "Thinking..." : "Ask"}
+                {isStreaming ? "..." : "Ask"}
               </button>
             </div>
             
@@ -130,7 +130,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
                   onClick={() => {
                     send(suggestion);
                   }}
-                  className="px-3 py-1.5 text-sm rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 text-muted-foreground hover:text-foreground"
+                  className="px-3 py-1.5 text-sm rounded-full border border-border bg-green-100 text-green-800 border border-green-200 hover:bg-green-200 transition-colors"
                 >
                   {suggestion}
                 </button>
@@ -139,7 +139,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
           </form>
           
           <p className="text-xs text-muted-foreground">
-            Answers are generated from my resume & projects. If it's not in my experience, I'll say so.
+            Answers are generated from his resume & projects. If it's not in my experience, I'll say so.
           </p>
         </div>
       </section>
@@ -177,13 +177,13 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about my work, skills, projects..."
+            placeholder="What do you want to know?"
             className="flex-1 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
           />
-          <button disabled={isStreaming || !input.trim()} className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">{isStreaming ? "Thinking..." : "Ask"}</button>
+          <button disabled={isStreaming || !input.trim()} className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">{isStreaming ? "..." : "Ask"}</button>
         </form>
         <p className="mt-2 text-xs text-muted-foreground">
-          Answers are generated from my resume & projects. If it's not in my experience, I'll say so.
+          Answers are generated from his resume & projects. If it's not in my experience, I'll say so.
         </p>
       </div>
     </section>
