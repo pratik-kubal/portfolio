@@ -22,7 +22,7 @@ async function main() {
   const parts = chunk(md, 120);
 
   const emb = await openai.embeddings.create({
-    model: "text-embedding-3-small",
+    model: embeddingModel,
     input: parts,
   });
 

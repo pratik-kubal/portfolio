@@ -5,6 +5,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const LLM_MODEL = process.env.LLM_MODEL || "gpt-4.1";
+const embeddingModel = process.env.EMBEDDING_MODEL || "text-embedding-3-small";
 
 type Vec = { id: number; text: string; embedding: number[] };
 let corpus: Vec[] | null = null;
@@ -29,7 +31,7 @@ function cosine(a: number[], b: number[]) {
 
 async function retrieve(query: string, k = 5) {
   const { data } = await openai.embeddings.create({
-    model: "text-embedding-3-small",
+    model: embeddingModel,
     input: query
   });
   const q = data[0].embedding;
@@ -90,7 +92,7 @@ User question: ${message}`;
 
   // Stream a response using the Responses API
   const response = openai.responses.stream({
-    model: "gpt-4.1",                    // or gpt-4.1 if you prefer
+    model: LLM_MODEL,
     input: [
       { role: "system", content: FEW_SHOTS.join("\n\n---\n\n") },
       ...history,
