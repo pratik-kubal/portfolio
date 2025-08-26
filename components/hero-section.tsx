@@ -58,6 +58,20 @@ export function HeroSection() {
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="Ask something else about me..."
               className="w-full sm:w-96 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
+              onFocus={(e) => {
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+                if (window.innerWidth < 768) {
+                  setTimeout(() => {
+                    e.target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                      inline: "nearest",
+                    })
+                  }, 300) // Delay to allow virtual keyboard to appear
+                  }
+                }}
             />
             <Button disabled={!question.trim()}  type="submit" size="lg" className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">
               <span>Ask AI</span>
