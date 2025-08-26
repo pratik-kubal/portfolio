@@ -1,12 +1,14 @@
 "use client"
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin } from "lucide-react"
+import { handleScroll } from "@/lib/utils";
 
 export function HeroSection() {
   const [question, setQuestion] = useState("");
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function goToChats(q?: string) {
     var finalQ = (q ?? question).trim();
@@ -54,24 +56,12 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <input
+              ref = {inputRef}
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="Ask something else about me..."
               className="w-full sm:w-96 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
-              onFocus={(e) => {
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-                if (window.innerWidth < 768) {
-                  setTimeout(() => {
-                    e.target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "center",
-                      inline: "nearest",
-                    })
-                  }, 300) // Delay to allow virtual keyboard to appear
-                  }
-                }}
+              onFocus={handleScroll(inputRef)}
             />
             <Button disabled={!question.trim()}  type="submit" size="lg" className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">
               <span>Ask AI</span>
