@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from "react";
 import MarkdownAsync from 'react-markdown';
 import { useRouter } from "next/navigation";
+import { handleScroll } from "@/lib/utils";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -78,16 +79,6 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
     router.replace("/chat", { scroll: false });
   }, [initialQuestion, router]);
 
-  const handleScroll = (e: React.FocusEvent<HTMLInputElement>) => {
-    setTimeout(() => {
-      e.target.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-        inline: "nearest",
-      })
-    }, 300) // Delay to allow virtual keyboard to appear
-  }
-
   // Show centered input initially
   if (!showFullChat && msgs.length === 0) {
     return (
@@ -117,14 +108,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
                 placeholder="What do you want to know?"
                 className="w-full rounded-xl border border-primary/20 px-6 py-4 text-lg bg-card/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
                 disabled={isStreaming}
-                onFocus={(e) => {
-                  if (typeof window !== "undefined") {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }
-                  if (window.innerWidth < 768) {
-                    handleScroll(e);
-                  }}
-                }
+                onFocus={handleScroll(inputRef)}
               />
               <button 
                 type="submit"
@@ -197,14 +181,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
             onChange={(e) => setInput(e.target.value)}
             placeholder="What do you want to know?"
             className="flex-1 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
-            onFocus={(e) => {
-              if (typeof window !== "undefined") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
-              if (window.innerWidth < 768) {
-                handleScroll(e);
-              }}
-            }
+            onFocus={handleScroll(inputRef)}
           />
           <button disabled={isStreaming || !input.trim()} className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">{isStreaming ? "..." : "Ask"}</button>
         </form>
