@@ -100,7 +100,7 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
             placeholder="Ask about my work, skills, projects..."
             className="flex-1 rounded-xl border px-3 py-2"
           />
-          <button className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">Ask</button>
+          <button disabled={isStreaming || !input.trim()} className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">{isStreaming ? "Thinking..." : "Ask"}</button>
         </form>
         <p className="mt-2 text-xs text-muted-foreground">
           Answers are generated from my resume & projects. If it’s not in my experience, I’ll say so.

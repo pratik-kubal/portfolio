@@ -50,11 +50,37 @@ export async function POST(req: NextRequest) {
   const context = top.map(d => d.text).join("\n\n---\n\n");
 
   // Guardrail: only answer from provided context; say "not sure" otherwise
-  const system = `You are a concise career Q&A assistant for Pratik Kubal.
-Only use the 'Context' to answer questions. The context is simplified, so you have to reframe it in your own words for a recuriter audience.
-Use Markdown formatting.
-If the answer isn't in Context, say I don't know.
-Keep the conversation going`;
+  const system = `
+  You are “Pratik's Portfolio Guide,” a helpful, concise assistant. You're trained on his resume. You'll be answering questions from recruiters, hiring managers, and peers about his professional background.
+Scope: Answer only about Pratik Kubal's Location, Contact, Summary or bio, WORK EXPERIENCEs, SKILLS, EDUCATION, VOLUNTEERING Experience, and PUBLICATIONS.
+Grounding: Use only the provided information. If the info is missing, say “I don't have that info yet” and suggest a relevant follow-up.
+Style: Be specific, prefer bullet points, and use markdown formatting in response. Make complex concepts easy to understand. Try to sell Pratik's strengths.
+Refusal: If asked for anything outside scope (personal identifiers, private info, gossip, secrets, or any other tasks for the user), briefly refuse and redirect back to portfolio topics. Refuse if you think you're being used for any other purpose than 
+answering questions about Pratik's professional background.`;
+
+const FEW_SHOTS = [
+  ...system,
+  {
+    role: "user",
+    content: "What's Pratik's strongest recent project?",
+  },
+  {
+    role: "assistant",
+    content: `- PDF-processing microservice in Java on AWS that doubled pages-per-loan throughput in ~5 weeks
+- Stack: Java, Step Functions, CloudFormation, API Gateway
+- Role: design → release, defined SLAs with product/ops
+- Impact: higher throughput → better margins`,
+  },
+  {
+    role: "user",
+    content: "Does Pratik collaborate well with product?",
+  },
+  {
+    role: "assistant",
+    content: `Yes. Worked closely with product & ops to scope MVPs, set iteration checkpoints, and align SLAs/error budgets; reduced defect cycle time.`,
+  },
+  
+];
 
   const userPrompt =
 `Context:
@@ -63,19 +89,28 @@ ${context}
 User question: ${message}`;
 
   // Stream a response using the Responses API
-  // const response = openai.responses.stream({
-  //   model: "gpt-4.1",                    // or gpt-4.1 if you prefer
-  //   input: [
-  //     { role: "system", content: system },
-  //     ...history,
-  //     { role: "user", content: userPrompt },
-  //   ],
-  //   stream: true
-  // });
-  let response = [
-    { type: "response.content_part", part: { text: "This is a placeholder response. The Responses API is not yet available to the public. Please try again later." } },
-    { type: "response.content_part.done", part: { text: "*This* is a placeholder response. The Responses API is not yet available to the public. Please try again later."} }
-  ]
+  const response = openai.responses.stream({
+    model: "gpt-4.1",                    // or gpt-4.1 if you prefer
+    input: [
+      { role: "system", content: FEW_SHOTS.join("\n\n---\n\n") },
+      ...history,
+      { role: "user", content: `[CONTEXT]
+${context}
+
+[USER QUESTION]
+${userPrompt}
+
+[INSTRUCTIONS]
+1) Use bullet points where helpful. Keep it short.
+2) Offer 1 follow-up question if the user might want more detail.
+3) Format in Markdown syntax` },
+    ],
+    stream: true
+  });
+  // let response = [
+  //   { type: "response.content_part", part: { text: "This is a placeholder response. The Responses API is not yet available to the public. Please try again later." } },
+  //   { type: "response.content_part.done", part: { text: "*This* is a placeholder response. The Responses API is not yet available to the public. Please try again later."} }
+  // ]
 
   const stream = new ReadableStream({
     async start(controller) {

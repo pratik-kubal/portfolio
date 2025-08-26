@@ -19,7 +19,7 @@ function chunk(text, max = 800) {
 
 async function main() {
   const md = fs.readFileSync(path.resolve("data/career.md"), "utf8");
-  const parts = chunk(md);
+  const parts = chunk(md, 120);
 
   const emb = await openai.embeddings.create({
     model: "text-embedding-3-small",
