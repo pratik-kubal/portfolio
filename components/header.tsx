@@ -4,17 +4,18 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const navigation = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "Chat", href: "/chat" }
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,18 +33,22 @@ export function Header() {
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="font-bold text-xl">PK</div>
+          <Link href="/" className="font-bold text-xl hover:text-primary transition-colors">
+            PK
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className={`transition-colors ${
+                pathname === item.href ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+              }`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -67,14 +72,16 @@ export function Header() {
           <nav className="md:hidden py-4 border-t">
             <div className="flex flex-col space-y-4">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className={`transition-colors ${
+                  pathname === item.href ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </nav>
