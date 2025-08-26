@@ -7,9 +7,9 @@ import { StarfieldBackground } from "@/components/starfield-background"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Pratik Kubal - Backend Developer",
+  title: "Pratik Kubal - Fullstack Developer",
   description:
-    "Portfolio of Pratik Kubal, a passionate backend software developer specializing in scalable systems and modern technologies.",
+    "Portfolio of Pratik Kubal",
   generator: "v0.app",
 }
 

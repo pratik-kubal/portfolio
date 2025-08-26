@@ -2,17 +2,25 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
+import { Github, Linkedin } from "lucide-react"
 
 export function HeroSection() {
   const [question, setQuestion] = useState("");
   const router = useRouter();
 
-  function goToChats() {
-    const q = question.trim();
-    router.push(`/chat?question=${encodeURIComponent(q)}`);
+  function goToChats(q?: string) {
+    var finalQ = (q ?? question).trim();
+    if (!finalQ) return;
+    finalQ = finalQ.replace("my", "his")
+    finalQ = String(finalQ).charAt(0).toUpperCase() + String(finalQ).slice(1)
+    router.push(`/chat?question=${encodeURIComponent(finalQ)}`);
   }
+
+  const chips = [
+    "my work experience",
+    "my professional summary",
+    "my Skills",
+  ];
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative">
@@ -24,25 +32,38 @@ export function HeroSection() {
           </p>
         </div>
 
+        {/* Chips Row */}
+        <div className="flex flex-wrap justify-center gap-3 mt-6">
+          {chips.map((c) => (
+            <button
+              key={c}
+              onClick={() => goToChats(c)}
+              className="rounded-full px-4 py-2 text-sm bg-green-100 text-green-800 border border-green-200 hover:bg-green-200 transition-colors"
+            >
+              Ask AI about {c}
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            goToChats();
-          }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <input
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Ask about my work, skills, projects..."
-            className="w-full sm:w-96 rounded-xl border px-3 py-2"
-          />
-          <Button type="submit" size="lg" className="text-lg px-8">
-            <span>Ask</span>
-          </Button>
-        </form>
-          
+            onSubmit={(e) => {
+              e.preventDefault();
+              goToChats();
+            }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <input
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="Ask something else about me..."
+              className="w-full sm:w-96 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
+            />
+            <Button disabled={!question.trim()}  type="submit" size="lg" className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">
+              <span>Ask AI</span>
+            </Button>
+          </form>
+
           <div className="flex gap-4">
             <Button variant="ghost" size="icon" asChild>
               <a href="https://github.com/pratik-kubal" target="_blank" rel="noopener noreferrer">
