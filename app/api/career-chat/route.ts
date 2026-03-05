@@ -61,10 +61,35 @@ async function retrieve(query: string, k = 5) {
 }
 
 export async function POST(req: NextRequest) {
-  const { message, history = [] } = await req.json() as {
-    message: string;
-    history?: { role: "user"|"assistant"; content: string }[];
+  const body = await req.json();
+  const { message, history } = body as {
+    message: unknown;
+    history?: unknown;
   };
+
+  if (typeof message !== "string" || !message.trim()) {
+    return new Response("Invalid message", { status: 400 });
+  }
+  if (message.length > 2000) {
+    return new Response("Message too long", { status: 400 });
+  }
+
+  const validRoles = new Set(["user", "assistant"]);
+  const safeHistory: { role: "user" | "assistant"; content: string }[] = [];
+  if (Array.isArray(history)) {
+    for (const item of history) {
+      if (
+        item &&
+        typeof item === "object" &&
+        validRoles.has(item.role) &&
+        typeof item.content === "string"
+      ) {
+        safeHistory.push({ role: item.role, content: item.content });
+      }
+    }
+  }
+  // Cap history to last 20 turns to limit token cost
+  const cappedHistory = safeHistory.slice(-20);
 
   const top = await retrieve(message, 6);
   const context = top.map(d => d.text).join("\n\n---\n\n");
@@ -76,7 +101,7 @@ export async function POST(req: NextRequest) {
     model: LLM_MODEL,
     input: [
       { role: "system", content: systemPrompt },
-      ...history,
+      ...cappedHistory,
       { role: "user", content: loadUserMessage(context, message) },
     ],
     stream: true
