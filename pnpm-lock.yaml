@@ -139,9 +139,6 @@ importers:
       next-themes:
         specifier: latest
         version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
-      openai:
-        specifier: ^5.13.1
-        version: 5.13.1(zod@3.25.67)
       react:
         specifier: ^19
         version: 19.1.1
@@ -2144,18 +2141,6 @@ packages:
 
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
-
-  openai@5.13.1:
-    resolution: {integrity: sha512-Jty97Apw40znKSlXZL2YDap1U2eN9NfXbqm/Rj1rExeOLEnhwezpKQ+v43kIqojavUgm30SR3iuvGlNEBR+AFg==}
-    hasBin: true
-    peerDependencies:
-      ws: ^8.18.0
-      zod: ^3.23.8
-    peerDependenciesMeta:
-      ws:
-        optional: true
-      zod:
-        optional: true
 
   parse-entities@4.0.2:
     resolution: {integrity: sha512-GG2AQYWoLgL877gQIKeRPGO1xF9+eG1ujIb5soS5gPvLQ1y2o8FL90w2QWNdf9I361Mpp7726c+lj3U0qK1uGw==}
@@ -4415,10 +4400,6 @@ snapshots:
   object-assign@4.1.1: {}
 
   obug@2.1.1: {}
-
-  openai@5.13.1(zod@3.25.67):
-    optionalDependencies:
-      zod: 3.25.67
 
   parse-entities@4.0.2:
     dependencies:
