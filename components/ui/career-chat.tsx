@@ -44,30 +44,49 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
     setMsgs(nextHistory);
     setIsStreaming(true);
 
-    const res = await fetch("/api/career-chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: q, history: nextHistory }),
-    });
-
     const aiIndex = nextHistory.length;
     setMsgs(h => [...h, { role: "assistant", content: "" }]);
 
-    const reader = res.body!.getReader();
-    const decoder = new TextDecoder();
-    let acc = "";
+    try {
+      const res = await fetch("/api/career-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: q, history: nextHistory }),
+      });
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      acc += decoder.decode(value, { stream: true });
+      if (!res.ok || !res.body) {
+        setMsgs(h => {
+          const copy = [...h];
+          copy[aiIndex] = { role: "assistant", content: "Sorry, something went wrong. Please try again." };
+          return copy;
+        });
+        setIsStreaming(false);
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        setMsgs(h => {
+          const copy = [...h];
+          copy[aiIndex] = { role: "assistant", content: acc };
+          return copy;
+        });
+      }
+    } catch {
       setMsgs(h => {
         const copy = [...h];
-        copy[aiIndex] = { role: "assistant", content: acc };
+        copy[aiIndex] = { role: "assistant", content: "Sorry, something went wrong. Please try again." };
         return copy;
       });
+    } finally {
+      setIsStreaming(false);
     }
-    setIsStreaming(false);
   }
 
   // Auto-send once if the page provided an initial question, then strip ?question
