@@ -1,15 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // ── hoisted mocks ──────────────────────────────────────────────────────────
-const { mockEmbeddingsCreate, mockMessagesStream } = vi.hoisted(() => ({
-  mockEmbeddingsCreate: vi.fn(),
+const { mockMessagesStream } = vi.hoisted(() => ({
   mockMessagesStream: vi.fn(),
-}));
-
-vi.mock("openai", () => ({
-  default: vi.fn().mockImplementation(function () {
-    return { embeddings: { create: mockEmbeddingsCreate } };
-  }),
 }));
 
 vi.mock("@anthropic-ai/sdk", () => ({
@@ -26,12 +19,9 @@ const mockReadFileSync = vi.hoisted(() =>
     if (String(filePath).includes("user-message.md")) {
       return "[CONTEXT]\n{{context}}\n\n[USER QUESTION]\n{{message}}\n\n[INSTRUCTIONS]\n1) Keep it short.";
     }
-    // career_vectors.json — two chunks with orthogonal embeddings
-    return JSON.stringify([
-      { id: 1, text: "Pratik is a software engineer.", embedding: [1, 0, 0] },
-      { id: 2, text: "He has Java and AWS experience.", embedding: [0, 1, 0] },
-    ]);
-  })
+    // career.md — full career text
+    return "Pratik is a software engineer with Java and AWS experience.";
+  }),
 );
 
 vi.mock("node:fs", () => ({
@@ -44,7 +34,10 @@ function makeStream(...texts: string[]) {
   return {
     [Symbol.asyncIterator]: async function* () {
       for (const text of texts) {
-        yield { type: "content_block_delta", delta: { type: "text_delta", text } };
+        yield {
+          type: "content_block_delta",
+          delta: { type: "text_delta", text },
+        };
       }
     },
   };
@@ -73,14 +66,13 @@ const { POST } = await import("./route");
 
 describe("POST /api/career-chat", () => {
   beforeEach(() => {
-    mockEmbeddingsCreate.mockResolvedValue({
-      data: [{ embedding: [1, 0, 0] }],
-    });
     mockMessagesStream.mockReturnValue(makeStream("Hello from AI"));
   });
 
   it("returns text/event-stream content-type", async () => {
-    const res = await POST(makeRequest({ message: "What is Pratik good at?" }) as any);
+    const res = await POST(
+      makeRequest({ message: "What is Pratik good at?" }) as any,
+    );
     expect(res.headers.get("Content-Type")).toBe("text/event-stream");
   });
 
@@ -98,22 +90,18 @@ describe("POST /api/career-chat", () => {
     expect(text).toContain("Second.");
   });
 
-  it("calls OpenAI embeddings with the user message", async () => {
-    await POST(makeRequest({ message: "What skills does Pratik have?" }) as any);
-    expect(mockEmbeddingsCreate).toHaveBeenCalledWith(
-      expect.objectContaining({ input: "What skills does Pratik have?" })
-    );
-  });
-
   it("passes conversation history to the LLM", async () => {
     const history = [{ role: "user" as const, content: "Previous question" }];
     await POST(makeRequest({ message: "Follow up", history }) as any);
     expect(mockMessagesStream).toHaveBeenCalledWith(
       expect.objectContaining({
         messages: expect.arrayContaining([
-          expect.objectContaining({ role: "user", content: "Previous question" }),
+          expect.objectContaining({
+            role: "user",
+            content: "Previous question",
+          }),
         ]),
-      })
+      }),
     );
   });
 
@@ -122,7 +110,7 @@ describe("POST /api/career-chat", () => {
     expect(mockMessagesStream).toHaveBeenCalledWith(
       expect.objectContaining({
         system: "You are a helpful portfolio assistant.",
-      })
+      }),
     );
   });
 
@@ -130,7 +118,9 @@ describe("POST /api/career-chat", () => {
     await POST(makeRequest({ message: "What are Pratik's skills?" }) as any);
     const call = mockMessagesStream.mock.calls.at(-1)![0];
     const userTurn = call.messages.at(-1).content as string;
-    expect(userTurn).toContain("Pratik is a software engineer.");
+    expect(userTurn).toContain(
+      "Pratik is a software engineer with Java and AWS experience.",
+    );
     expect(userTurn).toContain("What are Pratik's skills?");
     expect(userTurn).not.toContain("{{context}}");
     expect(userTurn).not.toContain("{{message}}");
@@ -139,8 +129,14 @@ describe("POST /api/career-chat", () => {
   it("ignores stream events that are not content_block_delta text_delta", async () => {
     mockMessagesStream.mockReturnValue({
       [Symbol.asyncIterator]: async function* () {
-        yield { type: "content_block_delta", delta: { type: "input_json_delta", partial_json: "ignored" } };
-        yield { type: "content_block_delta", delta: { type: "text_delta", text: "included" } };
+        yield {
+          type: "content_block_delta",
+          delta: { type: "input_json_delta", partial_json: "ignored" },
+        };
+        yield {
+          type: "content_block_delta",
+          delta: { type: "text_delta", text: "included" },
+        };
       },
     });
     const res = await POST(makeRequest({ message: "test" }) as any);
