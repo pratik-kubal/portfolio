@@ -1,11 +1,13 @@
 // app/api/career-chat/route.ts
 import { NextRequest } from "next/server";
 import OpenAI from "openai";
+import Anthropic from "@anthropic-ai/sdk";
 import fs from "node:fs";
 import path from "node:path";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const LLM_MODEL = process.env.LLM_MODEL || "gpt-4.1";
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const CLAUDE_MODEL = process.env.LLM_MODEL || "claude-sonnet-4-6";
 const embeddingModel = process.env.EMBEDDING_MODEL || "text-embedding-3-small";
 
 type Vec = { id: number; text: string; embedding: number[] };
@@ -96,26 +98,21 @@ export async function POST(req: NextRequest) {
 
   const systemPrompt = loadPrompt();
 
-  // Stream a response using the Responses API
-  const response = openai.responses.stream({
-    model: LLM_MODEL,
-    input: [
-      { role: "system", content: systemPrompt },
+  const claudeStream = anthropic.messages.stream({
+    model: CLAUDE_MODEL,
+    max_tokens: 1024,
+    system: systemPrompt,
+    messages: [
       ...cappedHistory,
       { role: "user", content: loadUserMessage(context, message) },
     ],
-    stream: true
   });
-  // let response = [
-  //   { type: "response.content_part", part: { text: "This is a placeholder response. The Responses API is not yet available to the public. Please try again later." } },
-  //   { type: "response.content_part.done", part: { text: "*This* is a placeholder response. The Responses API is not yet available to the public. Please try again later."} }
-  // ]
 
   const stream = new ReadableStream({
     async start(controller) {
-      for await (const chunk of response) {
-        if (chunk.type === "response.content_part.done" && "text" in chunk.part) {
-          controller.enqueue(chunk.part.text);
+      for await (const event of claudeStream) {
+        if (event.type === "content_block_delta" && event.delta.type === "text_delta") {
+          controller.enqueue(event.delta.text);
         }
       }
       controller.close();
