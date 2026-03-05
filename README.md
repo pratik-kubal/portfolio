@@ -2,7 +2,7 @@
 
 Personal portfolio site with an AI-powered career assistant. Ask it anything about my background, experience, or skills — it answers by reasoning over my actual resume content in real time.
 
-**Live:** [pratikkubal.com](https://pratikkubal.com) <!-- update if needed -->
+**Live:** [pratikkubal.com](https://pratik-kubal.com) <!-- update if needed -->
 
 ---
 
