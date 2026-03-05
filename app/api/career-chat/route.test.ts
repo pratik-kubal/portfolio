@@ -1,17 +1,20 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // ── hoisted mocks ──────────────────────────────────────────────────────────
-const { mockEmbeddingsCreate, mockResponsesStream } = vi.hoisted(() => ({
+const { mockEmbeddingsCreate, mockMessagesStream } = vi.hoisted(() => ({
   mockEmbeddingsCreate: vi.fn(),
-  mockResponsesStream: vi.fn(),
+  mockMessagesStream: vi.fn(),
 }));
 
 vi.mock("openai", () => ({
   default: vi.fn().mockImplementation(function () {
-    return {
-      embeddings: { create: mockEmbeddingsCreate },
-      responses: { stream: mockResponsesStream },
-    };
+    return { embeddings: { create: mockEmbeddingsCreate } };
+  }),
+}));
+
+vi.mock("@anthropic-ai/sdk", () => ({
+  default: vi.fn().mockImplementation(function () {
+    return { messages: { stream: mockMessagesStream } };
   }),
 }));
 
@@ -36,12 +39,12 @@ vi.mock("node:fs", () => ({
 }));
 
 // ── helpers ────────────────────────────────────────────────────────────────
-/** Build an async-iterable that yields content-part events */
+/** Build an async-iterable that yields Anthropic content_block_delta events */
 function makeStream(...texts: string[]) {
   return {
     [Symbol.asyncIterator]: async function* () {
       for (const text of texts) {
-        yield { type: "response.content_part.done", part: { text } };
+        yield { type: "content_block_delta", delta: { type: "text_delta", text } };
       }
     },
   };
@@ -73,7 +76,7 @@ describe("POST /api/career-chat", () => {
     mockEmbeddingsCreate.mockResolvedValue({
       data: [{ embedding: [1, 0, 0] }],
     });
-    mockResponsesStream.mockReturnValue(makeStream("Hello from AI"));
+    mockMessagesStream.mockReturnValue(makeStream("Hello from AI"));
   });
 
   it("returns text/event-stream content-type", async () => {
@@ -82,13 +85,13 @@ describe("POST /api/career-chat", () => {
   });
 
   it("streams the LLM response text in the body", async () => {
-    mockResponsesStream.mockReturnValue(makeStream("Pratik is great at Java"));
+    mockMessagesStream.mockReturnValue(makeStream("Pratik is great at Java"));
     const res = await POST(makeRequest({ message: "Skills?" }) as any);
     expect(await readText(res)).toContain("Pratik is great at Java");
   });
 
   it("concatenates multiple streamed chunks", async () => {
-    mockResponsesStream.mockReturnValue(makeStream("First. ", "Second."));
+    mockMessagesStream.mockReturnValue(makeStream("First. ", "Second."));
     const res = await POST(makeRequest({ message: "Tell me more" }) as any);
     const text = await readText(res);
     expect(text).toContain("First. ");
@@ -105,9 +108,9 @@ describe("POST /api/career-chat", () => {
   it("passes conversation history to the LLM", async () => {
     const history = [{ role: "user" as const, content: "Previous question" }];
     await POST(makeRequest({ message: "Follow up", history }) as any);
-    expect(mockResponsesStream).toHaveBeenCalledWith(
+    expect(mockMessagesStream).toHaveBeenCalledWith(
       expect.objectContaining({
-        input: expect.arrayContaining([
+        messages: expect.arrayContaining([
           expect.objectContaining({ role: "user", content: "Previous question" }),
         ]),
       })
@@ -116,33 +119,28 @@ describe("POST /api/career-chat", () => {
 
   it("uses the system prompt loaded from prompt.md", async () => {
     await POST(makeRequest({ message: "Who is Pratik?" }) as any);
-    expect(mockResponsesStream).toHaveBeenCalledWith(
+    expect(mockMessagesStream).toHaveBeenCalledWith(
       expect.objectContaining({
-        input: expect.arrayContaining([
-          expect.objectContaining({
-            role: "system",
-            content: "You are a helpful portfolio assistant.",
-          }),
-        ]),
+        system: "You are a helpful portfolio assistant.",
       })
     );
   });
 
   it("renders {{context}} and {{message}} into the user turn", async () => {
     await POST(makeRequest({ message: "What are Pratik's skills?" }) as any);
-    const call = mockResponsesStream.mock.calls.at(-1)![0];
-    const userTurn = call.input.at(-1).content as string;
+    const call = mockMessagesStream.mock.calls.at(-1)![0];
+    const userTurn = call.messages.at(-1).content as string;
     expect(userTurn).toContain("Pratik is a software engineer.");
     expect(userTurn).toContain("What are Pratik's skills?");
     expect(userTurn).not.toContain("{{context}}");
     expect(userTurn).not.toContain("{{message}}");
   });
 
-  it("ignores stream events that are not response.content_part.done", async () => {
-    mockResponsesStream.mockReturnValue({
+  it("ignores stream events that are not content_block_delta text_delta", async () => {
+    mockMessagesStream.mockReturnValue({
       [Symbol.asyncIterator]: async function* () {
-        yield { type: "response.content_part", part: { text: "ignored" } };
-        yield { type: "response.content_part.done", part: { text: "included" } };
+        yield { type: "content_block_delta", delta: { type: "input_json_delta", partial_json: "ignored" } };
+        yield { type: "content_block_delta", delta: { type: "text_delta", text: "included" } };
       },
     });
     const res = await POST(makeRequest({ message: "test" }) as any);
