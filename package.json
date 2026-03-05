@@ -52,7 +52,6 @@
     "next": "15.5.12",
     "next-themes": "latest",
     "@anthropic-ai/sdk": "latest",
-    "openai": "^5.13.1",
     "react": "^19",
     "react-day-picker": "9.8.0",
     "react-dom": "^19",
