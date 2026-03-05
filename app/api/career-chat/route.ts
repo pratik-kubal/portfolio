@@ -10,6 +10,8 @@ const embeddingModel = process.env.EMBEDDING_MODEL || "text-embedding-3-small";
 
 type Vec = { id: number; text: string; embedding: number[] };
 let corpus: Vec[] | null = null;
+let promptText: string | null = null;
+let userMessageTemplate: string | null = null;
 
 function loadCorpus(): Vec[] {
   if (!corpus) {
@@ -17,6 +19,22 @@ function loadCorpus(): Vec[] {
     corpus = JSON.parse(fs.readFileSync(p, "utf8"));
   }
   return corpus!;
+}
+
+function loadPrompt(): string {
+  if (!promptText) {
+    promptText = fs.readFileSync(path.resolve("data/prompt.md"), "utf8");
+  }
+  return promptText;
+}
+
+function loadUserMessage(context: string, message: string): string {
+  if (!userMessageTemplate) {
+    userMessageTemplate = fs.readFileSync(path.resolve("data/user-message.md"), "utf8");
+  }
+  return userMessageTemplate
+    .replace("{{context}}", context)
+    .replace("{{message}}", message);
 }
 
 function cosine(a: number[], b: number[]) {
@@ -51,61 +69,15 @@ export async function POST(req: NextRequest) {
   const top = await retrieve(message, 6);
   const context = top.map(d => d.text).join("\n\n---\n\n");
 
-  // Guardrail: only answer from provided context; say "not sure" otherwise
-  const system = `
-  You are “Pratik's Portfolio Guide,” a helpful, concise assistant. You're trained on his resume. You'll be answering questions from recruiters, hiring managers, and peers about his professional background.
-Scope: Answer only about Pratik Kubal's Location, Contact, Summary or bio, WORK EXPERIENCEs, SKILLS, EDUCATION, VOLUNTEERING Experience, and PUBLICATIONS.
-Grounding: Use only the provided information. If the info is missing, say “I don't have that info yet” and suggest a relevant follow-up.
-Style: Summarize and structure the answer in your own words having a conversational tone. Use bullet points. Use markdown formatting in response. Make complex concepts easy to understand. Try to sell Pratik's strengths.
-Refusal: If asked for anything outside scope (personal identifiers, private info, gossip, secrets, or any other tasks for the user), briefly refuse and redirect back to portfolio topics. Refuse if you think you're being used for any other purpose than 
-answering questions about Pratik's professional background.`;
-
-const FEW_SHOTS = [
-  ...system,
-  {
-    role: "user",
-    content: "What's Pratik's strongest recent project?",
-  },
-  {
-    role: "assistant",
-    content: `- PDF-processing microservice in Java on AWS that doubled pages-per-loan throughput in ~5 weeks
-- Stack: Java, Step Functions, CloudFormation, API Gateway
-- Role: design → release, defined SLAs with product/ops
-- Impact: higher throughput → better margins`,
-  },
-  {
-    role: "user",
-    content: "Does Pratik collaborate well with product?",
-  },
-  {
-    role: "assistant",
-    content: `Yes. Worked closely with product & ops to scope MVPs, set iteration checkpoints, and align SLAs/error budgets; reduced defect cycle time.`,
-  },
-  
-];
-
-  const userPrompt =
-`Context:
-${context}
-
-User question: ${message}`;
+  const systemPrompt = loadPrompt();
 
   // Stream a response using the Responses API
   const response = openai.responses.stream({
     model: LLM_MODEL,
     input: [
-      { role: "system", content: FEW_SHOTS.join("\n\n---\n\n") },
+      { role: "system", content: systemPrompt },
       ...history,
-      { role: "user", content: `[CONTEXT]
-${context}
-
-[USER QUESTION]
-${userPrompt}
-
-[INSTRUCTIONS]
-1) Use bullet points where helpful. Keep it short.
-2) Offer 1 follow-up question if the user might want more detail.
-3) Format in Markdown syntax` },
+      { role: "user", content: loadUserMessage(context, message) },
     ],
     stream: true
   });
