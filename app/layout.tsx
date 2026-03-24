@@ -1,5 +1,6 @@
 import type React from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -132,6 +133,24 @@ html {
             {children}
           </div>
         </ThemeProvider>
+        <Script
+          id="apollo-tracker"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              function initApollo(){
+                var n=Math.random().toString(36).substring(7),
+                    o=document.createElement("script");
+                o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n;
+                o.async=true;
+                o.defer=true;
+                o.onload=function(){window.trackingFunctions.onLoad({appId:"69c1476f4668580011e33138"})};
+                document.head.appendChild(o)
+              }
+              initApollo();
+            `,
+          }}
+        />
       </body>
     </html>
   );
