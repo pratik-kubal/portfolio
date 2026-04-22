@@ -88,11 +88,16 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Pratik Kubal",
+  givenName: "Pratik",
+  additionalName: "Pravin",
+  familyName: "Kubal",
   url: siteUrl,
   email: "pratik-kubal@outlook.com",
   jobTitle: "Full-Stack Software Engineer",
   description:
     "Full-stack software engineer with 5+ years of experience in FinTech, AWS, microservices, and AI/LLM integration.",
+  disambiguatingDescription:
+    "Full-stack software engineer based in Philadelphia, PA. M.S. Computer Science from University at Buffalo (SUNY), 2020. Former Software Engineer II at Dark Matter Technologies (2020–2025). Focus on FinTech microservices on AWS and AI/LLM integration. ORCID: 0009-0005-9209-7704.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Philadelphia",
@@ -118,7 +123,14 @@ const jsonLd = {
     "https://github.com/pratik-kubal",
     "https://github.com/pratikkubal",
     "https://x.com/pratik_kubal",
+    "https://orcid.org/0009-0005-9209-7704",
   ],
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "ORCID",
+    value: "0009-0005-9209-7704",
+    url: "https://orcid.org/0009-0005-9209-7704",
+  },
   knowsAbout: [
     "Java",
     "Python",
