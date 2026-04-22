@@ -100,13 +100,24 @@ const jsonLd = {
     addressCountry: "US",
   },
   alumniOf: [
-    { "@type": "CollegeOrUniversity", name: "SUNY" },
-    { "@type": "CollegeOrUniversity", name: "University of Mumbai" },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University at Buffalo, The State University of New York",
+      url: "https://www.buffalo.edu",
+      sameAs: "https://en.wikipedia.org/wiki/University_at_Buffalo",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of Mumbai",
+      url: "https://mu.ac.in",
+      sameAs: "https://en.wikipedia.org/wiki/University_of_Mumbai",
+    },
   ],
   sameAs: [
-    "https://linkedin.com/in/pratik-kubal",
+    "https://www.linkedin.com/in/pratik-kubal/",
     "https://github.com/pratik-kubal",
-    siteUrl,
+    "https://github.com/pratikkubal",
+    "https://x.com/pratik_kubal",
   ],
   knowsAbout: [
     "Java",
@@ -118,6 +129,43 @@ const jsonLd = {
     "Microservices",
     "FinTech",
     "AI/LLM Integration",
+  ],
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Full-Stack Software Engineer",
+    occupationLocation: {
+      "@type": "City",
+      name: "Philadelphia, PA",
+    },
+    skills:
+      "Java, Python, TypeScript, React, Next.js, AWS, Microservices, FinTech, AI/LLM Integration",
+    experienceRequirements: "5+ years",
+    responsibilities:
+      "Building scalable, cloud-native microservices and APIs on AWS, primarily in FinTech. Led database migrations (Neptune→Aurora) and CI/CD pipelines. Integrated AI/LLM tooling into production systems.",
+  },
+  worksFor: [
+    {
+      "@type": "Role",
+      roleName: "Software Engineer II",
+      startDate: "2022-09",
+      endDate: "2025-05-15",
+      worksFor: {
+        "@type": "Organization",
+        name: "Dark Matter Technologies",
+        url: "https://dmatter.com/",
+      },
+    },
+    {
+      "@type": "Role",
+      roleName: "Software Engineer I",
+      startDate: "2020-04",
+      endDate: "2022-09",
+      worksFor: {
+        "@type": "Organization",
+        name: "Dark Matter Technologies",
+        url: "https://dmatter.com/",
+      },
+    },
   ],
 };
 

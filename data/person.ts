@@ -63,14 +63,8 @@ export const person = {
     {
       k: "email",
       label: "Email",
-      handle: "pratik.kubal@outlook.com",
-      url: "mailto:pratik.kubal@outlook.com",
-    },
-    {
-      k: "resume",
-      label: "Résumé",
-      handle: "cv.pdf",
-      url: "/cv.pdf",
+      handle: "pratik-kubal@outlook.com",
+      url: "mailto:pratik-kubal@outlook.com",
     },
   ] as Social[],
   projects: [
