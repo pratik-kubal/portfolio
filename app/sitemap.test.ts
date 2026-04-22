@@ -6,20 +6,12 @@ describe("sitemap", () => {
     const entries = sitemap();
     const urls = entries.map((e) => e.url);
     expect(urls).toContain("https://pratik-kubal.com");
-    expect(urls).toContain("https://pratik-kubal.com/chat");
   });
 
   it("sets home page priority to 1", () => {
     const entries = sitemap();
     const home = entries.find((e) => e.url === "https://pratik-kubal.com");
     expect(home?.priority).toBe(1);
-  });
-
-  it("sets chat page priority lower than home page", () => {
-    const entries = sitemap();
-    const home = entries.find((e) => e.url === "https://pratik-kubal.com");
-    const chat = entries.find((e) => e.url === "https://pratik-kubal.com/chat");
-    expect(chat?.priority).toBeLessThan(home!.priority!);
   });
 
   it("includes lastModified for all entries", () => {

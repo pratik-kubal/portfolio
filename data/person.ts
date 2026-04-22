@@ -36,12 +36,10 @@ export const person = {
   chatOpener:
     "Hi. I'm a small assistant that lives on this page. Ask me about Pratik — his projects, his stack, or how to get in touch.",
   facts: [
-    { k: "Born", v: "Mumbai, IN" },
     { k: "Lives", v: "Philadelphia, PA" },
     { k: "Occupation", v: "Software Engineer" },
     { k: "Education", v: "M.S. Computer Science" },
     { k: "Known for", v: "Backend, FinTech, AWS" },
-    { k: "Languages", v: "English, Hindi, Marathi" },
   ] as Fact[],
   socials: [
     {
