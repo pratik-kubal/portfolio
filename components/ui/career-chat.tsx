@@ -1,18 +1,25 @@
-// components/CareerChat.tsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import MarkdownAsync from 'react-markdown';
+import MarkdownAsync from "react-markdown";
 import { useRouter } from "next/navigation";
 import { handleScroll } from "@/lib/utils";
+import { person } from "@/data/person";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-export default function CareerChat({ initialQuestion = "" }: { initialQuestion?: string }) {
+type Variant = "inline" | "page";
+
+export default function CareerChat({
+  initialQuestion = "",
+  variant = "page",
+}: {
+  initialQuestion?: string;
+  variant?: Variant;
+}) {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
-  const [showFullChat, setShowFullChat] = useState(false);
 
   const boxRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -20,32 +27,22 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
   const router = useRouter();
   const autoSentRef = useRef(false);
 
-  useEffect(() => { boxRef.current?.scrollTo({ top: 1e6, behavior: "smooth" }); }, [msgs, isStreaming]);
-
-  // Focus input when component mounts
   useEffect(() => {
-    if (inputRef.current && !showFullChat) {
-      inputRef.current.focus();
-    }
-  }, [showFullChat]);
+    boxRef.current?.scrollTo({ top: 1e6, behavior: "smooth" });
+  }, [msgs, isStreaming]);
 
   async function send(question?: string) {
     const q = (question ?? input).trim();
     if (!q) return;
 
-    // Transition to full chat view when first message is sent
-    if (!showFullChat) {
-      setShowFullChat(true);
-    }
-
-    if (!question) setInput(""); // clear input only if typed manually
+    if (!question) setInput("");
 
     const nextHistory = [...msgs, { role: "user" as const, content: q }];
     setMsgs(nextHistory);
     setIsStreaming(true);
 
     const aiIndex = nextHistory.length;
-    setMsgs(h => [...h, { role: "assistant", content: "" }]);
+    setMsgs((h) => [...h, { role: "assistant", content: "" }]);
 
     try {
       const res = await fetch("/api/career-chat", {
@@ -55,9 +52,12 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
       });
 
       if (!res.ok || !res.body) {
-        setMsgs(h => {
+        setMsgs((h) => {
           const copy = [...h];
-          copy[aiIndex] = { role: "assistant", content: "Sorry, something went wrong. Please try again." };
+          copy[aiIndex] = {
+            role: "assistant",
+            content: "Sorry, something went wrong. Please try again.",
+          };
           return copy;
         });
         setIsStreaming(false);
@@ -72,16 +72,19 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
         const { done, value } = await reader.read();
         if (done) break;
         acc += decoder.decode(value, { stream: true });
-        setMsgs(h => {
+        setMsgs((h) => {
           const copy = [...h];
           copy[aiIndex] = { role: "assistant", content: acc };
           return copy;
         });
       }
     } catch {
-      setMsgs(h => {
+      setMsgs((h) => {
         const copy = [...h];
-        copy[aiIndex] = { role: "assistant", content: "Sorry, something went wrong. Please try again." };
+        copy[aiIndex] = {
+          role: "assistant",
+          content: "Sorry, something went wrong. Please try again.",
+        };
         return copy;
       });
     } finally {
@@ -89,124 +92,161 @@ export default function CareerChat({ initialQuestion = "" }: { initialQuestion?:
     }
   }
 
-  // Auto-send once if the page provided an initial question, then strip ?question
   useEffect(() => {
     if (autoSentRef.current) return;
     if (!initialQuestion) return;
     autoSentRef.current = true;
     send(initialQuestion);
-    router.replace("/chat", { scroll: false });
-  }, [initialQuestion, router]);
+    if (variant === "page") {
+      router.replace("/chat", { scroll: false });
+    }
+  }, [initialQuestion, router, variant]);
 
-  // Show centered input initially
-  if (!showFullChat && msgs.length === 0) {
+  const opener = person.chatOpener;
+  const prompts = person.prompts;
+
+  if (variant === "inline") {
     return (
-      <section className="min-h-screen flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-xl text-center space-y-6 animate-in fade-in duration-500">
-          <div className="space-y-3">
-            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Ask about Pratik
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Get insights about my work experience, skills, and projects
-            </p>
-          </div>
-          
-          <form 
-            className="space-y-4" 
-            onSubmit={(e) => { 
-              e.preventDefault(); 
-              send(); 
-            }}
-          >
-            <div className="relative">
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="What do you want to know?"
-                className="w-full rounded-xl border border-primary/20 px-6 py-4 text-lg bg-card/50 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
-                disabled={isStreaming}
-                onFocus={handleScroll(inputRef)}
-              />
-              <button 
-                type="submit"
-                disabled={isStreaming || !input.trim()} 
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-4 py-2 bg-primary text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-all duration-200"
-              >
-                {isStreaming ? "..." : "Ask"}
-              </button>
-            </div>
-            
-            <div className="flex flex-wrap gap-2 justify-center">
-              {[
-                "What's your recent work?",
-                "Tell me about your skills",
-                "What projects have you built?",
-                "Your educational background?"
-              ].map((suggestion) => (
-                <button
-                  key={suggestion}
-                  type="button"
-                  onClick={() => {
-                    send(suggestion);
-                  }}
-                  className="px-3 py-1.5 text-sm rounded-full border border-border bg-green-100 text-green-800 border border-green-200 hover:bg-green-200 transition-colors"
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
-          </form>
-          
-          <p className="text-xs text-muted-foreground">
-            Answers are generated from his resume & projects. If it's not in my experience, I'll say so.
-          </p>
+      <section className="v3-chat">
+        <div className="tag">
+          <i />
+          LIVE
         </div>
+        <h3>Talk to a small AI trained on my work.</h3>
+        <div className="note">
+          It knows about my projects, experience, and how to reach me. It will
+          politely refuse questions outside that scope.
+        </div>
+
+        <div className="v3-convo" ref={boxRef}>
+          {msgs.length === 0 && <div className="v3-bub a">{opener}</div>}
+          {msgs.map((m, i) => (
+            <div
+              className={`v3-bub ${m.role === "user" ? "u" : "a"}`}
+              key={i}
+            >
+              {m.role === "assistant" ? (
+                <MarkdownAsync>{m.content}</MarkdownAsync>
+              ) : (
+                m.content
+              )}
+            </div>
+          ))}
+          {isStreaming && (
+            <div className="v3-bub a" style={{ opacity: 0.55 }}>
+              thinking…
+            </div>
+          )}
+        </div>
+
+        {msgs.length === 0 && (
+          <div className="v3-chips3">
+            {prompts.map((q) => (
+              <button key={q} type="button" onClick={() => send(q)}>
+                “{q}”
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form
+          className="v3-ask"
+          onSubmit={(e) => {
+            e.preventDefault();
+            send();
+          }}
+        >
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask a question…"
+            spellCheck={false}
+            onFocus={handleScroll(inputRef)}
+            disabled={isStreaming}
+          />
+          <button type="submit" disabled={isStreaming || !input.trim()}>
+            Ask
+          </button>
+        </form>
       </section>
     );
   }
 
-  // Show full chat interface after first message
+  // page variant — full-screen, editorial paper background
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-8">
-      <div 
-        id="chat" 
-        className="w-full max-w-2xl bg-card/80 rounded-2xl bg-transparent flex flex-col h-[70vh] md:h-[75vh] animate-in slide-in-from-bottom-4 duration-500"
-      >
-        <div ref={boxRef} className="p-2 overflow-auto space-y-3 mt-auto">
+    <section className="min-h-[calc(100vh-40px)] flex items-start justify-center px-6 pt-24 pb-10">
+      <div className="w-full max-w-2xl flex flex-col gap-6">
+        <div className="space-y-2">
+          <div
+            className="font-mono text-[11px] tracking-[0.2em] uppercase"
+            style={{ color: "var(--accent-text)" }}
+          >
+            ◦ a conversation
+          </div>
+          <h1 className="font-serif text-4xl md:text-5xl leading-[1.05] tracking-tight">
+            Ask about <em style={{ color: "var(--accent-text)" }}>Pratik</em>.
+          </h1>
+          <p className="font-mono text-xs" style={{ color: "var(--dim)" }}>
+            Answers are generated from his résumé &amp; projects. If it&apos;s
+            not in his experience, I&apos;ll say so.
+          </p>
+        </div>
+
+        <div
+          ref={boxRef}
+          className="v3-convo flex-1 min-h-[320px] max-h-[60vh] overflow-auto"
+        >
+          {msgs.length === 0 && <div className="v3-bub a">{opener}</div>}
           {msgs.map((m, i) => (
-            <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
-              <div className={`inline-block rounded-2xl px-3 py-2  ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+            <div
+              className={`v3-bub ${m.role === "user" ? "u" : "a"}`}
+              key={i}
+            >
+              {m.role === "assistant" ? (
                 <MarkdownAsync>{m.content}</MarkdownAsync>
-              </div>
+              ) : (
+                m.content
+              )}
             </div>
           ))}
           {isStreaming && (
-            <div className="flex justify-start">
-              <div className="bg-muted border border-border/50 text-foreground rounded-2xl px-3 py-2">
-                <span className="inline-flex gap-1 align-middle">
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce [animation-delay:-200ms]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce [animation-delay:-100ms]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-foreground/60 animate-bounce" />
-                </span>
-              </div>
+            <div className="v3-bub a" style={{ opacity: 0.55 }}>
+              thinking…
             </div>
           )}
         </div>
-        <form className="mt-3 flex gap-2" onSubmit={(e) => { e.preventDefault(); send(); }}>
+
+        {msgs.length === 0 && (
+          <div className="v3-chips3">
+            {prompts.map((q) => (
+              <button key={q} type="button" onClick={() => send(q)}>
+                “{q}”
+              </button>
+            ))}
+          </div>
+        )}
+
+        <form
+          className="v3-ask"
+          onSubmit={(e) => {
+            e.preventDefault();
+            send();
+          }}
+        >
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="What do you want to know?"
-            className="flex-1 rounded-xl border px-3 py-2 border-green-800 backdrop-blur-sm focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 placeholder:text-muted-foreground/60"
+            placeholder="Ask a question…"
+            spellCheck={false}
             onFocus={handleScroll(inputRef)}
+            disabled={isStreaming}
           />
-          <button disabled={isStreaming || !input.trim()} className="rounded-xl px-4 py-2 bg-primary text-primary-foreground">{isStreaming ? "..." : "Ask"}</button>
+          <button type="submit" disabled={isStreaming || !input.trim()}>
+            Ask
+          </button>
         </form>
-        <p className="mt-2 text-xs text-muted-foreground">
-          Answers are generated from his resume & projects. If it's not in my experience, I'll say so.
-        </p>
       </div>
     </section>
   );

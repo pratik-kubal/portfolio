@@ -19,11 +19,9 @@ export default async function Chat({
     typeof params?.question === "string" ? params.question : "";
 
   return (
-    <main className="min-h-screen">
+    <main className="page-transition">
       <Header />
-      <div>
-        <CareerChat initialQuestion={initialQuestion} />
-      </div>
+      <CareerChat initialQuestion={initialQuestion} variant="page" />
     </main>
   );
 }

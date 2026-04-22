@@ -1,13 +1,33 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { StarfieldBackground } from "@/components/starfield-background";
 import "./globals.css";
 
 const siteUrl = "https://pratik-kubal.com";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -107,13 +127,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <style>{`
 html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
+  font-family: var(--font-serif);
 }
         `}</style>
         <script
@@ -128,7 +150,6 @@ html {
           enableSystem
           disableTransitionOnChange
         >
-          <StarfieldBackground />
           <div className="relative z-10 min-h-screen flex flex-col">
             {children}
           </div>

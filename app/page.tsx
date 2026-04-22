@@ -1,13 +1,19 @@
-"use client";
-import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { Footer } from "@/components/footer"
+import { Header } from "@/components/header";
+import { EditorialCard } from "@/components/editorial-card";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
+  const initialQuestion =
+    typeof params?.question === "string" ? params.question : "";
+
   return (
-    <main className="min-h-screen">
+    <main className="page-transition">
       <Header />
-      <HeroSection />
+      <EditorialCard initialQuestion={initialQuestion} />
     </main>
-  )
+  );
 }
