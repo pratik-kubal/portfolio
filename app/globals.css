@@ -218,14 +218,17 @@
 }
 
 .v3-stage {
-  display: block;
-  padding-top: 40px;
-  padding-left: 408px;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 40px 28px 0;
   min-height: 100vh;
 }
 @media (max-width: 900px) {
   .v3-stage {
-    padding-left: 0;
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
   }
 }
 
@@ -235,33 +238,18 @@
   border: 1px solid var(--rule);
   border-radius: 4px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 20px 40px -20px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 64px;
-  left: 28px;
   width: 352px;
-  max-height: calc(100vh - 88px);
-  overflow-y: auto;
-  scrollbar-width: none;
-  z-index: 30;
-}
-.v3-card::-webkit-scrollbar {
-  display: none;
+  flex-shrink: 0;
 }
 @media (max-width: 900px) {
   .v3-card {
     position: static;
     width: auto;
-    max-height: none;
-    overflow-y: visible;
+    margin: 16px;
   }
 }
 .dark .v3-card {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 20px 40px -20px rgba(0, 0, 0, 0.6);
-}
-@media (max-width: 900px) {
-  .v3-card {
-    margin: 16px;
-  }
 }
 
 
@@ -363,7 +351,9 @@
 }
 
 .v3-main {
-  padding: 84px 76px;
+  flex: 1;
+  min-width: 0;
+  padding: 44px 76px 84px;
   display: flex;
   flex-direction: column;
 }
@@ -698,6 +688,8 @@
   color: var(--ink);
   letter-spacing: -0.005em;
   height: 22px;
+}
+.np-wrap[data-live="true"] .tk-marq {
   mask-image: linear-gradient(
     90deg,
     transparent 0,
@@ -714,8 +706,15 @@
   );
 }
 .tk-marq .inner {
-  display: inline-block;
+  display: block;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.np-wrap[data-live="true"] .tk-marq .inner {
+  display: inline-block;
+  overflow: visible;
+  text-overflow: clip;
 }
 .np-wrap[data-live="true"] .tk-marq .inner {
   animation: tk-scroll 18s linear infinite;

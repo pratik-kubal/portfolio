@@ -35,11 +35,11 @@ const CACHE_KEY = "pk.nowplaying.v1";
 const POLL_MS = 30_000;
 
 const PLACEHOLDER_TRACK: Track = {
-  title: "Weightless",
-  artist: "Marconi Union",
-  album: "Weightless (Ambient Transmissions Vol. 2)",
+  title: "Blade Runner Blues",
+  artist: "Vangelis",
+  album: "Blade Runner (Music From The Original Soundtrack)",
   albumArt: null,
-  url: "https://open.spotify.com/track/6kkwzB6hXLIONkEk9JciA6",
+  url: "https://open.spotify.com/track/575blCgesVtCu0HEYaIcas",
 };
 
 function readCache(): Track | null {
@@ -224,7 +224,9 @@ export function SpotifyNowPlaying({
   }, []);
 
   const marqueeUnit = `${show.title}  ·  ${show.artist}  ·  `;
-  const marqueePieces = marqueeUnit.repeat(4).split("  ·  ");
+  const marqueePieces = isPlaying
+    ? marqueeUnit.repeat(4).split("  ·  ")
+    : [show.title, show.artist];
 
   return (
     <div className="np-wrap" data-live={isPlaying ? "true" : "false"}>
