@@ -2,6 +2,7 @@
 
 import { person } from "@/data/person";
 import CareerChat from "@/components/ui/career-chat";
+import { SpotifyNowPlaying } from "@/components/spotify-now-playing";
 
 export function EditorialCard({
   initialQuestion = "",
@@ -44,6 +45,8 @@ export function EditorialCard({
             </a>
           ))}
         </div>
+
+        <SpotifyNowPlaying endpoint="/api/now-playing" forceState="auto" />
       </aside>
 
       <main className="v3-main">
