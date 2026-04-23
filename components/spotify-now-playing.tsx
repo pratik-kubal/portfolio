@@ -190,10 +190,10 @@ export function SpotifyNowPlaying({
 
   const show = track ?? PLACEHOLDER_TRACK;
   const label = isPlaying
-    ? "Now Playing"
+    ? "Listening To Right Now"
     : source === "placeholder" && forceState === "auto"
       ? "On Rotation"
-      : "Last Played";
+      : "Was Listening to";
 
   const bars = useMemo(() => {
     const out: { style: BarStyle }[] = [];
