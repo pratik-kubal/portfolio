@@ -403,6 +403,10 @@
   border-radius: 6px;
   position: relative;
 }
+.v3-chat-scroll {
+  max-height: 1271.25px;
+  overflow-y: auto;
+}
 .v3-chat .tag {
   position: absolute;
   top: -10px;
@@ -470,6 +474,21 @@
   content: "— ";
   color: var(--accent-text);
 }
+.v3-bub.a .v3-word {
+  display: inline-block;
+  opacity: 0;
+  animation: v3wordFade 360ms ease-out forwards;
+}
+@keyframes v3wordFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .v3-bub.a p { margin: 0 0 6px; }
 .v3-bub.a ul,
 .v3-bub.a ol {
@@ -483,6 +502,40 @@
   background: color-mix(in srgb, var(--dim) 18%, transparent);
   padding: 1px 4px;
   border-radius: 3px;
+}
+.v3-bub.a table {
+  border-collapse: collapse;
+  margin: 8px 0 10px;
+  font-size: 14px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+.v3-bub.a thead {
+  border-bottom: 1px solid var(--rule);
+}
+.v3-bub.a th,
+.v3-bub.a td {
+  text-align: left;
+  vertical-align: top;
+  padding: 6px 14px 6px 0;
+  white-space: nowrap;
+}
+.v3-bub.a th:last-child,
+.v3-bub.a td:last-child {
+  padding-right: 0;
+}
+.v3-bub.a th {
+  font-weight: 600;
+  color: var(--ink);
+  padding-bottom: 8px;
+}
+.v3-bub.a tbody tr + tr td {
+  border-top: 1px solid color-mix(in srgb, var(--rule) 55%, transparent);
+}
+.v3-bub.a td {
+  color: color-mix(in srgb, var(--ink) 92%, transparent);
 }
 
 .v3-ask {
@@ -771,5 +824,10 @@
   .tk-marq .inner {
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .v3-bub.a .v3-word {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

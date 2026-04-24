@@ -2,11 +2,62 @@
 
 import { useEffect, useRef, useState } from "react";
 import MarkdownAsync from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useRouter } from "next/navigation";
 import { handleScroll } from "@/lib/utils";
+import { nextChatScroll } from "@/lib/chat-scroll";
 import { person } from "@/data/person";
 
 type Msg = { role: "user" | "assistant"; content: string };
+
+// Wrap each word in <span class="v3-word"> so new words can fade in as they
+// stream. Whitespace stays as plain text so wrapping stays natural. React
+// reconciles spans positionally, so only newly-appended words animate on mount.
+const WORD_SKIP_TAGS = new Set(["code", "pre"]);
+function rehypeSplitWords() {
+  type HastNode = {
+    type: string;
+    tagName?: string;
+    value?: string;
+    children?: HastNode[];
+    properties?: Record<string, unknown>;
+  };
+  const walk = (node: HastNode, inSkip: boolean) => {
+    if (!node.children) return;
+    const skipHere =
+      inSkip ||
+      (node.type === "element" &&
+        !!node.tagName &&
+        WORD_SKIP_TAGS.has(node.tagName));
+    const out: HastNode[] = [];
+    for (const child of node.children) {
+      if (
+        !skipHere &&
+        child.type === "text" &&
+        typeof child.value === "string"
+      ) {
+        for (const part of child.value.split(/(\s+)/)) {
+          if (!part) continue;
+          if (/^\s+$/.test(part)) {
+            out.push({ type: "text", value: part });
+          } else {
+            out.push({
+              type: "element",
+              tagName: "span",
+              properties: { className: ["v3-word"] },
+              children: [{ type: "text", value: part }],
+            });
+          }
+        }
+      } else {
+        walk(child, skipHere);
+        out.push(child);
+      }
+    }
+    node.children = out;
+  };
+  return (tree: HastNode) => walk(tree, false);
+}
 
 export default function CareerChat({
   initialQuestion = "",
@@ -19,13 +70,58 @@ export default function CareerChat({
 
   const boxRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const followRef = useRef(false);
 
   const router = useRouter();
   const autoSentRef = useRef(false);
 
   useEffect(() => {
-    boxRef.current?.scrollTo({ top: 1e6, behavior: "smooth" });
-  }, [msgs, isStreaming]);
+    const el = boxRef.current;
+    const inputEl = inputRef.current;
+    if (!el || !inputEl) return;
+    let stickInner = true;
+    let prevY = window.scrollY;
+    const onInnerScroll = () => {
+      stickInner = el.scrollHeight - el.scrollTop - el.clientHeight < 40;
+    };
+    const onWindowScroll = () => {
+      if (window.scrollY < prevY - 4) followRef.current = false;
+      prevY = window.scrollY;
+    };
+    const pin = () => {
+      const action = nextChatScroll({
+        inner: {
+          scrollTop: el.scrollTop,
+          scrollHeight: el.scrollHeight,
+          clientHeight: el.clientHeight,
+        },
+        inputClientBottom: inputEl.getBoundingClientRect().bottom,
+        viewportHeight: window.innerHeight,
+        stickInner,
+        follow: followRef.current,
+      });
+      if (action.innerScrollTo !== null) el.scrollTop = action.innerScrollTo;
+      if (action.windowScrollBy > 0) {
+        window.scrollBy({ top: action.windowScrollBy });
+        prevY = window.scrollY;
+      }
+    };
+    el.addEventListener("scroll", onInnerScroll, { passive: true });
+    window.addEventListener("scroll", onWindowScroll, { passive: true });
+    const ro = new ResizeObserver(pin);
+    Array.from(el.children).forEach((c) => ro.observe(c));
+    const mo = new MutationObserver(() => {
+      Array.from(el.children).forEach((c) => ro.observe(c));
+      pin();
+    });
+    mo.observe(el, { childList: true, subtree: true });
+    return () => {
+      el.removeEventListener("scroll", onInnerScroll);
+      window.removeEventListener("scroll", onWindowScroll);
+      ro.disconnect();
+      mo.disconnect();
+    };
+  }, []);
 
   async function send(question?: string) {
     const q = (question ?? input).trim();
@@ -39,6 +135,7 @@ export default function CareerChat({
 
     const aiIndex = nextHistory.length;
     setMsgs((h) => [...h, { role: "assistant", content: "" }]);
+    followRef.current = true;
 
     try {
       const res = await fetch("/api/career-chat", {
@@ -102,18 +199,23 @@ export default function CareerChat({
         <i />
         LIVE
       </div>
-      <h3>Talk to a small AI trained on my work.</h3>
+      <div className="v3-chat-scroll" ref={boxRef}>
+      <h3>Talk to a Claude-powered AI briefed on my experience.</h3>
       <div className="note">
-        It knows about my projects, experience, and how to reach me. It will
-        politely refuse questions outside that scope.
+        It knows my projects, work history, and how to reach me — and will stay in scope.
       </div>
 
-      <div className="v3-convo" ref={boxRef}>
+      <div className="v3-convo">
         {msgs.length === 0 && <div className="v3-bub a">{person.chatOpener}</div>}
         {msgs.map((m, i) => (
           <div className={`v3-bub ${m.role === "user" ? "u" : "a"}`} key={i}>
             {m.role === "assistant" ? (
-              <MarkdownAsync>{m.content}</MarkdownAsync>
+              <MarkdownAsync
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeSplitWords]}
+              >
+                {m.content}
+              </MarkdownAsync>
             ) : (
               m.content
             )}
@@ -156,6 +258,7 @@ export default function CareerChat({
           Ask
         </button>
       </form>
+      </div>
     </section>
   );
 }

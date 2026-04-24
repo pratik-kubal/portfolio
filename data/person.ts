@@ -34,7 +34,7 @@ export const person = {
   ledeEm: "quiet",
   ledeAfter: " systems & sharp tools.",
   chatOpener:
-    "Hi. I'm a small assistant that lives on this page. Ask me about Pratik — his projects, his stack, or how to get in touch.",
+    "Hi Visitor!",
   facts: [
     { k: "Lives", v: "Philadelphia, PA" },
     { k: "Occupation", v: "Software Engineer" },
