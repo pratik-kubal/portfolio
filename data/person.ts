@@ -34,7 +34,7 @@ export const person = {
   ledeEm: "quiet",
   ledeAfter: " systems & sharp tools.",
   chatOpener:
-    "Hi Visitor!",
+    "Hello There!",
   facts: [
     { k: "Lives", v: "Philadelphia, PA" },
     { k: "Occupation", v: "Software Engineer" },
@@ -90,6 +90,12 @@ export const person = {
     },
   ] as Project[],
   timeline: [
+    {
+      year: "2025—now",
+      role: "Independent · Pro Bono Leadership",
+      where: "Compass Pro Bono · West Philly Porchfest",
+      what: "Deputy Project Leader on a Compass Pro Bono engagement for the Children's Scholarship Fund of Philadelphia; web design and development volunteer for West Philly Porchfest; active AI-platform upskilling — Claude Code, Azure AI Engineer and AWS certifications in progress.",
+    },
     {
       year: "2022—25",
       role: "Software Engineer II",

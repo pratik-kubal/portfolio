@@ -15,24 +15,35 @@ Single consolidated profile for Pratik Kubal — used as the LLM context for the
 | **LinkedIn** | linkedin.com/in/pratik-kubal |
 | **GitHub** | github.com/pratik-kubal |
 | **Personal Website / Portfolio** | pratik-kubal.com |
-| **Work Authorization** | Authorized to work permanently in the United States — no visa sponsorship required |
+| **Work Authorization** | Marriage-based green-card adjustment of status in progress; currently on B-2 after H-1B lapsed with the May 2025 RIF. Will hold permanent U.S. work authorization — no visa sponsorship required — upon EAD / Green Card issuance |
 | **Remote Work** | Open to fully remote roles anywhere in the United States |
 | **Hybrid / On-site** | Open to hybrid or in-person work within ~10 miles of Philadelphia, PA or Malvern, PA |
-| **Availability** | Available 40 hrs/week with U.S. timezone overlap |
+| **Availability** | 40 hrs/week with U.S. timezone overlap; start date contingent on EAD / Green Card issuance (pending) |
 
 ---
 
 ## Summary
 
-Backend-leaning full-stack software engineer with 5 years of production experience in fintech / mortgage-tech SaaS, all on the AIVA loan-document AI platform at Dark Matter Technologies. Strongest in Java + AWS: led a Neptune → Aurora Serverless migration on a ~100K-request/day platform that cut API latency 90% and saved ~$10K/year, rearchitected the loan-processing engine for 2× throughput, and built self-service tooling that eliminated manual config deploys for two teams.
+Backend-leaning full-stack software engineer with 5 years of production experience in fintech / mortgage-tech SaaS, all on the AIVA loan-document AI platform at Dark Matter Technologies (Apr 2020 – May 2025, promoted from SWE I to SWE II). Strongest in Java + AWS: led a Neptune → Aurora Serverless migration on a ~100K-request/day platform that cut API latency 90% and saved ~$10K/year, rearchitected the loan-processing engine for 2× throughput, and built self-service tooling that eliminated manual config deploys for two teams.
 
-Consistently the engineer who revives quality and process — restarted the cross-team code review program after the senior mentor left, raised org-wide test coverage to 70% via dependency-injection patterns, and replaced a 24-hour deployment cycle with a 4-hour CI/CD pipeline. Comfortable across the stack (React/Next.js for self-service UIs and a personal AI-powered resume Q&A app), and partners well with Product and Data teams.
+Consistently the engineer who revived quality and process — restarted the cross-team code review program after the senior mentor left, raised org-wide test coverage to 70% via dependency-injection patterns, and replaced a 24-hour deployment cycle with a 4-hour CI/CD pipeline. Comfortable across the stack (React/Next.js for self-service UIs and a personal AI-powered resume Q&A app), and partners well with Product and Data teams.
 
-Promoted from SWE I to SWE II at Dark Matter Technologies. Authorized to work permanently in the U.S., based in Philadelphia, open to remote (U.S.) or hybrid/in-person around Philadelphia or Malvern, PA.
+**Currently (May 2025 – Present):** Actively interviewing after a reduction-in-force at Dark Matter Technologies. H-1B status lapsed with the RIF and transitioned to B-2 while a marriage-based green-card application is processed — so the next role will not require sponsorship, but cannot start until the EAD / Green Card is in hand. Using the transition to lead a Compass Pro Bono engagement as Deputy Project Leader (Children's Scholarship Fund of Philadelphia), volunteer web engineering for West Philly Porchfest, and invest in AI-platform depth (Claude Code training; Azure AI Engineer Associate and AWS certifications in progress). Based in Philadelphia, open to remote (U.S.) or hybrid/in-person around Philadelphia or Malvern, PA.
 
 ---
 
 ## Work Experience
+
+### Current — Pro Bono Leadership, Volunteer Engineering, AI Upskilling
+**May 2025 – Present · Philadelphia, PA · Actively interviewing**
+
+Position was eliminated at Dark Matter Technologies in May 2025 as part of a company-wide reduction in force. H-1B status lapsed and was replaced with B-2 while a marriage-based green-card application is processed; once the EAD / Green Card issues, will hold permanent U.S. work authorization with no sponsorship required. In the meantime, has stepped into project leadership on a pro bono engagement, contributed volunteer engineering to a local community organization, and invested in AI-platform depth through certifications — while interviewing for the next full-time role.
+
+- **Pro bono project leadership — Compass Pro Bono (Deputy Project Leader).** Leading the pro bono project team serving the Children's Scholarship Fund of Philadelphia (CSFP). A step up from the 2024 Compass engagement (team member) to a leadership seat responsible for scope, timelines, client communication, and deliverables.
+- **Volunteer web engineering — West Philly Porchfest (westphillyporchfest.com).** Contributing web design and development to the Philadelphia community arts festival.
+- **AI-platform upskilling.** Working through Anthropic's Claude Code training; Azure AI Engineer Associate certification in progress; AWS certification in progress. Complements production AI/LLM experience from the AIVA platform and the personal Interactive AI-Driven Resume Q&A Web App (shipped Aug 2025 during this period — see Projects).
+
+---
 
 ### Software Engineer II — Dark Matter Technologies
 **Sep 2022 – May 2025 · Philadelphia, PA · FinTech / Mortgage-Tech SaaS · Product: AIVA (AI Virtual Assistant for loan document extraction & classification)**
@@ -145,6 +156,6 @@ Joined Dark Matter Technologies as the first role after completing the M.S. (Apr
 
 ## Job-Search Positioning
 
-- **Primary fit:** Backend / full-stack SWE roles in fintech, AI-platform, or developer-tooling teams. Strongest as a senior IC who owns migrations, performance/reliability work, and self-service tooling end-to-end.
-- **Secondary fit:** Forward-deployed / integration-engineer roles (customer-facing scoping + Python/SQL data pipelines + Salesforce experience).
-- **Compensation / location:** Open to fully remote (U.S.) or hybrid/on-site within ~10 miles of Philadelphia or Malvern, PA. 40 hrs/week, U.S. timezone overlap. No visa sponsorship needed.
+- **Primary fit:** Backend / full-stack SWE roles in fintech, AI-platform, or developer-tooling teams. Strongest as a senior IC who owns migrations, performance/reliability work, and self-service tooling end-to-end. Current AI upskilling (Claude Code, Azure AI Engineer Associate in progress, AWS certification in progress) reinforces the AI-platform angle on top of production AI/LLM experience from the AIVA platform and the Resume Q&A project.
+- **Secondary fit:** Forward-deployed / integration-engineer roles (customer-facing scoping + Python/SQL data pipelines + Salesforce experience). Reinforced since May 2025 by the Deputy Project Leader role at Compass Pro Bono — leading scope, timelines, and client communication on a pro bono engagement for a Philadelphia non-profit.
+- **Availability:** Actively interviewing — position eliminated at Dark Matter Technologies (May 2025 RIF). H-1B lapsed; currently on B-2 while a marriage-based green-card application is pending. Cannot start until the EAD / Green Card is in hand; at that point will hold permanent U.S. work authorization with no sponsorship required. Open to fully remote (U.S.) or hybrid/on-site within ~10 miles of Philadelphia or Malvern, PA. 40 hrs/week, U.S. timezone overlap.

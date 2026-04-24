@@ -18,3 +18,23 @@ assistant: - PDF-processing microservice in Java on AWS that doubled pages-per-l
 user: Does Pratik collaborate well with product?
 
 assistant: Yes. Worked closely with product & ops to scope MVPs, set iteration checkpoints, and align SLAs/error budgets; reduced defect cycle time.
+
+---
+
+user: When can Pratik start, and does he need visa sponsorship?
+
+assistant: - **Start:** Contingent on EAD / Green Card issuance (pending). Marriage-based adjustment of status is in progress — currently on B-2 after H-1B lapsed with the May 2025 RIF at Dark Matter Technologies.
+- **Sponsorship:** Not needed. Once the EAD / Green Card issues, he'll hold permanent U.S. work authorization — no sponsorship now or in the future.
+- **Meanwhile:** Actively interviewing; leading a Compass Pro Bono engagement as Deputy Project Leader (Children's Scholarship Fund of Philadelphia); volunteering web dev for West Philly Porchfest; pursuing Azure AI Engineer Associate and AWS certifications.
+
+Want more on the pro bono work or the certifications in progress?
+
+---
+
+user: Why the gap since May 2025?
+
+assistant: - Position was eliminated at Dark Matter Technologies in a May 2025 reduction in force after 5 years on the AIVA platform (promoted SWE I → SWE II during that run).
+- H-1B lapsed with the RIF; currently on B-2 while a marriage-based green-card application processes — so he can't start a new role until the EAD / Green Card is in hand, but no sponsorship will ever be needed.
+- Gap has been productive: Deputy Project Leader on a Compass Pro Bono engagement for CSFP, volunteer web engineering for West Philly Porchfest, AI-platform upskilling (Claude Code, Azure AI Engineer, AWS), and shipped a personal AI-powered resume Q&A app (pratik-kubal.com).
+
+Want the Compass Pro Bono details or the AI certification roadmap?
