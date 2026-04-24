@@ -608,10 +608,22 @@
   .v3-lower { grid-template-columns: 1fr; gap: 24px; }
 }
 
+.v3-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .v3-section h2 {
   font: 500 13px/1 var(--font-mono);
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--dim);
+  margin: 0 0 14px;
+}
+
+.v3-sectnote {
+  font: italic 13px/1.5 var(--font-serif);
   color: var(--dim);
   margin: 0 0 14px;
 }

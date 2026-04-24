@@ -67,24 +67,17 @@ export const person = {
       url: "mailto:pratik-kubal@outlook.com",
     },
   ] as Social[],
+  projectsNote:
+    "Fun fact — you're standing inside one of them right now. Try the chat above.",
   projects: [
-    {
-      id: "resume-qa",
-      name: "resume-qa",
-      year: "2025",
-      status: "active",
-      blurb:
-        "Interactive AI-driven resume Q&A — the site you're on, backed by a RAG pipeline.",
-      metric: "2x recruiter interactions",
-    },
     {
       id: "rules-engine",
       name: "rules-engine",
       year: "2022",
       status: "shipped",
       blurb:
-        "Java rules-based microservice for loan document classification, with PM-editable rules.",
-      metric: "2.4x throughput",
+        "Java rules-management microservice for loan document classification — Product Managers edit rules on the fly without redeploys, zero SLA breaches on AWS Lambda.",
+      metric: "50K→120K pages/hr",
     },
     {
       id: "srgan-compress",
@@ -101,14 +94,22 @@ export const person = {
       year: "2022—25",
       role: "Software Engineer II",
       where: "Dark Matter Technologies",
-      what: "FinTech platform, Neptune→Aurora migration, CI/CD.",
+      what: "Led Neptune→Aurora Serverless migration (−90% API latency, ~$10K/yr saved) on the AIVA loan-processing platform; built CI/CD pipelines that cut deploys from 24h to 4h; shipped a self-service React micro-frontend and revived the cross-team code review program.",
+    },
+    {
+      year: "2024",
+      role: "Volunteer Engineer",
+      where: "Compass Pro Bono",
+      what: "Designed a Salesforce integration for a Philadelphia non-profit with a 4-person team — eliminated 4 of every 5 manual data-entry steps.",
     },
     {
       year: "2020—22",
       role: "Software Engineer I",
       where: "Dark Matter Technologies",
-      what: "Java services, GraphQL, IaC on AWS.",
+      what: "Rearchitected the Java loan-processing pipeline with parallel streams (2× throughput); optimized GraphQL endpoints (−900ms); raised org-wide automated test coverage to 70% via dependency injection; mentored 3 junior developers.",
     },
+  ] as TimelineEntry[],
+  education: [
     {
       year: "2017—20",
       role: "M.S. Computer Science",

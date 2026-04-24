@@ -59,25 +59,45 @@ export function EditorialCard({
         <p className="v3-dek">
           {person.bio}{" "}
           <b>Currently</b> open to new work.{" "}
-          Writes occasionally — see the projects below.
         </p>
 
         <CareerChat variant="inline" initialQuestion={initialQuestion} />
 
         <div className="v3-lower">
-          <div className="v3-section">
-            <h2>Selected projects</h2>
-            {person.projects.map((p) => (
-              <div className="v3-proj3" key={p.id}>
-                <div className="n">{p.name}</div>
-                <div className="b">{p.blurb}</div>
-                <div className="m">
-                  {p.year}
-                  <br />
-                  {p.metric}
+          <div className="v3-col">
+            <div className="v3-section">
+              <h2>Selected projects</h2>
+              {person.projectsNote && (
+                <p className="v3-sectnote">{person.projectsNote}</p>
+              )}
+              {person.projects.map((p) => (
+                <div className="v3-proj3" key={p.id}>
+                  <div className="n">{p.name}</div>
+                  <div className="b">{p.blurb}</div>
+                  <div className="m">
+                    {p.year}
+                    <br />
+                    {p.metric}
+                  </div>
                 </div>
+              ))}
+            </div>
+            <div className="v3-section">
+              <h2>Education</h2>
+              <div className="v3-tl3">
+                {person.education.map((ed) => (
+                  <div className="row" key={ed.year + ed.where}>
+                    <div className="y">{ed.year}</div>
+                    <div>
+                      <b>{ed.role}</b>
+                      <span>
+                        {ed.where} — {ed.what}
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
           <div className="v3-section">
             <h2>Experience</h2>
