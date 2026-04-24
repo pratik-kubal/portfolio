@@ -132,7 +132,7 @@ export const person = {
   prompts: [
     "Walk me through your background.",
     "What's your strongest technical project?",
-    "Do you need visa sponsorship?",
+    "Tell me about your AWS experience.",
     "Why the gap since May 2025?",
   ],
 } as const;
