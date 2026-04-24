@@ -12,7 +12,9 @@ export function EditorialCard({
   return (
     <div className="v3-stage">
       <aside className="v3-card">
-        <div className="portrait" />
+        <div className="portrait">
+          <img src="/portrait.png" alt={`Portrait of ${person.name}`} />
+        </div>
         <h1 className="v3-name">{person.name}</h1>
         <div className="v3-pron">{person.pronunciation}</div>
         <p className="v3-role">
