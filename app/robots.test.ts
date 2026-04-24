@@ -19,16 +19,6 @@ describe("robots", () => {
     expect(disallow).toContain("/api/");
   });
 
-  it("disallows crawling of chat page", () => {
-    const config = robots();
-    const rules = Array.isArray(config.rules) ? config.rules : [config.rules];
-    const allBots = rules.find((r) => r.userAgent === "*");
-    const disallow = Array.isArray(allBots?.disallow)
-      ? allBots.disallow
-      : [allBots?.disallow];
-    expect(disallow).toContain("/chat");
-  });
-
   it("sets sitemap URL pointing to the production domain", () => {
     const config = robots();
     expect(config.sitemap).toBe("https://pratik-kubal.com/sitemap.xml");

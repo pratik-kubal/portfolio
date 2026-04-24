@@ -58,7 +58,7 @@ The chat passes resume data directly to the LLM as context:
 ### API Routes
 
 - `app/api/career-chat/route.ts` — POST: AI chat streaming endpoint using full career.md context
-- `app/api/contact/route.tsx` — POST: Contact form handler; returns a `mailtoUrl` for client-side use
+- `app/api/now-playing/route.ts` — GET: Spotify currently-playing / recently-played endpoint (shapes track, falls back, caches)
 
 ### Testing
 

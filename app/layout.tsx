@@ -1,13 +1,33 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { StarfieldBackground } from "@/components/starfield-background";
 import "./globals.css";
 
 const siteUrl = "https://pratik-kubal.com";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -68,11 +88,16 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Pratik Kubal",
+  givenName: "Pratik",
+  additionalName: "Pravin",
+  familyName: "Kubal",
   url: siteUrl,
   email: "pratik-kubal@outlook.com",
   jobTitle: "Full-Stack Software Engineer",
   description:
     "Full-stack software engineer with 5+ years of experience in FinTech, AWS, microservices, and AI/LLM integration.",
+  disambiguatingDescription:
+    "Full-stack software engineer based in Philadelphia, PA. M.S. Computer Science from University at Buffalo (SUNY), 2020. Former Software Engineer II at Dark Matter Technologies (2020–2025). Focus on FinTech microservices on AWS and AI/LLM integration. ORCID: 0009-0005-9209-7704.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Philadelphia",
@@ -80,14 +105,32 @@ const jsonLd = {
     addressCountry: "US",
   },
   alumniOf: [
-    { "@type": "CollegeOrUniversity", name: "SUNY" },
-    { "@type": "CollegeOrUniversity", name: "University of Mumbai" },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University at Buffalo, The State University of New York",
+      url: "https://www.buffalo.edu",
+      sameAs: "https://en.wikipedia.org/wiki/University_at_Buffalo",
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "University of Mumbai",
+      url: "https://mu.ac.in",
+      sameAs: "https://en.wikipedia.org/wiki/University_of_Mumbai",
+    },
   ],
   sameAs: [
-    "https://linkedin.com/in/pratik-kubal",
+    "https://www.linkedin.com/in/pratik-kubal/",
     "https://github.com/pratik-kubal",
-    siteUrl,
+    "https://github.com/pratikkubal",
+    "https://x.com/pratik_kubal",
+    "https://orcid.org/0009-0005-9209-7704",
   ],
+  identifier: {
+    "@type": "PropertyValue",
+    propertyID: "ORCID",
+    value: "0009-0005-9209-7704",
+    url: "https://orcid.org/0009-0005-9209-7704",
+  },
   knowsAbout: [
     "Java",
     "Python",
@@ -99,6 +142,43 @@ const jsonLd = {
     "FinTech",
     "AI/LLM Integration",
   ],
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Full-Stack Software Engineer",
+    occupationLocation: {
+      "@type": "City",
+      name: "Philadelphia, PA",
+    },
+    skills:
+      "Java, Python, TypeScript, React, Next.js, AWS, Microservices, FinTech, AI/LLM Integration",
+    experienceRequirements: "5+ years",
+    responsibilities:
+      "Building scalable, cloud-native microservices and APIs on AWS, primarily in FinTech. Led database migrations (Neptune→Aurora) and CI/CD pipelines. Integrated AI/LLM tooling into production systems.",
+  },
+  worksFor: [
+    {
+      "@type": "Role",
+      roleName: "Software Engineer II",
+      startDate: "2022-09",
+      endDate: "2025-05-15",
+      worksFor: {
+        "@type": "Organization",
+        name: "Dark Matter Technologies",
+        url: "https://dmatter.com/",
+      },
+    },
+    {
+      "@type": "Role",
+      roleName: "Software Engineer I",
+      startDate: "2020-04",
+      endDate: "2022-09",
+      worksFor: {
+        "@type": "Organization",
+        name: "Dark Matter Technologies",
+        url: "https://dmatter.com/",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -107,13 +187,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <head>
         <style>{`
 html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
+  font-family: var(--font-serif);
 }
         `}</style>
         <script
@@ -128,7 +210,6 @@ html {
           enableSystem
           disableTransitionOnChange
         >
-          <StarfieldBackground />
           <div className="relative z-10 min-h-screen flex flex-col">
             {children}
           </div>
