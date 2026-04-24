@@ -27,7 +27,7 @@ export const person = {
   name: "Pratik Kubal",
   role: "Full-Stack Software Engineer",
   based: "Philadelphia, PA",
-  pronunciation: "/ˈprɑː.tɪk ˈkuː.bɑːl/",
+  pronunciation: "/ˈpraː.tIk ˈkuː.baːl/",
   bio: "I'm a full-stack software engineer with 5+ years building scalable, cloud-native microservices and APIs on AWS — mostly in FinTech. I've led database migrations, shipped CI/CD pipelines that cut deploys from days to hours, and integrated AI/LLM tooling into real products.",
   eyebrow: "◦ a portfolio, conversationally",
   ledeBefore: "Engineer of ",
