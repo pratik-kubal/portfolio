@@ -103,11 +103,11 @@ First role after the M.S. in Computer Science. Joined the AIVA team and grew fro
 ## Projects
 
 ### Interactive AI-Driven Resume Q&A Web App
-**Aug 2025 · Live at pratik-kubal.com · Sole developer**
+**Aug 2025 · This website (pratik-kubal.com) · Sole developer**
 
-Personal project that turned the static resume into a conversational AI assistant for recruiters. Full-stack Next.js app with a retrieval-augmented generation (RAG) pipeline over the resume content, exposing a real-time chat that answers questions about background, skills, and impact.
+This is the website the recruiter is currently on — a personal project that turned the static resume into a conversational AI assistant. Full-stack Next.js app with a retrieval-augmented generation (RAG) pipeline over the resume content, exposing a real-time chat that answers questions about background, skills, and impact. (You — the assistant — are the chat.)
 
-- **Stack:** React.js, Next.js, Tailwind CSS, OpenAI API, Vercel, GitHub Actions, Jest, Cypress.
+- **Stack:** React.js, Next.js, Tailwind CSS, Claude API (Anthropic), Vercel, GitHub Actions, Jest, Cypress. (Originally shipped on the OpenAI API; backend was migrated to Claude.)
 - **CI/CD with GitHub Actions** — automated test + deploy, reducing deploy time from 30 min to 5 min.
 - **80% test coverage** via Jest (unit) and Cypress (integration).
 - **Caching on Next.js API routes** to handle live Q&A — cut average API latency by ~300 ms.
@@ -136,7 +136,7 @@ Pro bono technology consulting for a non-profit. Collaborated with the four-pers
 
 **Databases:** PostgreSQL, Aurora Serverless, DynamoDB, AWS Neptune; SQL query optimization
 
-**Data & AI:** Python/SQL data pipelines and ETL, retrieval-augmented generation (RAG), OpenAI API integration
+**Data & AI:** Python/SQL data pipelines and ETL, retrieval-augmented generation (RAG), Claude API / Anthropic SDK integration (originally OpenAI)
 
 **DevOps & SRE:** GitHub Actions, AWS CodeDeploy, end-to-end CI/CD, Grafana, SLI/SLO definition, on-call, runbooks, postmortems, MTTR reduction
 

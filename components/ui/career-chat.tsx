@@ -200,9 +200,9 @@ export default function CareerChat({
         LIVE
       </div>
       <div className="v3-chat-scroll" ref={boxRef}>
-      <h3>Talk to a Claude-powered AI briefed on my experience.</h3>
+      <h3>Skip the intro call — interview me here.</h3>
       <div className="note">
-        It knows my projects, work history, and how to reach me — and will stay in scope.
+        A Claude-powered assistant with full context on my background.
       </div>
 
       <div className="v3-convo">

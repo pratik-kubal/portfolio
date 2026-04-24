@@ -28,13 +28,13 @@ export const person = {
   role: "Full-Stack Software Engineer",
   based: "Philadelphia, PA",
   pronunciation: "/ˈpraː.tIk ˈkuː.baːl/",
-  bio: "I'm a full-stack software engineer with 5+ years building scalable, cloud-native microservices and APIs on AWS — mostly in FinTech. I've led database migrations, shipped CI/CD pipelines that cut deploys from days to hours, and integrated AI/LLM tooling into real products.",
+  bio: "I'm a full-stack software engineer with 5+ years building scalable, cloud-native microservices and APIs on AWS — mostly in FinTech. I've led database migrations, shipped CI/CD pipelines that cut deploys from days to hours.",
   eyebrow: "◦ a portfolio, conversationally",
   ledeBefore: "Engineer of ",
   ledeEm: "quiet",
   ledeAfter: " systems & sharp tools.",
   chatOpener:
-    "Hello There!",
+    "Ask me anything you'd ask in a real screen.",
   facts: [
     { k: "Lives", v: "Philadelphia, PA" },
     { k: "Occupation", v: "Software Engineer" },
@@ -130,10 +130,10 @@ export const person = {
     },
   ] as TimelineEntry[],
   prompts: [
-    "What's his recent work?",
-    "Tell me about the RAG app",
-    "How do I get in touch?",
-    "What's his stack?",
+    "Walk me through your background.",
+    "What's your strongest technical project?",
+    "Do you need visa sponsorship?",
+    "Why the gap since May 2025?",
   ],
 } as const;
 

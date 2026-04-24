@@ -7,21 +7,21 @@
 ### Achievement PROJ-A: Interactive AI-Driven Resume Q&A Web App
 **Source:** All 34 resumes
 **User's role:** Sole developer
-**Date:** Aug 2025 · Live at pratik-kubal.com
+**Date:** Aug 2025 · This website (pratik-kubal.com) — the recruiter viewing this chat is already inside the project
 
-**Context:** Personal project converting a static resume into an AI-powered conversational assistant for recruiters. Full-stack app with RAG pipeline.
+**Context:** Personal project converting a static resume into an AI-powered conversational assistant for recruiters. Full-stack app with RAG pipeline. Originally shipped on the OpenAI API; backend has since been migrated to the Claude API (Anthropic SDK).
 
 **Bullet variants:**
-- **2L (combined):** Built a full-stack React.js/Next.js web app with OpenAI API integration, enabling recruiters to query resume content in real time via a RAG pipeline; CI/CD with GitHub Actions reduced deploy time from 30 min to 5 min; 80% test coverage via Jest and Cypress.
-- **2L (RAG focus):** Built a retrieval-augmented generation pipeline using the OpenAI API, enabling real-time conversational queries over resume content.
+- **2L (combined):** Built a full-stack React.js/Next.js web app with Claude API (Anthropic SDK) integration, enabling recruiters to query resume content in real time via a RAG pipeline; CI/CD with GitHub Actions reduced deploy time from 30 min to 5 min; 80% test coverage via Jest and Cypress.
+- **2L (RAG focus):** Built a retrieval-augmented generation pipeline using the Claude API, enabling real-time conversational queries over resume content.
 - **2L (CI/CD focus):** Implemented end-to-end CI/CD with GitHub Actions for automated testing and deployment, reducing deployment time from 30 minutes to 5 minutes.
 - **2L (API focus):** Integrated Next.js API routes and caching to handle live Q&A requests, reducing average API latency by 300 ms.
 - **2L (testing focus):** Wrote unit and integration tests with Jest and Cypress, achieving 80% test coverage.
 - **2L (analytics focus):** Added analytics tracking to capture question patterns, identifying the top 5 recruiter queries and guiding the feature roadmap.
-- **1L:** Built AI-powered resume Q&A app (React.js, Next.js, OpenAI API, RAG) — live at pratik-kubal.com.
+- **1L:** Built AI-powered resume Q&A app (React.js, Next.js, Claude API, RAG) — live at pratik-kubal.com (migrated from OpenAI).
 
-**Key skills:** React.js, Next.js, Tailwind CSS, OpenAI API, RAG, Vercel, GitHub Actions, Jest, Cypress
-**ATS keywords:** RAG, OpenAI API, full-stack, React, Next.js, AI integration, LLM
+**Key skills:** React.js, Next.js, Tailwind CSS, Claude API (Anthropic SDK), RAG, Vercel, GitHub Actions, Jest, Cypress
+**ATS keywords:** RAG, Claude API, Anthropic, OpenAI API, full-stack, React, Next.js, AI integration, LLM
 **Reframing notes:**
 - AI First: HIGH — lead project, emphasize RAG and AI-assisted development
 - Backend: MEDIUM — show API integration depth
