@@ -1116,8 +1116,8 @@
 
 .cn-detail { align-self: start; }
 
-/* Service 1 — evaluation rubric (no fictional scores) */
-.cn-rubric {
+/* Service — readiness scorecard */
+.cn-score {
   border: 1px solid var(--rule);
   background: var(--card);
   padding: 18px 20px;
@@ -1126,11 +1126,11 @@
   position: relative;
   box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.18);
 }
-.dark .cn-rubric {
+.dark .cn-score {
   box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.6);
 }
-.cn-rubric::before {
-  content: "▪ EVALUATION RUBRIC";
+.cn-score::before {
+  content: "▪ SAMPLE SCORECARD";
   position: absolute;
   top: -8px;
   left: 14px;
@@ -1140,29 +1140,74 @@
   letter-spacing: 0.22em;
   color: var(--dim);
 }
-.cn-rubric .ttl {
+.cn-score .ttl {
   font: italic 500 16px/1.2 var(--font-serif);
   color: var(--accent-pair);
   margin: 2px 0 14px;
 }
-.cn-rubric .row {
-  padding: 8px 0;
+.cn-score .row {
+  display: grid;
+  grid-template-columns: 1fr 60px 28px;
+  gap: 10px;
+  align-items: center;
+  padding: 7px 0;
   border-bottom: 1px dotted var(--rule);
+}
+.cn-score .row:last-of-type { border-bottom: none; }
+.cn-score .row .nm {
   font: 11px/1.2 var(--font-mono);
   color: var(--ink);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 10.5px;
 }
-.cn-rubric .row:last-of-type { border-bottom: none; }
-.cn-rubric .foot {
-  margin-top: 12px;
+.cn-score .row .bar {
+  height: 5px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cn-score .row .bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent-text);
+  border-radius: 2px;
+}
+.cn-score .row .sc {
+  font: 600 12px/1 var(--font-mono);
+  color: var(--accent-pair);
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+.cn-score .totalRow {
+  margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.cn-score .totalRow .lbl {
+  font: 10px/1 var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.cn-score .totalRow .big {
+  font: 500 28px/1 var(--font-serif);
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.cn-score .totalRow .big em {
+  font-style: normal;
+  color: var(--accent-text);
+}
+.cn-score .verdict {
+  margin-top: 8px;
   font: italic 13px/1.4 var(--font-serif);
   color: var(--dim);
 }
-.cn-rubric .foot b {
+.cn-score .verdict b {
   color: var(--accent-pair);
   font-weight: 500;
 }

@@ -321,17 +321,59 @@ export function ConsultingPage() {
             </ul>
           </div>
           <div className="cn-detail">
-            <div className="cn-rubric">
-              <div className="ttl">What we evaluate</div>
-              <div className="row">Data hygiene</div>
-              <div className="row">Eval discipline</div>
-              <div className="row">Platform &amp; infra</div>
-              <div className="row">Observability</div>
-              <div className="row">Risk &amp; review</div>
-              <div className="row">Talent &amp; ownership</div>
-              <div className="foot">
-                Each dimension scored <b>1–10</b> in the final report, with
-                evidence and a 90-day action attached.
+            <div className="cn-score">
+              <div className="ttl">Sample readiness scorecard</div>
+              <div className="row">
+                <div className="nm">Data hygiene</div>
+                <div className="bar">
+                  <i style={{ width: "72%" }} />
+                </div>
+                <div className="sc">7.2</div>
+              </div>
+              <div className="row">
+                <div className="nm">Eval discipline</div>
+                <div className="bar">
+                  <i style={{ width: "48%" }} />
+                </div>
+                <div className="sc">4.8</div>
+              </div>
+              <div className="row">
+                <div className="nm">Platform &amp; infra</div>
+                <div className="bar">
+                  <i style={{ width: "81%" }} />
+                </div>
+                <div className="sc">8.1</div>
+              </div>
+              <div className="row">
+                <div className="nm">Observability</div>
+                <div className="bar">
+                  <i style={{ width: "55%" }} />
+                </div>
+                <div className="sc">5.5</div>
+              </div>
+              <div className="row">
+                <div className="nm">Risk &amp; review</div>
+                <div className="bar">
+                  <i style={{ width: "38%" }} />
+                </div>
+                <div className="sc">3.8</div>
+              </div>
+              <div className="row">
+                <div className="nm">Talent &amp; ownership</div>
+                <div className="bar">
+                  <i style={{ width: "66%" }} />
+                </div>
+                <div className="sc">6.6</div>
+              </div>
+              <div className="totalRow">
+                <span className="lbl">Composite</span>
+                <span className="big">
+                  <em>5.9</em> / 10
+                </span>
+              </div>
+              <div className="verdict">
+                Verdict: <b>cautiously ready</b>. Ship one production agent in
+                90 days. Hold off on the platform rewrite.
               </div>
             </div>
           </div>
