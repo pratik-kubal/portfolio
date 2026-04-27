@@ -824,9 +824,9 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   Consulting page styles (cn-*)
+   Advisor page styles (cn-*)
    Ported from design bundle (portfolio-final/project/consulting/consulting.jsx).
-   Used by app/consulting/page.tsx via components/consulting-page.tsx.
+   Used by app/advisor/page.tsx via components/advisor-page.tsx.
    ───────────────────────────────────────────────────────────────────── */
 
 .cn-root {

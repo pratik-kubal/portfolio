@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-export function ConsultingPage() {
+export function AdvisorPage() {
   return (
     <div className="cn-root">
       <div className="cn-wrap">
         <section className="cn-hero">
           <div>
-            <div className="eyebrow">Independent practice · 2025 — present</div>
+            <div className="eyebrow">Independent AI Advisor / Contractor · 2025 — present</div>
             <h1>
               Helping organizations <em>think carefully</em>{" "}
               about AI.
@@ -491,7 +491,7 @@ export function ConsultingPage() {
             </p>
             <div className="actions">
               <a
-                href="mailto:pratik-kubal@outlook.com?subject=Consulting%20inquiry"
+                href="mailto:pratik-kubal@outlook.com?subject=Advisor%20inquiry"
                 className="p"
               >
                 pratik-kubal@outlook.com
@@ -515,7 +515,7 @@ export function ConsultingPage() {
         </section>
 
         <div className="cn-foot">
-          <div>© 2026 Pratik Kubal · independent practice</div>
+          <div>© 2026 Pratik Kubal · Independent AI Advisor / Contractor</div>
           <div>
             <Link href="/">portfolio</Link> ·{" "}
             <a href="mailto:pratik-kubal@outlook.com">

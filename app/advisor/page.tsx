@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
-import { ConsultingPage } from "@/components/consulting-page";
+import { AdvisorPage } from "@/components/advisor-page";
 
 export const metadata: Metadata = {
-  title: "Consulting",
+  title: "Advisor",
   description:
     "Independent advisory practice — conversational AI & FAQ automation, AI readiness assessments, and nonprofit AI strategy. Written, short engagements, honest about uncertainty.",
   alternates: {
-    canonical: "https://pratik-kubal.com/consulting",
+    canonical: "https://pratik-kubal.com/advisor",
   },
 };
 
-export default function Consulting() {
+export default function Advisor() {
   return (
     <main className="page-transition">
       <Header />
-      <ConsultingPage />
+      <AdvisorPage />
     </main>
   );
 }

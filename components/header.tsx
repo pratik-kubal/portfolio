@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header() {
   const pathname = usePathname();
-  const isConsulting = pathname === "/consulting";
+  const isAdvisor = pathname === "/advisor";
 
   const today = new Date();
   const stamp = today
@@ -27,9 +27,9 @@ export function Header() {
           }}
         >
           <b>Pratik Kubal</b>
-          {isConsulting ? (
+          {isAdvisor ? (
             <span>
-              / consulting{" "}
+              / advisor{" "}
               <em
                 style={{
                   fontStyle: "italic",
@@ -52,13 +52,13 @@ export function Header() {
         }}
       >
         <Link
-          href="/consulting"
+          href="/advisor"
           style={{
-            color: isConsulting ? "var(--accent-text)" : "inherit",
+            color: isAdvisor ? "var(--accent-text)" : "inherit",
             textDecoration: "none",
           }}
         >
-          consulting
+          advisor
         </Link>
         <span>updated · {stamp} · indexed</span>
         <ThemeToggle />
