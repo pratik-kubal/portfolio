@@ -12,17 +12,11 @@ export function ConsultingPage() {
               about AI.
             </h1>
             <p className="lede">
-              I help leadership teams move from <b>vague AI ambition</b> to a
-              concrete plan: what to build, what to buy, what to leave alone,
-              and who should do the work. Engagements are short, written, and
-              honest about uncertainty.
+              I help <b>small businesses and nonprofits</b> cut through the AI noise — figuring out what's actually worth trying, what to ignore, and how to get started without wasting money or time.
             </p>
             <div className="ctas">
               <a href="#contact" className="p">
                 Book a discovery call
-              </a>
-              <a href="#services" className="s">
-                See the three practices
               </a>
             </div>
           </div>
@@ -69,67 +63,55 @@ export function ConsultingPage() {
         <section className="cn-sec" id="services">
           <div className="lbl">
             <span className="num">§ 01</span>
-            <span>The three practices</span>
+            <span>The three ways</span>
           </div>
           <h2>
-            Three engagements I do well, and a long list of{" "}
-            <em>things I don&apos;t</em>.
+            <em>Three Things</em>{" "}I can help with.
           </h2>
         </section>
 
         <section className="cn-svc">
           <div className="meta">
-            <span className="pill">№ 01 — Conversational</span>
+            <span className="pill">01 — Fielding questions</span>
             <dl className="kv">
-              <dt>Length</dt>
-              <dd>4–10 weeks</dd>
               <dt>Audience</dt>
               <dd>Support, ops, product</dd>
               <dt>Output</dt>
               <dd>Working bot + evals</dd>
-              <dt>Channels</dt>
-              <dd>Web · Slack · WA</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              Conversational AI &amp; FAQ Automation — bots that actually answer
-              the question, with receipts.
+              Answering customer questions automatically through AI - Saving your time
             </p>
             <p>
-              I help teams design and ship <b>retrieval-grounded chatbots</b>{" "}
-              for support, internal knowledge, and customer-facing FAQ. The
-              work is half writing — turning your knowledge base, tickets, and
-              policies into something a model can cite — and half engineering:{" "}
-              <b>
-                evals, guardrails, escalation paths, and the boring
-                observability
-              </b>{" "}
-              that keeps it honest in production.
+              I help organizations design and implement <b>chatbots</b>{" "}
+              for support, internal knowledge, and customer-facing FAQ. The integration is
+              highly customized according to each use-case and technical stack.
             </p>
             <ul>
               <li>
                 <span>
-                  <b>Knowledge ingestion.</b> Docs, tickets, and tribal
-                  knowledge into a citable corpus.
+                  <b>Pulling in what you already know.</b> Your existing documents, 
+                  FAQs, and policies, turned into something a bot can actually use.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Retrieval &amp; grounding.</b> Hybrid search, freshness
-                  rules, and &ldquo;I don&apos;t know&rdquo; as a feature.
+                  <b>Getting accurate answers.</b> Making sure the bot 
+                  doesn't make things up, and knows when to say &ldquo;I don&apos;t know&rdquo;.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Eval harness.</b> Golden questions, regression suites, and
-                  a weekly scorecard humans can read.
+                  <b>Testing before it goes live.</b> A simple way to check if the bot is 
+                  actually helping before your customers see it.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Handoff &amp; escalation.</b> When the bot routes to a
-                  human, with full context attached.
+                  <b>Knowing when to hand off to a human.</b> So nothing important falls 
+                  through the cracks.
                 </span>
               </li>
             </ul>
@@ -137,7 +119,7 @@ export function ConsultingPage() {
           <div className="cn-detail">
             <div className="cn-mx">
               <div className="head">
-                <div className="ttl">What well-built bots do</div>
+                <div className="ttl">What well-built can bots do</div>
                 <div className="src">
                   Independent
                   <br />
@@ -160,10 +142,10 @@ export function ConsultingPage() {
                 </div>
                 <div className="cell">
                   <div className="k">
-                    First-response time <sup>2</sup>
+                    Response time <sup>2</sup>
                   </div>
                   <div className="v">
-                    <em>−55</em>
+                    <em>55</em>
                     <sup>%</sup>
                   </div>
                   <div className="d">
@@ -176,7 +158,7 @@ export function ConsultingPage() {
                     CSAT lift <sup>3</sup>
                   </div>
                   <div className="v">
-                    +<em>40</em>
+                    <em>+40</em>
                     <sup>%</sup>
                   </div>
                   <div className="d">
@@ -190,7 +172,8 @@ export function ConsultingPage() {
                   </div>
                   <div className="v">
                     <em>11</em>
-                    <sup>min → 2</sup>
+                    <sup>min → </sup>
+                    <em>2</em>
                   </div>
                   <div className="d">
                     Klarna&apos;s AI assistant cut average resolution from 11
@@ -264,10 +247,10 @@ export function ConsultingPage() {
 
         <section className="cn-svc alt">
           <div className="meta">
-            <span className="pill">№ 02 — Readiness</span>
+            <span className="pill">02 — Readiness</span>
             <dl className="kv">
               <dt>Length</dt>
-              <dd>3–4 weeks</dd>
+              <dd>3-4 weeks</dd>
               <dt>Audience</dt>
               <dd>CTO, VP Eng</dd>
               <dt>Output</dt>
@@ -381,10 +364,10 @@ export function ConsultingPage() {
 
         <section className="cn-svc">
           <div className="meta">
-            <span className="pill">№ 03 — Nonprofit</span>
+            <span className="pill">03 — Nonprofit</span>
             <dl className="kv">
               <dt>Length</dt>
-              <dd>6–8 weeks</dd>
+              <dd>6-8 weeks</dd>
               <dt>Audience</dt>
               <dd>ED, board, ops lead</dd>
               <dt>Output</dt>
@@ -434,7 +417,7 @@ export function ConsultingPage() {
           </div>
           <div className="cn-detail">
             <div className="cn-fn">
-              <div className="dt">Field note · Compass Pro Bono · 2024–present</div>
+              <div className="dt">Field note · Compass Pro Bono · 2024-present</div>
               <div className="body">
                 In the 2024 engagement with a four-person volunteer team, the
                 work was a Salesforce integration that eliminated four of every
@@ -478,12 +461,12 @@ export function ConsultingPage() {
             <div className="n">Week 1 — Listen</div>
             <h3>Reading &amp; interviews</h3>
             <p>
-              I read everything you&apos;ll let me read and talk to 6–10 people
+              I read everything you&apos;ll let me read and talk to 6-10 people
               across the org.
             </p>
           </div>
           <div className="step">
-            <div className="n">Week 2–3 — Draft</div>
+            <div className="n">Week 2-3 — Draft</div>
             <h3>A working document</h3>
             <p>
               You see the draft early. We disagree in writing. The document gets
