@@ -886,6 +886,44 @@
   margin: 0 0 28px;
 }
 .cn-hero .lede b { font-weight: 500; }
+
+.cn-ground {
+  position: relative;
+  margin: 4px 0 30px;
+  padding: 18px 22px 18px 24px;
+  border-left: 2px solid var(--accent-text);
+  max-width: 58ch;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--accent-text) 5%, transparent) 0%,
+    transparent 70%
+  );
+}
+.cn-ground::before {
+  content: "◦ Plain talk";
+  position: absolute;
+  top: -7px;
+  left: 18px;
+  background: var(--paper);
+  padding: 0 8px;
+  font: 10px/1 var(--font-mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.cn-ground p {
+  margin: 0;
+  font: 400 16.5px/1.55 var(--font-serif);
+  color: var(--ink);
+  text-wrap: pretty;
+  font-variation-settings: "opsz" 18;
+}
+.cn-ground p em {
+  font-style: italic;
+  color: var(--accent-text);
+  font-weight: 500;
+}
+
 .cn-hero .ctas {
   display: flex;
   gap: 10px;
@@ -1608,6 +1646,8 @@
   .cn-wrap { padding: 0 22px; }
   .cn-hero h1 { font-size: 42px; }
   .cn-hero .lede { font-size: 17px; }
+  .cn-ground { padding: 16px 16px 16px 18px; }
+  .cn-ground p { font-size: 15.5px; }
   .cn-process { grid-template-columns: 1fr; }
 }
 

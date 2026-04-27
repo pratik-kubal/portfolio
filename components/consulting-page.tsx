@@ -8,12 +8,20 @@ export function ConsultingPage() {
           <div>
             <div className="eyebrow">Independent practice · 2025 — present</div>
             <h1>
-              A small consultancy for organizations <em>thinking carefully</em>{" "}
+              Helping organizations <em>think carefully</em>{" "}
               about AI.
             </h1>
             <p className="lede">
               I help <b>small businesses and nonprofits</b> cut through the AI noise — figuring out what's actually worth trying, what to ignore, and how to get started without wasting money or time.
             </p>
+            <aside className="cn-ground" aria-label="Grounding note">
+              <p>
+                I work with organizations that have no in-house technical
+                staff, limited budgets, and real skepticism about whether AI
+                is right for them.{" "}
+                <em>That skepticism is healthy. Let&apos;s start there.</em>
+              </p>
+            </aside>
             <div className="ctas">
               <a href="#contact" className="p">
                 Book a discovery call
@@ -35,7 +43,7 @@ export function ConsultingPage() {
               <div className="row">
                 <span className="k">Format</span>
                 <span className="v">
-                  <em>written, async-first</em>
+                  <em>written, at your pace</em>
                 </span>
               </div>
               <div className="row">
@@ -82,7 +90,7 @@ export function ConsultingPage() {
           </div>
           <div className="body">
             <p className="hd">
-              Answering customer questions automatically through AI - Saving your time
+              Answering customer questions automatically through AI — Saving your time
             </p>
             <p>
               I help organizations design and implement <b>chatbots</b>{" "}
@@ -249,23 +257,19 @@ export function ConsultingPage() {
           <div className="meta">
             <span className="pill">02 — Readiness</span>
             <dl className="kv">
-              <dt>Length</dt>
-              <dd>3-4 weeks</dd>
               <dt>Audience</dt>
-              <dd>CTO, VP Eng</dd>
+              <dd>Stakeholders</dd>
               <dt>Output</dt>
               <dd>Written report</dd>
-              <dt>Team size</dt>
-              <dd>20 — 400</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              AI Readiness Assessments — an honest look at whether your
-              organization can actually ship.
+              Is your organization actually ready for AI?
+              — An honest look before you commit to anything.
             </p>
             <p>
-              A four-week diagnostic for engineering leaders who suspect their
+              A four-week diagnostic for leaders who suspect their
               team is <b>further from</b> (or sometimes closer to) production AI
               than the deck suggests. The work is to sit with your data, your
               platform, your security posture, and your people, and produce a
@@ -274,31 +278,32 @@ export function ConsultingPage() {
                 a roadmap, an evaluation rubric, and a list of things to stop
                 doing
               </b>
-              .
+              . Works for small teams. You don't need a technical staff for this — 
+              that's kind of the point.
             </p>
             <ul>
               <li>
                 <span>
-                  <b>Data &amp; evals.</b> What you have, what&apos;s clean, and
+                  <b>Data.</b> What you have, what&apos;s clean, and
                   what an honest baseline looks like.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Platform readiness.</b> Inference, vector stores,
-                  observability, cost controls. The unglamorous half.
+                  <b>Your tools and systems.</b> Your tools and systems. What you're running 
+                  on, what it costs, and whether it can handle more.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Org &amp; risk.</b> Who owns what when something
-                  hallucinates in front of a customer.
+                  <b>Org &amp; risk.</b> Who owns what when the AI gets something wrong
+                  in front of a customer.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Roadmap.</b> Three things to ship in 90 days. One thing to
-                  kill this quarter.
+                  <b>Roadmap.</b> Three things to try in 90 days. 
+                  One to actually finish in the next few months.
                 </span>
               </li>
             </ul>
@@ -312,13 +317,6 @@ export function ConsultingPage() {
                   <i style={{ width: "72%" }} />
                 </div>
                 <div className="sc">7.2</div>
-              </div>
-              <div className="row">
-                <div className="nm">Eval discipline</div>
-                <div className="bar">
-                  <i style={{ width: "48%" }} />
-                </div>
-                <div className="sc">4.8</div>
               </div>
               <div className="row">
                 <div className="nm">Platform &amp; infra</div>
@@ -355,8 +353,7 @@ export function ConsultingPage() {
                 </span>
               </div>
               <div className="verdict">
-                Verdict: <b>cautiously ready</b>. Ship one production agent in
-                90 days. Hold off on the platform rewrite.
+                Verdict: <b>cautiously ready</b>. Get one thing running in 90 days.
               </div>
             </div>
           </div>
@@ -366,24 +363,19 @@ export function ConsultingPage() {
           <div className="meta">
             <span className="pill">03 — Nonprofit</span>
             <dl className="kv">
-              <dt>Length</dt>
-              <dd>6-8 weeks</dd>
               <dt>Audience</dt>
               <dd>ED, board, ops lead</dd>
               <dt>Output</dt>
               <dd>Strategy memo + pilot</dd>
-              <dt>Pricing</dt>
-              <dd>Sliding scale</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              Nonprofit AI Strategy — small budgets, big stakes, and an aversion
-              to magical thinking.
+              Nonprofit AI Strategy — small budgets and big stakes.
             </p>
             <p>
-              Nonprofits are getting pitched generative AI by every vendor in
-              the room. I work with executive directors and program leads to
+              Nonprofits are being sold AI tools by every vendor right now.
+              I work with executive directors and program leads to
               figure out <b>what&apos;s worth piloting</b>, what the failure
               modes are for the people you serve, and how to staff this without
               hiring an entire ML team you can&apos;t afford.
@@ -391,13 +383,13 @@ export function ConsultingPage() {
             <ul>
               <li>
                 <span>
-                  <b>Use-case triage.</b> Which programs benefit, which
-                  don&apos;t, and which are quietly risky.
+                  <b>Figuring out where AI actually helps.</b> and which programs are 
+                  quietly risky or not worth the effort.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Vendor &amp; tool review.</b> Plain-language assessment of
+                  <b>What you're being sold.</b> Plain-language assessment of
                   what&apos;s pitched to you.
                 </span>
               </li>
@@ -421,14 +413,12 @@ export function ConsultingPage() {
               <div className="body">
                 In the 2024 engagement with a four-person volunteer team, the
                 work was a Salesforce integration that eliminated four of every
-                five manual data-entry steps for a Philadelphia non-profit — and
-                a step-by-step runbook so non-technical staff could keep it
-                running without an engineer in the room. The 2025 engagement, as
+                five manual data-entry steps for a Philadelphia non-profit. The 2025 engagement, as
                 Deputy Project Leader for the Children&apos;s Scholarship Fund of
-                Philadelphia, is a step up the ladder: scope, timelines, client
-                communication, deliverables. Pattern across both:{" "}
+                Philadelphia, is a bigger challenge: scope, timelines, client
+                communication, deliverables.{" "}
                 <em>
-                  the model and the integration are the cheap part
+                  The model or the integration is the cheap part
                 </em>
                 . The honest conversation about what staff time gets reclaimed
                 is the work.
@@ -450,35 +440,39 @@ export function ConsultingPage() {
         </section>
         <section className="cn-process">
           <div className="step">
-            <div className="n">Week 0 — Intake</div>
+            <div className="n">Intake</div>
             <h3>A 45-minute call</h3>
             <p>
-              We talk. If I&apos;m not the right person, I tell you and
-              recommend two people who are.
+              We talk through what's going on, what you've already tried, and 
+              what a good outcome looks like. If I'm not the right fit, I'll 
+              say so and point you somewhere better.
             </p>
           </div>
           <div className="step">
-            <div className="n">Week 1 — Listen</div>
+            <div className="n">Listen</div>
             <h3>Reading &amp; interviews</h3>
             <p>
-              I read everything you&apos;ll let me read and talk to 6-10 people
-              across the org.
+              I read what you send me & talk to a handful of people on your team
+              — usually 3 to 5 short conversations. I'm trying to understand how work 
+              actually happens, not how it looks on paper.
             </p>
           </div>
           <div className="step">
-            <div className="n">Week 2-3 — Draft</div>
+            <div className="n">Draft</div>
             <h3>A working document</h3>
             <p>
-              You see the draft early. We disagree in writing. The document gets
-              sharper.
+              You get a draft early. I'd rather you push back on something concrete
+              than wait three weeks for a polished document that misses the point. 
+              We go back and forth until it reflects reality.
             </p>
           </div>
           <div className="step">
-            <div className="n">Week 4 — Hand off</div>
+            <div className="n">Hand off</div>
             <h3>Final memo &amp; readout</h3>
             <p>
-              One memo, one 60-minute readout, and a follow-up call 30 days
-              later. No retainers.
+              You get a short document you can actually use — share it with your board,
+              your funders, or your team. We do one final call to walk through it together.
+              After that, it's yours. No ongoing fees, no dependency on me to make it work.
             </p>
           </div>
         </section>
@@ -487,7 +481,8 @@ export function ConsultingPage() {
           <div>
             <div className="eyebrow">◦ open for Q3 2026</div>
             <h2>
-              Tell me what you&apos;re <em>actually</em> trying to figure out.
+              <em>Not sure where to start?</em> That's the most common situation. Send me two 
+              paragraphs and I&apos;ll tell you if I can help.
             </h2>
             <p>
               A short note is enough to start. Two paragraphs about the org, the
@@ -510,7 +505,7 @@ export function ConsultingPage() {
             </div>
             <div className="row">
               <span className="k">Format</span>
-              <span className="v">written, async-first</span>
+              <span className="v">written, at your pace</span>
             </div>
             <div className="row">
               <span className="k">Status</span>
