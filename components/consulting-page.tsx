@@ -22,7 +22,7 @@ export function ConsultingPage() {
                 Book a discovery call
               </a>
               <a href="#services" className="s">
-                See the two practices
+                See the three practices
               </a>
             </div>
           </div>
@@ -69,17 +69,202 @@ export function ConsultingPage() {
         <section className="cn-sec" id="services">
           <div className="lbl">
             <span className="num">§ 01</span>
-            <span>The two practices</span>
+            <span>The three practices</span>
           </div>
           <h2>
-            Two engagements I do well, and a long list of{" "}
+            Three engagements I do well, and a long list of{" "}
             <em>things I don&apos;t</em>.
           </h2>
         </section>
 
         <section className="cn-svc">
           <div className="meta">
-            <span className="pill">№ 01 — Readiness</span>
+            <span className="pill">№ 01 — Conversational</span>
+            <dl className="kv">
+              <dt>Length</dt>
+              <dd>4–10 weeks</dd>
+              <dt>Audience</dt>
+              <dd>Support, ops, product</dd>
+              <dt>Output</dt>
+              <dd>Working bot + evals</dd>
+              <dt>Channels</dt>
+              <dd>Web · Slack · WA</dd>
+            </dl>
+          </div>
+          <div className="body">
+            <p className="hd">
+              Conversational AI &amp; FAQ Automation — bots that actually answer
+              the question, with receipts.
+            </p>
+            <p>
+              I help teams design and ship <b>retrieval-grounded chatbots</b>{" "}
+              for support, internal knowledge, and customer-facing FAQ. The
+              work is half writing — turning your knowledge base, tickets, and
+              policies into something a model can cite — and half engineering:{" "}
+              <b>
+                evals, guardrails, escalation paths, and the boring
+                observability
+              </b>{" "}
+              that keeps it honest in production.
+            </p>
+            <ul>
+              <li>
+                <span>
+                  <b>Knowledge ingestion.</b> Docs, tickets, and tribal
+                  knowledge into a citable corpus.
+                </span>
+              </li>
+              <li>
+                <span>
+                  <b>Retrieval &amp; grounding.</b> Hybrid search, freshness
+                  rules, and &ldquo;I don&apos;t know&rdquo; as a feature.
+                </span>
+              </li>
+              <li>
+                <span>
+                  <b>Eval harness.</b> Golden questions, regression suites, and
+                  a weekly scorecard humans can read.
+                </span>
+              </li>
+              <li>
+                <span>
+                  <b>Handoff &amp; escalation.</b> When the bot routes to a
+                  human, with full context attached.
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className="cn-detail">
+            <div className="cn-mx">
+              <div className="head">
+                <div className="ttl">What well-built bots do</div>
+                <div className="src">
+                  Independent
+                  <br />
+                  research
+                </div>
+              </div>
+              <div className="grid">
+                <div className="cell">
+                  <div className="k">
+                    Issue deflection <sup>1</sup>
+                  </div>
+                  <div className="v">
+                    <em>52</em>
+                    <sup>%</sup>
+                  </div>
+                  <div className="d">
+                    of customer issues resolved by self-service bots, rising to{" "}
+                    <b>96%</b> on simple queries.
+                  </div>
+                </div>
+                <div className="cell">
+                  <div className="k">
+                    First-response time <sup>2</sup>
+                  </div>
+                  <div className="v">
+                    <em>−55</em>
+                    <sup>%</sup>
+                  </div>
+                  <div className="d">
+                    average reduction in first-response time across CX teams
+                    using AI tooling.
+                  </div>
+                </div>
+                <div className="cell">
+                  <div className="k">
+                    CSAT lift <sup>3</sup>
+                  </div>
+                  <div className="v">
+                    +<em>40</em>
+                    <sup>%</sup>
+                  </div>
+                  <div className="d">
+                    of mid-sized businesses report a 40%+ jump in CSAT within{" "}
+                    <b>3 months</b>.
+                  </div>
+                </div>
+                <div className="cell">
+                  <div className="k">
+                    Resolution time <sup>4</sup>
+                  </div>
+                  <div className="v">
+                    <em>11</em>
+                    <sup>min → 2</sup>
+                  </div>
+                  <div className="d">
+                    Klarna&apos;s AI assistant cut average resolution from 11
+                    minutes to ~2.
+                  </div>
+                </div>
+              </div>
+              <div className="srcs">
+                <span className="lbl">◦ Sources</span>
+                <ol>
+                  <li>
+                    <sup>1</sup>
+                    <span>
+                      <a
+                        href="https://yourgpt.ai/blog/growth/ai-customer-service-statistics"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        YourGPT, AI Customer Service Statistics 2026
+                      </a>{" "}
+                      — self-service bots resolve 54% of issues, up to 96% on
+                      simple queries.
+                    </span>
+                  </li>
+                  <li>
+                    <sup>2</sup>
+                    <span>
+                      <a
+                        href="https://www.freshworks.com/How-AI-is-unlocking-ROI-in-customer-service/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Freshworks CX Benchmark Report 2025
+                      </a>{" "}
+                      — 55% reduction in average first-response time for CX
+                      teams.
+                    </span>
+                  </li>
+                  <li>
+                    <sup>3</sup>
+                    <span>
+                      <a
+                        href="https://yourgpt.ai/blog/growth/ai-customer-service-statistics"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        YourGPT 2026
+                      </a>{" "}
+                      — 70% of mid-sized businesses see 40%+ CSAT jump within 3
+                      months of AI adoption.
+                    </span>
+                  </li>
+                  <li>
+                    <sup>4</sup>
+                    <span>
+                      <a
+                        href="https://www.nexgencloud.com/blog/case-studies/how-ai-and-rag-chatbots-cut-customer-service-costs-by-millions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        NexGen Cloud / Klarna case study
+                      </a>{" "}
+                      — average resolution time dropped from 11 min to ~2 min.
+                    </span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="cn-svc alt">
+          <div className="meta">
+            <span className="pill">№ 02 — Readiness</span>
             <dl className="kv">
               <dt>Length</dt>
               <dd>3–4 weeks</dd>
@@ -152,9 +337,9 @@ export function ConsultingPage() {
           </div>
         </section>
 
-        <section className="cn-svc alt">
+        <section className="cn-svc">
           <div className="meta">
-            <span className="pill">№ 02 — Nonprofit</span>
+            <span className="pill">№ 03 — Nonprofit</span>
             <dl className="kv">
               <dt>Length</dt>
               <dd>6–8 weeks</dd>
