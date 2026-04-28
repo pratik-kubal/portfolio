@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { PageNav } from "@/components/page-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header() {
@@ -51,17 +52,9 @@ export function Header() {
           gap: 16,
         }}
       >
-        <Link
-          href="/advisor"
-          style={{
-            color: isAdvisor ? "var(--accent-text)" : "inherit",
-            textDecoration: "none",
-          }}
-        >
-          advisor
-        </Link>
-        <span>updated · {stamp} · indexed</span>
+        <span className="hdr-stamp">updated · {stamp} · indexed</span>
         <ThemeToggle />
+        <PageNav />
       </div>
     </header>
   );

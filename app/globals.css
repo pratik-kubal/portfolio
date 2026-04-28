@@ -221,6 +221,93 @@
   font-size: 13px;
 }
 
+/* Stack page-nav widget — file-folder index tabs in the header bar.
+   Tabs poke up from the top edge of the page card; the current tab sits
+   forward and carries an accent rule across its top edge. The .pn-stk
+   root opts out of the header's uppercase + tracking inheritance so its
+   own type rules apply to children. */
+.pn-stk {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 28px;
+  margin-top: -4px;
+  font-family: var(--font-mono);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.pn-stk a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 12px;
+  background: var(--paper);
+  border: 1px solid var(--dim);
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  color: var(--dim);
+  text-decoration: none;
+  font: 500 10px/1 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: translateY(2px);
+  transition: transform 0.15s, color 0.15s;
+}
+.pn-stk a:hover {
+  transform: translateY(0);
+  color: var(--ink);
+}
+.pn-stk a.cur {
+  transform: translateY(-2px);
+  color: var(--ink);
+  border-color: var(--ink);
+  height: 28px;
+  font-weight: 600;
+  background: var(--paper);
+}
+.pn-stk a.cur::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--accent-text);
+}
+.pn-stk a .num {
+  color: var(--dim);
+  font-size: 9px;
+}
+.pn-stk a.cur .num {
+  color: var(--accent-text);
+}
+.pn-stk a .flag {
+  background: var(--primary);
+  color: #fff;
+  font-size: 8px;
+  padding: 2px 3px;
+  letter-spacing: 0.18em;
+  border-radius: 1px;
+}
+@media (max-width: 640px) {
+  .pn-stk a {
+    padding: 0 10px;
+    gap: 4px;
+  }
+  .pn-stk a .num {
+    display: none;
+  }
+}
+
+/* Hide the rev-stamp on narrow viewports so the right cluster fits without wrapping */
+@media (max-width: 768px) {
+  .hdr-stamp {
+    display: none;
+  }
+}
+
 .v3-stage {
   display: flex;
   align-items: flex-start;
