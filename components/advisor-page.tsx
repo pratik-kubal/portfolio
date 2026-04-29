@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MailtoLink } from "./mailto-link";
 
 export function AdvisorPage() {
   return (
@@ -490,12 +491,12 @@ export function AdvisorPage() {
               in plain language, and I&apos;ll tell you if it&apos;s not a fit.
             </p>
             <div className="actions">
-              <a
+              <MailtoLink
                 href="mailto:pratik-kubal@outlook.com?subject=Advisor%20inquiry"
                 className="p"
               >
                 pratik-kubal@outlook.com
-              </a>
+              </MailtoLink>
             </div>
           </div>
           <div className="ledger">
@@ -518,9 +519,9 @@ export function AdvisorPage() {
           <div>© 2026 Pratik Kubal · Independent AI Advisor / Contractor</div>
           <div>
             <Link href="/">portfolio</Link> ·{" "}
-            <a href="mailto:pratik-kubal@outlook.com">
+            <MailtoLink href="mailto:pratik-kubal@outlook.com">
               pratik-kubal@outlook.com
-            </a>
+            </MailtoLink>
           </div>
         </div>
       </div>
