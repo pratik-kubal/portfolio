@@ -35,17 +35,28 @@ export function EditorialCard({
         <div className="v3-rule" />
 
         <div className="v3-socgrid">
-          {person.socials.map((s) => (
-            <a
-              key={s.k}
-              href={s.url}
-              target={s.url.startsWith("http") ? "_blank" : undefined}
-              rel={s.url.startsWith("http") ? "noopener noreferrer" : undefined}
-            >
-              <b>{s.label}</b>
-              <span>{s.handle.replace(/^@/, "")}</span>
-            </a>
-          ))}
+          {person.socials.map((s) => {
+            const isMailto = s.url.startsWith("mailto:");
+            const onClick = isMailto
+              ? (e: React.MouseEvent<HTMLAnchorElement>) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                  e.preventDefault();
+                  window.open(s.url, "_blank", "noopener,noreferrer");
+                }
+              : undefined;
+            return (
+              <a
+                key={s.k}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onClick}
+              >
+                <b>{s.label}</b>
+                <span>{s.handle.replace(/^@/, "")}</span>
+              </a>
+            );
+          })}
         </div>
 
         <SpotifyNowPlaying endpoint="/api/now-playing" forceState="auto" />

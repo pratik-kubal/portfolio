@@ -1,9 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { PageNav } from "@/components/page-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header() {
+  const pathname = usePathname();
+  const isAdvisor = pathname === "/advisor";
+
   const today = new Date();
   const stamp = today
     .toLocaleString("en-US", { month: "short", year: "numeric" })
@@ -23,7 +28,21 @@ export function Header() {
           }}
         >
           <b>Pratik Kubal</b>
-          <span>/ knowledge card</span>
+          {isAdvisor ? (
+            <span>
+              / advisor{" "}
+              <em
+                style={{
+                  fontStyle: "italic",
+                  color: "var(--accent-text)",
+                }}
+              >
+                · est. 2025
+              </em>
+            </span>
+          ) : (
+            <span>/ knowledge card</span>
+          )}
         </Link>
       </div>
       <div
@@ -33,8 +52,9 @@ export function Header() {
           gap: 16,
         }}
       >
-        <span>updated · {stamp} · indexed</span>
+        <span className="hdr-stamp">{stamp}</span>
         <ThemeToggle />
+        <PageNav />
       </div>
     </header>
   );
