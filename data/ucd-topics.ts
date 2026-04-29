@@ -30,7 +30,7 @@ export const TOPICS: Topic[] = [
     label: "Shuttle Map",
     q: "Where does the City Shuttle run?",
     context:
-      "The City Shuttle is a free continuous loop, weekdays 7am–7pm, with 6 stops between 30th St Station and Cedar Park (via Drexel Square, Penn Campus, Market & 40th, and Clark Park).",
+      "The City Shuttle is a free continuous loop, weekdays 7am-7pm, with 6 stops between 30th St Station and Cedar Park (via Drexel Square, Penn Campus, Market & 40th, and Clark Park).",
   },
   {
     id: "restaurants",

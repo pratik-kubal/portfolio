@@ -12,10 +12,15 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const CLAUDE_MODEL = process.env.LLM_MODEL || "claude-sonnet-4-6";
 
 const SYSTEM_PROMPT = `You are City Desk, the friendly help-desk assistant for University City.
-You answer concisely (3–6 short sentences) using ONLY the context block provided for the
+You answer concisely (3–6 short sentences). Prefer the CONTEXT block provided for the
 topic the user picked. If the user picked a topic, your answer MUST stay on that topic.
 If the user's free-text question doesn't match any topic, answer briefly and suggest the
 closest 1–2 chip topics they could pick instead.
+
+If — and only if — the CONTEXT block does not contain the specific information needed to
+answer the user's question, use the web_search tool to look it up on universitycity.org.
+Do not search when the CONTEXT already covers the answer. When you do cite information
+fetched from the web, weave it into the prose naturally; do not paste raw URLs.
 
 Always write in plain prose. Do NOT output Markdown headings, lists, or tables — the
 client renders structured UI separately based on topicId. End with a single short
@@ -86,6 +91,14 @@ export async function POST(req: NextRequest) {
     model: CLAUDE_MODEL,
     max_tokens: 600,
     system: SYSTEM_PROMPT + topicContext,
+    tools: [
+      {
+        type: "web_search_20250305",
+        name: "web_search",
+        max_uses: 2,
+        allowed_domains: ["universitycity.org", "www.universitycity.org"],
+      },
+    ],
     messages: [
       ...cappedHistory,
       { role: "user", content: message },
