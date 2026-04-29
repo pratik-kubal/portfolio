@@ -25,10 +25,10 @@ export type TimelineEntry = {
 
 export const person = {
   name: "Pratik Kubal",
-  role: "Full-Stack Software Engineer",
+  role: "Software Engineer",
   based: "Philadelphia, PA",
   pronunciation: "/ˈpraː.tIk ˈkuː.baːl/",
-  bio: "I'm a full-stack software engineer with 5+ years building scalable, cloud-native microservices and APIs on AWS — mostly in FinTech. I've led database migrations, shipped CI/CD pipelines that cut deploys from days to hours.",
+  bio: "I'm a software engineer with 5+ years building scalable, cloud-native microservices and APIs on AWS — mostly in FinTech. I've led database migrations, shipped CI/CD pipelines that cut deploys from days to hours.",
   eyebrow: "◦ a career, on the record",
   ledeBefore: "Engineer of ",
   ledeEm: "quiet",

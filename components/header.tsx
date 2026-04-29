@@ -52,7 +52,7 @@ export function Header() {
           gap: 16,
         }}
       >
-        <span className="hdr-stamp">updated · {stamp} · indexed</span>
+        <span className="hdr-stamp">{stamp}</span>
         <ThemeToggle />
         <PageNav />
       </div>

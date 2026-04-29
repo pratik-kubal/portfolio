@@ -24,7 +24,7 @@ Single consolidated profile for Pratik Kubal — used as the LLM context for the
 
 ## Summary
 
-Backend-leaning full-stack software engineer with 5 years of production experience in fintech / mortgage-tech SaaS, all on the AIVA loan-document AI platform at Dark Matter Technologies (Apr 2020 – May 2025, promoted from SWE I to SWE II). Strongest in Java + AWS: led a Neptune → Aurora Serverless migration on a ~100K-request/day platform that cut API latency 90% and saved ~$10K/year, rearchitected the loan-processing engine for 2× throughput, and built self-service tooling that eliminated manual config deploys for two teams.
+Backend-leaning software engineer with 5 years of production experience in fintech / mortgage-tech SaaS, all on the AIVA loan-document AI platform at Dark Matter Technologies (Apr 2020 – May 2025, promoted from SWE I to SWE II). Strongest in Java + AWS: led a Neptune → Aurora Serverless migration on a ~100K-request/day platform that cut API latency 90% and saved ~$10K/year, rearchitected the loan-processing engine for 2× throughput, and built self-service tooling that eliminated manual config deploys for two teams.
 
 Consistently the engineer who revived quality and process — restarted the cross-team code review program after the senior mentor left, raised org-wide test coverage to 70% via dependency-injection patterns, and replaced a 24-hour deployment cycle with a 4-hour CI/CD pipeline. Comfortable across the stack (React/Next.js for self-service UIs and a personal AI-powered resume Q&A app), and partners well with Product and Data teams.
 

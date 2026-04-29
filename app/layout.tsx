@@ -32,11 +32,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Pratik Kubal - Full-Stack Software Engineer",
+    default: "Pratik Kubal - Software Engineer",
     template: "%s | Pratik Kubal",
   },
   description:
-    "Full-stack software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration. Based in Philadelphia, PA.",
+    "Software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration. Based in Philadelphia, PA.",
   keywords: [
     "Pratik Kubal",
     "full-stack engineer",
@@ -57,16 +57,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: "Pratik Kubal - Full-Stack Software Engineer",
+    title: "Pratik Kubal - Software Engineer",
     description:
-      "Full-stack software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration.",
+      "Software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration.",
     siteName: "Pratik Kubal",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pratik Kubal - Full-Stack Software Engineer",
+    title: "Pratik Kubal - Software Engineer",
     description:
-      "Full-stack software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration.",
+      "Software engineer with 5+ years of experience in Java, Python, React, Next.js, and AWS. Specializing in FinTech, microservices, and AI/LLM integration.",
   },
   robots: {
     index: true,
@@ -93,11 +93,11 @@ const jsonLd = {
   familyName: "Kubal",
   url: siteUrl,
   email: "pratik-kubal@outlook.com",
-  jobTitle: "Full-Stack Software Engineer",
+  jobTitle: "Software Engineer",
   description:
-    "Full-stack software engineer with 5+ years of experience in FinTech, AWS, microservices, and AI/LLM integration.",
+    "Software engineer with 5+ years of experience in FinTech, AWS, microservices, and AI/LLM integration.",
   disambiguatingDescription:
-    "Full-stack software engineer based in Philadelphia, PA. M.S. Computer Science from University at Buffalo (SUNY), 2020. Former Software Engineer II at Dark Matter Technologies (2020–2025). Focus on FinTech microservices on AWS and AI/LLM integration. ORCID: 0009-0005-9209-7704.",
+    "Software engineer based in Philadelphia, PA. M.S. Computer Science from University at Buffalo (SUNY), 2020. Former Software Engineer II at Dark Matter Technologies (2020–2025). Focus on FinTech microservices on AWS and AI/LLM integration. ORCID: 0009-0005-9209-7704.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Philadelphia",
@@ -144,7 +144,7 @@ const jsonLd = {
   ],
   hasOccupation: {
     "@type": "Occupation",
-    name: "Full-Stack Software Engineer",
+    name: "Software Engineer",
     occupationLocation: {
       "@type": "City",
       name: "Philadelphia, PA",

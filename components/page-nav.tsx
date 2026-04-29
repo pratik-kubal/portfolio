@@ -11,7 +11,7 @@ interface NavPage {
 }
 
 const PAGES: NavPage[] = [
-  { id: "portfolio", label: "Portfolio", href: "/" },
+  { id: "portfolio", label: "Knowledge Card", href: "/" },
   { id: "advisor", label: "Advisor", href: "/advisor", flag: "NEW" },
 ];
 
