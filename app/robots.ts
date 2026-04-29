@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/"],
+      disallow: ["/api/", "/ucd-faq-demo"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };
