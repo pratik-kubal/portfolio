@@ -2284,6 +2284,110 @@
   font-weight: 600;
 }
 
+.ucd-faq-root .ucd-md {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ucd-faq-root .ucd-md > *:first-child {
+  margin-top: 0;
+}
+.ucd-faq-root .ucd-md > *:last-child {
+  margin-bottom: 0;
+}
+.ucd-faq-root .ucd-md p {
+  margin: 0;
+}
+.ucd-faq-root .ucd-md strong {
+  font-weight: 600;
+}
+.ucd-faq-root .ucd-md em {
+  font-style: italic;
+}
+.ucd-faq-root .ucd-md a {
+  color: var(--accent-ink);
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+.ucd-faq-root .ucd-md a:hover {
+  color: var(--accent);
+}
+.ucd-faq-root .ucd-md ul,
+.ucd-faq-root .ucd-md ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ucd-faq-root .ucd-md li {
+  line-height: 1.5;
+}
+.ucd-faq-root .ucd-md li > p {
+  margin: 0;
+}
+.ucd-faq-root .ucd-md h1,
+.ucd-faq-root .ucd-md h2,
+.ucd-faq-root .ucd-md h3,
+.ucd-faq-root .ucd-md h4,
+.ucd-faq-root .ucd-md h5,
+.ucd-faq-root .ucd-md h6 {
+  margin: 6px 0 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.ucd-faq-root .ucd-md h1 { font-size: 18px; }
+.ucd-faq-root .ucd-md h2 { font-size: 17px; }
+.ucd-faq-root .ucd-md h3 { font-size: 16px; }
+.ucd-faq-root .ucd-md h4,
+.ucd-faq-root .ucd-md h5,
+.ucd-faq-root .ucd-md h6 { font-size: 15px; }
+.ucd-faq-root .ucd-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.ucd-faq-root .ucd-md pre {
+  margin: 0;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.ucd-faq-root .ucd-md pre code {
+  background: transparent;
+  padding: 0;
+}
+.ucd-faq-root .ucd-md blockquote {
+  margin: 0;
+  padding: 4px 12px;
+  border-left: 3px solid var(--accent);
+  color: inherit;
+  opacity: 0.85;
+}
+.ucd-faq-root .ucd-md hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 6px 0;
+}
+.ucd-faq-root .ucd-md table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.ucd-faq-root .ucd-md th,
+.ucd-faq-root .ucd-md td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 10px;
+  text-align: left;
+}
+.ucd-faq-root .ucd-md th {
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.04);
+}
+
 .ucd-faq-root .ucd-link-row {
   display: flex;
   flex-wrap: wrap;

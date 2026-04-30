@@ -7,6 +7,8 @@ import {
   useRef,
   useState,
 } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { TOPICS, type Topic, type TopicId } from "@/data/ucd-topics";
 
 interface Turn {
@@ -563,7 +565,11 @@ function TurnRow({ turn }: { turn: Turn }) {
           <TypingDots />
         ) : (
           <div className="ucd-ans">
-            {showProse && <p>{turn.text}</p>}
+            {showProse && (
+              <div className="ucd-md">
+                <Markdown remarkPlugins={[remarkGfm]}>{turn.text}</Markdown>
+              </div>
+            )}
             {Comp && <Comp />}
           </div>
         )}
