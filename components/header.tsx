@@ -7,12 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header() {
   const pathname = usePathname();
-  const isAdvisor = pathname === "/advisor";
-
-  const today = new Date();
-  const stamp = today
-    .toLocaleString("en-US", { month: "short", year: "numeric" })
-    .toLowerCase();
+  const isAdvisor = pathname === "/solutions";
 
   return (
     <header className="v3-hdr">
@@ -30,7 +25,7 @@ export function Header() {
           <b>Pratik Kubal</b>
           {isAdvisor ? (
             <span>
-              / advisor{" "}
+              / solutions{" "}
               <em
                 style={{
                   fontStyle: "italic",
@@ -41,7 +36,7 @@ export function Header() {
               </em>
             </span>
           ) : (
-            <span>/ knowledge card</span>
+            <span>/ About Me</span>
           )}
         </Link>
       </div>
@@ -52,7 +47,6 @@ export function Header() {
           gap: 16,
         }}
       >
-        <span className="hdr-stamp">{stamp}</span>
         <ThemeToggle />
         <PageNav />
       </div>

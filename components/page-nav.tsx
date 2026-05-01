@@ -11,14 +11,14 @@ interface NavPage {
 }
 
 const PAGES: NavPage[] = [
-  { id: "portfolio", label: "Knowledge Card", href: "/" },
-  { id: "advisor", label: "Advisor", href: "/advisor", flag: "NEW" },
+  { id: "portfolio", label: "About Me", href: "/" },
+  { id: "advisor", label: "Solutions", href: "/solutions", flag: "NEW" },
 ];
 
 export function PageNav() {
   const pathname = usePathname();
   const currentId =
-    pathname === "/advisor" || pathname?.startsWith("/advisor/")
+    pathname === "/solutions" || pathname?.startsWith("/solutions/")
       ? "advisor"
       : "portfolio";
 

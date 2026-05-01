@@ -7,75 +7,35 @@ export function AdvisorPage() {
       <div className="cn-wrap">
         <section className="cn-hero">
           <div>
-            <div className="eyebrow">Independent AI Advisor / Contractor · 2025 — present</div>
+            <div className="eyebrow">Independent AI / Technical Solutions · 2025 — present</div>
             <h1>
-              Helping organizations <em>think carefully</em>{" "}
-              about AI.
+              Building AI solutions that <em>actually work</em>{" "}
+              for your organization.
             </h1>
             <p className="lede">
-              I help <b>small businesses and nonprofits</b> cut through the AI noise — figuring out what's actually worth trying, what to ignore, and how to get started without wasting money or time.
+              I design, build, and deploy AI systems for <b>small businesses and nonprofits</b> — chatbots, automations, integrations — with the full technical stack handled, so you don&apos;t need to hire a team to get started.
             </p>
             <aside className="cn-ground" aria-label="Grounding note">
               <p>
-                I work with organizations that have no in-house technical
-                staff, limited budgets, and real skepticism about whether AI
-                is right for them.{" "}
-                <em>That skepticism is healthy. Let&apos;s start there.</em>
+                I work with organizations that have real problems, limited budgets, and no technical staff to build solutions internally.{" "}
+                <em>I handle the technical side — scoping, building, integrating, testing — and hand you something that runs without me.</em>
               </p>
             </aside>
             <div className="ctas">
               <a href="#contact" className="p">
-                Book a discovery call
+                Book a technical discovery call
               </a>
-            </div>
-          </div>
-          <div className="idx-wrap">
-            <div className="cn-idx">
-              <div className="row">
-                <span className="k">Filed under</span>
-                <span className="v">
-                  <em>advisory · strategy</em>
-                </span>
-              </div>
-              <div className="row">
-                <span className="k">Engagements</span>
-                <span className="v">3 — 8 weeks</span>
-              </div>
-              <div className="row">
-                <span className="k">Format</span>
-                <span className="v">
-                  <em>written, at your pace</em>
-                </span>
-              </div>
-              <div className="row">
-                <span className="k">Capacity</span>
-                <span className="v">2 clients / qtr</span>
-              </div>
-              <div className="row">
-                <span className="k">Status</span>
-                <span className="v">
-                  <em>open · Q3 2026</em>
-                </span>
-              </div>
-              <div className="row">
-                <span className="k">Rate</span>
-                <span className="v">on request</span>
-              </div>
-              <div className="foot">
-                <span>CARD 01 / 01</span>
-                <span>REV. 04.26</span>
-              </div>
             </div>
           </div>
         </section>
 
         <section className="cn-sec" id="services">
           <div className="lbl">
-            <span className="num">§ 01</span>
+            <span className="num">01</span>
             <span>The three ways</span>
           </div>
           <h2>
-            <em>Three Things</em>{" "}I can help with.
+            <em>Three things</em>{" "}I build, implement, and ship.
           </h2>
         </section>
 
@@ -86,41 +46,46 @@ export function AdvisorPage() {
               <dt>Audience</dt>
               <dd>Support, ops, product</dd>
               <dt>Output</dt>
-              <dd>Working bot + evals</dd>
+              <dd>Live, deployed system</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              Answering customer questions automatically through AI — Saving your time
+              Chatbot &amp; FAQ systems — built, integrated, and running on your stack
             </p>
             <p>
-              I help organizations design and implement <b>chatbots</b>{" "}
-              for support, internal knowledge, and customer-facing FAQ. The integration is
-              highly customized according to each use-case and technical stack.
+              I design, build, and deploy custom <b>chatbots</b>{" "}
+              trained on your content — for support, internal knowledge bases, and customer-facing FAQ. I handle the full stack: the architecture, the integration into your existing tools, the evaluation, and the handoff.
             </p>
             <ul>
               <li>
                 <span>
-                  <b>Pulling in what you already know.</b> Your existing documents, 
-                  FAQs, and policies, turned into something a bot can actually use.
+                  <b>Pulling in what you already know.</b> Your existing documents,
+                  FAQs, and policies, turned into something a bot can actually query.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Getting accurate answers.</b> Making sure the bot 
-                  doesn't make things up, and knows when to say &ldquo;I don&apos;t know&rdquo;.
+                  <b>Getting accurate answers.</b> Making sure the bot
+                  doesn&apos;t hallucinate, and knows when to escalate.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Testing before it goes live.</b> A simple way to check if the bot is 
-                  actually helping before your customers see it.
+                  <b>Testing before it goes live.</b> Evaluation runs and quality checks
+                  before your customers see it.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Knowing when to hand off to a human.</b> So nothing important falls 
-                  through the cracks.
+                  <b>Knowing when to hand off to a human.</b> Escalation paths built in,
+                  so nothing important falls through the cracks.
+                </span>
+              </li>
+              <li>
+                <span>
+                  <b>Ongoing observability.</b> Dashboards and logs so you can see what&apos;s
+                  being asked — and catch problems before they become habits.
                 </span>
               </li>
             </ul>
@@ -254,33 +219,27 @@ export function AdvisorPage() {
           </div>
         </section>
 
-        <section className="cn-svc alt">
+        <section className="cn-svc">
           <div className="meta">
             <span className="pill">02 — Readiness</span>
             <dl className="kv">
               <dt>Audience</dt>
               <dd>Stakeholders</dd>
               <dt>Output</dt>
-              <dd>Written report</dd>
+              <dd>Technical build plan + roadmap</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              Is your organization actually ready for AI?
-              — An honest look before you commit to anything.
+              Technical scoping — what to build, what it costs, and what&apos;s actually worth the effort.
             </p>
             <p>
-              A four-week diagnostic for leaders who suspect their
-              team is <b>further from</b> (or sometimes closer to) production AI
-              than the deck suggests. The work is to sit with your data, your
-              platform, your security posture, and your people, and produce a
-              written report with{" "}
+              A four-week technical scoping engagement for organizations ready to build something real. I get into your data, your tools and systems, your security posture, and your team&apos;s actual capacity — and deliver a{" "}
               <b>
-                a roadmap, an evaluation rubric, and a list of things to stop
-                doing
+                technical build plan with a prioritized roadmap and a clear list of what to stop doing before you start
               </b>
-              . Works for small teams. You don't need a technical staff for this — 
-              that's kind of the point.
+              . Works for small teams. You don&apos;t need a technical staff for this —
+              that&apos;s kind of the point.
             </p>
             <ul>
               <li>
@@ -291,20 +250,20 @@ export function AdvisorPage() {
               </li>
               <li>
                 <span>
-                  <b>Your tools and systems.</b> Your tools and systems. What you're running 
-                  on, what it costs, and whether it can handle more.
+                  <b>Your tools and systems.</b> What you&apos;re running on, what it can
+                  actually support, and what the integration complexity looks like.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Org &amp; risk.</b> Who owns what when the AI gets something wrong
+                  <b>Org &amp; risk.</b> Who owns what when something the AI built goes wrong
                   in front of a customer.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Roadmap.</b> Three things to try in 90 days. 
-                  One to actually finish in the next few months.
+                  <b>Roadmap.</b> Three things to build in 90 days.
+                  One to actually ship in the next few months.
                 </span>
               </li>
             </ul>
@@ -354,7 +313,7 @@ export function AdvisorPage() {
                 </span>
               </div>
               <div className="verdict">
-                Verdict: <b>cautiously ready</b>. Get one thing running in 90 days.
+                Verdict: <b>cautiously ready</b>. Here&apos;s what to build first — and what to skip.
               </div>
             </div>
           </div>
@@ -367,43 +326,43 @@ export function AdvisorPage() {
               <dt>Audience</dt>
               <dd>ED, board, ops lead</dd>
               <dt>Output</dt>
-              <dd>Strategy memo + pilot</dd>
+              <dd>Running pilot + handoff docs</dd>
             </dl>
           </div>
           <div className="body">
             <p className="hd">
-              Nonprofit AI Strategy — small budgets and big stakes.
+              Nonprofit AI implementation — small budgets, one real pilot, no platform lock-in.
             </p>
             <p>
-              Nonprofits are being sold AI tools by every vendor right now.
+              Nonprofits are being sold AI tools that require maintaining.
               I work with executive directors and program leads to
-              figure out <b>what&apos;s worth piloting</b>, what the failure
-              modes are for the people you serve, and how to staff this without
-              hiring an entire ML team you can&apos;t afford.
+              <b> scope, build, and run one actual pilot</b> — designed for your
+              staff capacity, your budget, and the people you serve — without
+              the platform commitments that require a full-time engineer to keep running.
             </p>
             <ul>
               <li>
                 <span>
-                  <b>Figuring out where AI actually helps.</b> and which programs are 
-                  quietly risky or not worth the effort.
+                  <b>Figuring out what&apos;s actually worth building.</b> And which programs are
+                  quietly risky or not worth the engineering overhead.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>What you're being sold.</b> Plain-language assessment of
-                  what&apos;s pitched to you.
+                  <b>What you&apos;re being sold.</b> Plain-language technical assessment of
+                  what&apos;s actually in the contract.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>Donor-ready memo.</b> A short document the board and
-                  funders can actually read.
+                  <b>Donor-ready documentation.</b> A short written summary the board and
+                  funders can read and actually understand.
                 </span>
               </li>
               <li>
                 <span>
-                  <b>One small pilot.</b> Scoped, measured, and reversible. No
-                  platform commitments.
+                  <b>One scoped pilot.</b> Built, measured, and designed to be reversible.
+                  No platform commitments you&apos;ll be stuck maintaining.
                 </span>
               </li>
             </ul>
@@ -432,7 +391,7 @@ export function AdvisorPage() {
 
         <section className="cn-sec">
           <div className="lbl">
-            <span className="num">§ 02</span>
+            <span className="num">02</span>
             <span>How an engagement runs</span>
           </div>
           <h2>
@@ -442,38 +401,38 @@ export function AdvisorPage() {
         <section className="cn-process">
           <div className="step">
             <div className="n">Intake</div>
-            <h3>A 45-minute call</h3>
+            <h3>A technical discovery call</h3>
             <p>
-              We talk through what's going on, what you've already tried, and 
-              what a good outcome looks like. If I'm not the right fit, I'll 
-              say so and point you somewhere better.
+              We talk through the problem, what you&apos;ve tried, and what a realistic
+              build looks like. If it&apos;s not the right fit, I&apos;ll say so and point
+              you somewhere better.
             </p>
           </div>
           <div className="step">
             <div className="n">Listen</div>
-            <h3>Reading &amp; interviews</h3>
+            <h3>Technical scoping</h3>
             <p>
-              I read what you send me & talk to a handful of people on your team
-              — usually 3 to 5 short conversations. I'm trying to understand how work 
-              actually happens, not how it looks on paper.
+              I dig into your existing stack, data, and tools. Two to five conversations
+              with the people closest to the problem. I&apos;m trying to understand how the
+              systems actually work, not how they look on paper.
             </p>
           </div>
           <div className="step">
             <div className="n">Draft</div>
-            <h3>A working document</h3>
+            <h3>Build &amp; iterate</h3>
             <p>
-              You get a draft early. I'd rather you push back on something concrete
-              than wait three weeks for a polished document that misses the point. 
-              We go back and forth until it reflects reality.
+              You get working software early — not a polished document that misses the point.
+              We test it against real questions, adjust, and keep going until it reflects
+              what you actually need.
             </p>
           </div>
           <div className="step">
             <div className="n">Hand off</div>
-            <h3>Final memo &amp; readout</h3>
+            <h3>Deploy + hand off</h3>
             <p>
-              You get a short document you can actually use — share it with your board,
-              your funders, or your team. We do one final call to walk through it together.
-              After that, it's yours. No ongoing fees, no dependency on me to make it work.
+              You get a running system you can actually use — along with documentation
+              your team can maintain. One final walkthrough. After that, it&apos;s yours.
+              No retainers, no ongoing dependency on me to keep it working.
             </p>
           </div>
         </section>
@@ -482,13 +441,14 @@ export function AdvisorPage() {
           <div>
             <div className="eyebrow">◦ open for Q3 2026</div>
             <h2>
-              <em>Not sure where to start?</em> That's the most common situation. Send me two 
-              paragraphs and I&apos;ll tell you if I can help.
+              <em>Not sure what to build first?</em> That&apos;s the most common starting point.
+              Send me two paragraphs and I&apos;ll tell you what&apos;s actually buildable.
             </h2>
             <p>
               A short note is enough to start. Two paragraphs about the org, the
-              question on the table, and a rough timeline. Replies are written,
-              in plain language, and I&apos;ll tell you if it&apos;s not a fit.
+              problem you&apos;re trying to solve, and a rough timeline. Replies are direct
+              and in plain language. I&apos;ll tell you what&apos;s buildable, what it&apos;ll take,
+              and whether it&apos;s the right fit.
             </p>
             <div className="actions">
               <MailtoLink
@@ -506,7 +466,7 @@ export function AdvisorPage() {
             </div>
             <div className="row">
               <span className="k">Format</span>
-              <span className="v">written, at your pace</span>
+              <span className="v">built, at your pace</span>
             </div>
             <div className="row">
               <span className="k">Status</span>
@@ -516,7 +476,7 @@ export function AdvisorPage() {
         </section>
 
         <div className="cn-foot">
-          <div>© 2026 Pratik Kubal · Independent AI Advisor / Contractor</div>
+          <div>© 2026 Pratik Kubal · Independent AI / Technical Solutions</div>
           <div>
             <Link href="/">portfolio</Link> ·{" "}
             <MailtoLink href="mailto:pratik-kubal@outlook.com">

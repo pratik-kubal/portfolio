@@ -203,7 +203,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--dim);
   font: 11px/1 var(--font-mono);
   color: var(--dim);
   letter-spacing: 0.1em;
@@ -211,6 +211,9 @@
   background: color-mix(in srgb, var(--paper) 85%, transparent);
   backdrop-filter: blur(6px);
   z-index: 40;
+}
+:root:not(.dark) .v3-hdr {
+  border-bottom-color: var(--rule);
 }
 .v3-hdr b {
   color: var(--ink);
@@ -242,7 +245,7 @@
   align-items: center;
   gap: 6px;
   height: 24px;
-  padding: 0 12px;
+  padding: 0 8px;
   background: var(--paper);
   border: 1px solid var(--dim);
   border-bottom: none;
@@ -252,20 +255,21 @@
   font: 500 10px/1 var(--font-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transform: translateY(2px);
+  transform: translateY(7px);
   transition: transform 0.15s, color 0.15s;
 }
 .pn-stk a:hover {
-  transform: translateY(0);
+  transform: translateY(5px);
   color: var(--ink);
 }
 .pn-stk a.cur {
-  transform: translateY(-2px);
+  align-self: flex-start;
   color: var(--ink);
   border-color: var(--ink);
-  height: 28px;
+  height: 39px;
   font-weight: 600;
   background: var(--paper);
+  transform: translateY(-2px);
 }
 .pn-stk a.cur::before {
   content: "";
@@ -933,10 +937,6 @@
 /* HERO */
 .cn-hero {
   padding: 96px 0 64px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 72px;
-  align-items: start;
 }
 .cn-hero .eyebrow {
   font: 11px/1 var(--font-mono);
@@ -979,7 +979,7 @@
   margin: 4px 0 30px;
   padding: 18px 22px 18px 24px;
   border-left: 2px solid var(--accent-text);
-  max-width: 58ch;
+  max-width: 70ch;
   background: linear-gradient(
     to right,
     color-mix(in srgb, var(--accent-text) 5%, transparent) 0%,
@@ -1113,7 +1113,7 @@
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 32px;
-  align-items: baseline;
+  align-items: center;
   scroll-margin-top: 56px;
 }
 .cn-sec .lbl {
@@ -1146,12 +1146,9 @@
 .cn-svc {
   padding: 0 0 56px;
   display: grid;
-  grid-template-columns: 200px minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: 200px minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 32px;
   align-items: start;
-}
-.cn-svc.alt {
-  grid-template-columns: 200px minmax(0, 1fr) minmax(0, 1.4fr);
 }
 .cn-svc .meta {
   font: 11px/1.55 var(--font-mono);
@@ -1218,7 +1215,7 @@
   display: grid;
   grid-template-columns: 18px 1fr;
   gap: 12px;
-  font: 14px/1.5 var(--font-serif);
+  font: 15.5px/1.6 var(--font-serif);
   color: var(--ink);
 }
 .cn-svc .body ul li:first-child {
@@ -1491,65 +1488,63 @@
   border-bottom-color: var(--accent-text);
 }
 
-/* Service — sticky-note field note */
+/* Service — field note card */
 .cn-fn {
-  transform: rotate(-1deg);
-  background: var(--sticky-bg);
-  color: var(--sticky-ink);
-  padding: 18px 20px 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 10px 24px -10px rgba(0, 0, 0, 0.25);
-  border-radius: 1px;
-  position: relative;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  padding: 22px 22px 18px;
+  border-radius: 3px;
   font-family: var(--font-serif);
+  position: relative;
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.18);
 }
 .dark .cn-fn {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 10px 24px -10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.6);
 }
 .cn-fn::before {
-  content: "";
+  content: "▪ FIELD NOTE";
   position: absolute;
   top: -7px;
-  left: 50%;
-  transform: translateX(-50%) rotate(2deg);
-  width: 54px;
-  height: 14px;
-  background: color-mix(in srgb, var(--primary) 30%, transparent);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  left: 14px;
+  background: var(--paper);
+  padding: 0 7px;
+  font: 10px/1 var(--font-mono);
+  letter-spacing: 0.22em;
+  color: var(--dim);
 }
 .cn-fn .dt {
   font: 9.5px/1 var(--font-mono);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0.6;
-  margin: 6px 0 8px;
+  color: var(--dim);
+  margin: 4px 0 12px;
 }
 .cn-fn .body {
-  font: italic 400 15.5px/1.5 var(--font-serif);
+  font: italic 400 14.5px/1.55 var(--font-serif);
+  color: var(--ink);
   text-wrap: pretty;
 }
-.cn-fn .body::first-letter {
-  font-size: 1.3em;
+.cn-fn .body em {
+  color: var(--accent-text);
+  font-style: italic;
   font-weight: 500;
-  color: var(--chart-2);
 }
 .cn-fn .stamp {
   margin-top: 14px;
-  padding: 6px 10px;
-  border: 1.5px solid var(--chart-2);
-  color: var(--chart-2);
+  padding: 5px 9px;
+  border: 1px solid var(--accent-text);
+  color: var(--accent-text);
   display: inline-block;
   font: 600 9.5px/1 var(--font-mono);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  transform: rotate(-2deg);
-  opacity: 0.85;
 }
 .cn-fn .sig {
-  margin-top: 8px;
+  margin-top: 10px;
   font: 10px/1 var(--font-mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  opacity: 0.55;
+  color: var(--dim);
   text-align: right;
 }
 
@@ -1701,15 +1696,11 @@
 /* RESPONSIVE */
 @media (max-width: 1080px) {
   .cn-hero {
-    grid-template-columns: 1fr;
-    gap: 36px;
     padding: 64px 0 40px;
   }
   .cn-hero h1 { font-size: 52px; }
-  .cn-hero .idx-wrap { max-width: 380px; }
   .cn-sec { grid-template-columns: 1fr; gap: 14px; }
-  .cn-svc,
-  .cn-svc.alt {
+  .cn-svc {
     grid-template-columns: 1fr;
     gap: 24px;
   }
