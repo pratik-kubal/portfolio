@@ -203,7 +203,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  border-bottom: 1px solid var(--dim);
+  border-bottom: 1px solid var(--rule);
   font: 11px/1 var(--font-mono);
   color: var(--dim);
   letter-spacing: 0.1em;
@@ -211,9 +211,6 @@
   background: color-mix(in srgb, var(--paper) 85%, transparent);
   backdrop-filter: blur(6px);
   z-index: 40;
-}
-:root:not(.dark) .v3-hdr {
-  border-bottom-color: var(--rule);
 }
 .v3-hdr b {
   color: var(--ink);
