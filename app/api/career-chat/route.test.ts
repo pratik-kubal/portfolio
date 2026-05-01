@@ -1,14 +1,27 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // ── hoisted mocks ──────────────────────────────────────────────────────────
-const { mockMessagesStream } = vi.hoisted(() => ({
+const { mockMessagesStream, mockLogQuestion, mockAfter } = vi.hoisted(() => ({
   mockMessagesStream: vi.fn(),
+  mockLogQuestion: vi.fn(),
+  mockAfter: vi.fn(),
 }));
 
 vi.mock("@anthropic-ai/sdk", () => ({
   default: vi.fn().mockImplementation(function () {
     return { messages: { stream: mockMessagesStream } };
   }),
+}));
+
+vi.mock("next/server", () => ({
+  // NextRequest is unused at runtime in our route — we just need a placeholder
+  // so the import doesn't blow up, plus a captured `after` to assert against.
+  NextRequest: class {},
+  after: mockAfter,
+}));
+
+vi.mock("@/lib/db/log-question", () => ({
+  logQuestion: mockLogQuestion,
 }));
 
 const mockReadFileSync = vi.hoisted(() =>
@@ -67,6 +80,9 @@ const { POST } = await import("./route");
 describe("POST /api/career-chat", () => {
   beforeEach(() => {
     mockMessagesStream.mockReturnValue(makeStream("Hello from AI"));
+    mockLogQuestion.mockReset();
+    mockLogQuestion.mockResolvedValue(true);
+    mockAfter.mockReset();
   });
 
   it("returns text/event-stream content-type", async () => {
@@ -124,6 +140,58 @@ describe("POST /api/career-chat", () => {
     expect(userTurn).toContain("What are Pratik's skills?");
     expect(userTurn).not.toContain("{{context}}");
     expect(userTurn).not.toContain("{{message}}");
+  });
+
+  it("logs the question to the analytics sink with metadata", async () => {
+    await POST(
+      makeRequest({
+        message: "What does Pratik build?",
+        sessionId: "sess-abc",
+        source: "chip",
+        turnIndex: 0,
+      }) as any,
+    );
+    expect(mockLogQuestion).toHaveBeenCalledOnce();
+    const args = mockLogQuestion.mock.calls[0][0];
+    expect(args).toMatchObject({
+      sessionId: "sess-abc",
+      turnIndex: 0,
+      question: "What does Pratik build?",
+      source: "chip",
+    });
+    // after() must be called so Vercel keeps the function alive for the insert
+    expect(mockAfter).toHaveBeenCalledOnce();
+  });
+
+  it("skips logging when sessionId is missing", async () => {
+    await POST(makeRequest({ message: "Anonymous question" }) as any);
+    expect(mockLogQuestion).not.toHaveBeenCalled();
+    expect(mockAfter).not.toHaveBeenCalled();
+  });
+
+  it("still streams a response when the analytics insert fails", async () => {
+    mockLogQuestion.mockRejectedValue(new Error("db down"));
+    const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const res = await POST(
+      makeRequest({
+        message: "Skills?",
+        sessionId: "sess-xyz",
+        source: "typed",
+      }) as any,
+    );
+    expect(await readText(res)).toContain("Hello from AI");
+    errSpy.mockRestore();
+  });
+
+  it("normalizes an unknown source to 'unknown'", async () => {
+    await POST(
+      makeRequest({
+        message: "Hi",
+        sessionId: "sess-1",
+        source: "bogus",
+      }) as any,
+    );
+    expect(mockLogQuestion.mock.calls[0][0].source).toBe("unknown");
   });
 
   it("ignores stream events that are not content_block_delta text_delta", async () => {
