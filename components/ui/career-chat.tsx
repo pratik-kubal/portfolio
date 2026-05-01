@@ -13,20 +13,26 @@ type QuestionSource = "typed" | "chip" | "deeplink";
 
 const SESSION_KEY = "career-chat:session-id";
 
+function generateSessionId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return `s_${Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("")}`;
+}
+
 function getOrCreateSessionId(): string {
   if (typeof window === "undefined") return "";
   try {
     const existing = window.localStorage.getItem(SESSION_KEY);
     if (existing) return existing;
-    const fresh =
-      typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-        ? crypto.randomUUID()
-        : `s_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const fresh = generateSessionId();
     window.localStorage.setItem(SESSION_KEY, fresh);
     return fresh;
   } catch {
     // localStorage blocked (private mode, etc.) — fall back to in-memory id.
-    return `s_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    return generateSessionId();
   }
 }
 
