@@ -17,10 +17,17 @@ async function main() {
   const sql = neon(url);
   const ddl = fs.readFileSync(path.resolve("lib/db/schema.sql"), "utf8");
 
-  const statements = ddl
-    .split(/;\s*$/m)
+  // Strip SQL line comments first so they don't get glued onto the next
+  // statement and trip up the simple ;-splitter below.
+  const stripped = ddl
+    .split("\n")
+    .filter((line) => !line.trim().startsWith("--"))
+    .join("\n");
+
+  const statements = stripped
+    .split(";")
     .map((s) => s.trim())
-    .filter((s) => s.length > 0 && !s.startsWith("--"));
+    .filter((s) => s.length > 0);
 
   for (const stmt of statements) {
     await sql.query(stmt);
