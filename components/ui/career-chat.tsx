@@ -9,6 +9,26 @@ import { nextChatScroll } from "@/lib/chat-scroll";
 import { person } from "@/data/person";
 
 type Msg = { role: "user" | "assistant"; content: string };
+type QuestionSource = "typed" | "chip" | "deeplink";
+
+const SESSION_KEY = "career-chat:session-id";
+
+function getOrCreateSessionId(): string {
+  if (typeof window === "undefined") return "";
+  try {
+    const existing = window.localStorage.getItem(SESSION_KEY);
+    if (existing) return existing;
+    const fresh =
+      typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : `s_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    window.localStorage.setItem(SESSION_KEY, fresh);
+    return fresh;
+  } catch {
+    // localStorage blocked (private mode, etc.) — fall back to in-memory id.
+    return `s_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  }
+}
 
 // Wrap each word in <span class="v3-word"> so new words can fade in as they
 // stream. Whitespace stays as plain text so wrapping stays natural. React
@@ -123,7 +143,7 @@ export default function CareerChat({
     };
   }, []);
 
-  async function send(question?: string) {
+  async function send(question: string | undefined, source: QuestionSource) {
     const q = (question ?? input).trim();
     if (!q) return;
 
@@ -141,7 +161,13 @@ export default function CareerChat({
       const res = await fetch("/api/career-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: q, history: nextHistory }),
+        body: JSON.stringify({
+          message: q,
+          history: nextHistory,
+          sessionId: getOrCreateSessionId(),
+          source,
+          turnIndex: msgs.length,
+        }),
       });
 
       if (!res.ok || !res.body) {
@@ -189,7 +215,7 @@ export default function CareerChat({
     if (autoSentRef.current) return;
     if (!initialQuestion) return;
     autoSentRef.current = true;
-    send(initialQuestion);
+    send(initialQuestion, "deeplink");
     router.replace("/", { scroll: false });
   }, [initialQuestion, router]);
 
@@ -231,7 +257,7 @@ export default function CareerChat({
       {msgs.length === 0 && (
         <div className="v3-chips3">
           {person.prompts.map((q) => (
-            <button key={q} type="button" onClick={() => send(q)}>
+            <button key={q} type="button" onClick={() => send(q, "chip")}>
               “{q}”
             </button>
           ))}
@@ -242,7 +268,7 @@ export default function CareerChat({
         className="v3-ask"
         onSubmit={(e) => {
           e.preventDefault();
-          send();
+          send(undefined, "typed");
         }}
       >
         <input

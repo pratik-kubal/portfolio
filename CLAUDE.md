@@ -46,6 +46,18 @@ The chat passes resume data directly to the LLM as context:
 
 - `ANTHROPIC_API_KEY` — Required for the chat API
 - `LLM_MODEL` — LLM to use (default: `claude-sonnet-4-6`)
+- `DATABASE_URL` — Neon Postgres connection string. Optional: when unset, the question-analytics logger silently no-ops so local dev keeps working.
+- `IP_HASH_SALT` — Random secret used to salt SHA-256 hashes of visitor IPs before they're stored. When unset, `ip_hash` is left null (the raw IP is never persisted either way).
+
+### Question Analytics
+
+Every inbound user message to `/api/career-chat` is captured to the `chat_questions` table in Neon for later analysis. The insert is fire-and-forget via Next.js `after()` so it runs in parallel with the LLM stream and never blocks the response.
+
+- `lib/db/schema.sql` — DDL for `chat_questions`. Apply with `tsx lib/db/migrate.ts` (idempotent — re-runs are safe).
+- `lib/db/client.ts` — Lazy Neon HTTP client; returns null if `DATABASE_URL` is unset.
+- `lib/db/log-question.ts` — Sanitizes the question, hashes the IP, normalizes UA into a coarse family, and inserts. Never throws.
+
+The client component generates a UUID `sessionId` once per browser (stored in `localStorage` under `career-chat:session-id`) and tags every request with `source` (`typed` / `chip` / `deeplink`) and `turnIndex` so multi-turn conversations can be reconstructed.
 
 ### Key Components
 
@@ -64,7 +76,8 @@ The chat passes resume data directly to the LLM as context:
 
 Vitest (`pnpm test`) with tests co-located next to the route:
 
-- `app/api/career-chat/route.test.ts` — Unit tests for the career chat API (mocks Anthropic SDK and `node:fs`)
+- `app/api/career-chat/route.test.ts` — Unit tests for the career chat API (mocks Anthropic SDK, `node:fs`, `next/server`'s `after`, and the analytics logger)
+- `lib/db/log-question.test.ts` — Unit tests for the question-analytics logger (mocks `lib/db/client.ts`)
 
 ### Styling
 
