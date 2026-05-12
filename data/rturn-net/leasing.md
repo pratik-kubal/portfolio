@@ -1,57 +1,6 @@
-# https://rturn.net/leasing/
+Source: https://rturn.net/leasing/
 
-
-[100 South Broad Street, Suite 800 Philadelphia, PA 19110](https://maps.app.goo.gl/rSqR85Y3NdnxwehF7)
-[](tel:8334235563)
-<http://www.rturn.net>
-Get Help
-[![rturn updated logo](https://rturn.net/wp-content/uploads/2025/08/rturn-updated-logo.webp)](https://rturn.net/)
-  * [Home](https://rturn.net/)
-  * [TURN All Stars](https://rturn.net/about/)
-  * [Services](https://rturn.net/leasing/)
-    * [Housing Inspections](https://rturn.net/housing-inspections/)
-    * [Background Check](https://rturn.net/background-check/)
-    * [Eviction Defense Clinic](https://rturn.net/eviction-defense-clinics/)
-    * [Landlord-Tenant Webinars](https://rturn.net/landlord-tenant-webinars/)
-    * [Repair Clinic](https://rturn.net/repair-clinic/)
-  * [Advocacy](https://rturn.net/leasing/)
-    * [TURN’s Network](https://rturn.net/turns-network/)
-    * [Join the network](https://rturn.net/register/)
-  * [Tenant Laws](https://rturn.net/leasing/)
-    * [Leasing](https://rturn.net/leasing/)
-    * [Utilities](https://rturn.net/utilities/)
-    * [Discrimination](https://rturn.net/tenant-laws-discrimination/)
-  * [News](https://rturn.net/news/)
-  * [Contact Us](https://rturn.net/contact-us/)
-
-
-  * [Home](https://rturn.net/)
-  * [TURN All Stars](https://rturn.net/about/)
-  * [Services](https://rturn.net/leasing/)
-    * [Housing Inspections](https://rturn.net/housing-inspections/)
-    * [Background Check](https://rturn.net/background-check/)
-    * [Eviction Defense Clinic](https://rturn.net/eviction-defense-clinics/)
-    * [Landlord-Tenant Webinars](https://rturn.net/landlord-tenant-webinars/)
-    * [Repair Clinic](https://rturn.net/repair-clinic/)
-[](https://rturn.net/leasing/)
-  * [Advocacy](https://rturn.net/leasing/)
-    * [TURN’s Network](https://rturn.net/turns-network/)
-    * [Join the network](https://rturn.net/register/)
-[](https://rturn.net/leasing/)
-  * [Tenant Laws](https://rturn.net/leasing/)
-    * [Leasing](https://rturn.net/leasing/)
-    * [Utilities](https://rturn.net/utilities/)
-    * [Discrimination](https://rturn.net/tenant-laws-discrimination/)
-[](https://rturn.net/leasing/)
-  * [News](https://rturn.net/news/)
-  * [Contact Us](https://rturn.net/contact-us/)
-
-
-
-#### Need Help Now? Call Us!
-[267-635-4100](tel:267-635-4100)
 # Leasing
-![Tenant Laws](https://rturn.net/wp-content/uploads/2025/05/Tenant-Laws.webp)
 ## Tenant Laws: Leasing
 A lease is an agreement or contract between the landlord and tenant. All tenants have a lease whether it is written or oral. If you pay rent, you have a lease. The agreement you make with your landlord can be enforced in court. If you break the terms of your lease, your landlord must go to court to enforce the terms or to evict you.
 ask for a plain language lease
@@ -69,7 +18,6 @@ Who is responsible for paying the utility bills
 How much notice is needed when you are ready to move
 Some lease terms cannot be enforced – the tenant cannot be made responsible for all repairs or repairs that cost under a certain amount of money. According to the Pennsylvania Supreme Court in Pugh v. Holmes, the landlord must maintain everything for which the tenant is paying rent. Similarly, the tenant cannot be made to take a house or an apartment as is. Regardless of any agreement you make with the landlord, it is the landlord’s responsibility to keep the property up to Housing Code Standards.
 **You cannot legally sign away your right to a decent place to live.**
-![Agreement icon](https://rturn.net/wp-content/uploads/2025/05/Agreement-icon.webp)
 Learn More from Turn
 ## Frequently Asked Questions
 ##### Before You Move In
@@ -141,12 +89,6 @@ Some one-year leases become month-to-month leases at the end of the year. But ma
 **Moving Out Before the End of Your Lease**
 Leaving before the end of your lease can be dangerous. For example, if you have a one-year lease and you move out two months early, a judge might agree that you owe two months’ rent. But if your landlord violates the terms of the lease, you have the right to move without paying more rent.
 According to a case decided by the Pennsylvania Supreme Court (Pugh v. Holmes) all residential leases, written or oral, have an implied Warranty of Habitability. That is, even if there is nothing in writing, a landlord must maintain a tenant’s home in good repair.
-Your landlord only can raise your rent by giving you advance notice – The notice should be given in writing. If you have an oral lease or a month-to-month lease, your landlord must give you 15 days’ notice before raising your rent. That is, to raise your rent on January 1, your landlord should give you a written notice on or before December 16.
-Most leases which last more than one month are in writing. If you have a lease longer than one month, such as a yearly lease, there will probably be a clause in the lease that says how much notice your landlord must give before raising your rent. Usually this will be 30 days, 60 days or 90 days before the end of your lease. If there is no such clause, your landlord must give you at least 15 days’ notice.
-**If your landlord does not give you enough notice, the rent increase is not legal.**
-The other protection tenants have is the Fair Housing Ordinance. This law says that your landlord cannot raise your rent if there are Housing Code violations in your home. If you have received a rent increase and there are Housing Code violations, you should file a complaint with the Fair Housing Commission.
-**You must file in person.**
-Bring your lease, your landlord’s rent increase notice, and proof that you have paid your last three months’ rent (rent book, canceled checks, etc.).
 ##### Lead Poisoning Prevention
 **EXPOSED LEAD PAINT IS AGAINST THE LAW**
 Lead damages your brain. It can hurt anyone but it is more likely to injure children under six. Because lead paint tastes sweet, children will eat it even when you are not looking. Lead poisoning also poses a serious risk to pregnant women. And lead is everywhere around us: dusty window sills, peeling paint chips, contaminated soil.
@@ -159,32 +101,3 @@ We must take the necessary measures to protect our children from lead poisoning 
 **The Property Maintenance Code requires landlords to repair peeling or chipping paint of any kind. Federal and local laws also require landlords to notify you of any history of lead problems, but don’t rely on that.**
 If your landlord refuses to fix damaged walls or windows **call the Philadelphia Department of Licenses & Inspections at 311** to get a free inspection.
 **Read the Philadelphia Lead Paint Law**
-[![rturn updated logo](https://rturn.net/wp-content/uploads/2025/08/rturn-updated-logo.png)](https://rturn.net/)
-Tenant Union Representative Network (TURN) is a tenant service and advocacy organization that promotes the human right to housing.
-#### Tools & Resources
-  * [Check Eviction Court Records](https://fjdclaims.phila.gov/phmuni/login.do)
-  * [Check Housing Code Violations](https://www.phila.gov/services/permits-violations-licenses/get-a-copy-of-a-license-permit-or-violation/)
-  * [Check Ownership Records](https://property.phila.gov/)
-  * [Landlord Property Background Check](https://li.phila.gov/property-history)
-  * [Housing Inspections](https://www.pha.phila.gov/landlords/hqs-inspection/)
-  * [Landlord-Tenant Webinar](https://rturn.net/landlord-tenant-webinars/)
-
-
-#### Our Services
-  * [Housing Inspection](https://rturn.net/housing-inspections/)
-  * [Landlord-Tenant Webinar](https://rturn.net/landlord-tenant-webinars/)
-  * [Landlord/Property Background Check](https://rturn.net/background-check/)
-  * [Eviction Defense Clinic](https://rturn.net/eviction-defense-clinics/)
-  * [Repair Clinic](https://rturn.net/repair-clinic/)
-
-
-Copyright © 2026 **[Tenant Union Representative Network](https://rturn.net/)**. All rights reserved. | [Sitemap](https://rturn.net/sitemap/)
-  * [Follow](https://www.facebook.com/share/17KBNmmNqJ/?mibextid=wwXIfr "Follow on Facebook")
-  * [Follow](https://www.instagram.com/turnphilly?igsh=MXRqc2h4am5uMHBmbw== "Follow on Instagram")
-  * [Follow](https://x.com/turnphilly?s=21 "Follow on X")
-  * [Follow](https://www.linkedin.com/company/turnphilly/ "Follow on LinkedIn")
-
-
-Good day,
-How can we help you?
-
