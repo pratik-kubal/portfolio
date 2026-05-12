@@ -1,27 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type MsgRole = "bot" | "user";
 type Msg = { role: MsgRole; text: string; time: string };
 
-const MESSAGES: Msg[] = [
-  {
-    role: "bot",
-    text: "Hi — I'm TURN. I help Philly tenants understand their rights and connect with an advocate. What's going on?",
-    time: "06:38 PM",
-  },
-  {
-    role: "user",
-    text: "My landlord hasn't fixed the heat in 3 weeks.",
-    time: "06:39 PM",
-  },
-  {
-    role: "bot",
-    text: "That's a serious violation — heat is required Oct 1 to Apr 30 under PA law. Have you put the request in writing yet?",
-    time: "06:39 PM",
-  },
-];
+const GREETING_TEXT =
+  "Hi — I'm TURN. I help Philly tenants understand their rights and connect with an advocate. What's going on?";
 
 const CHIPS = [
   "I'm facing eviction",
@@ -29,8 +16,121 @@ const CHIPS = [
   "Talk to an advocate",
 ];
 
+function formatTime(d: Date): string {
+  return d
+    .toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    })
+    .toUpperCase();
+}
+
+function roleToApi(role: MsgRole): "user" | "assistant" {
+  return role === "user" ? "user" : "assistant";
+}
+
 export function RturnChatPage() {
   const [input, setInput] = useState("");
+  const [msgs, setMsgs] = useState<Msg[]>([
+    { role: "bot", text: GREETING_TEXT, time: "" },
+  ]);
+  const [isStreaming, setIsStreaming] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const threadRef = useRef<HTMLDivElement>(null);
+
+  // Fill the greeting timestamp on mount so SSR/CSR don't diverge.
+  useEffect(() => {
+    setMsgs((prev) => {
+      if (prev[0]?.role !== "bot" || prev[0].time) return prev;
+      const copy = [...prev];
+      copy[0] = { ...copy[0], time: formatTime(new Date()) };
+      return copy;
+    });
+  }, []);
+
+  useEffect(() => {
+    const el = threadRef.current;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
+  }, [msgs, isStreaming]);
+
+  async function send(text: string) {
+    const q = text.trim();
+    if (!q || isStreaming) return;
+
+    setInput("");
+    setHasInteracted(true);
+
+    const now = new Date();
+    const userMsg: Msg = { role: "user", text: q, time: formatTime(now) };
+    const placeholder: Msg = { role: "bot", text: "", time: formatTime(now) };
+
+    // History for the API: everything finalized so far, excluding the new
+    // user message (the API appends it explicitly). The leading greeting is a
+    // UI placeholder, not a real assistant turn — drop it so the conversation
+    // starts on a user message as Anthropic expects.
+    const apiHistory = msgs
+      .map((m) => ({ role: roleToApi(m.role), content: m.text }))
+      .filter((_, i, arr) => !(i === 0 && arr[0].role === "assistant"));
+
+    const aiIndex = msgs.length + 1;
+    setMsgs((prev) => [...prev, userMsg, placeholder]);
+    setIsStreaming(true);
+
+    try {
+      const res = await fetch("/api/rturn-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: q, history: apiHistory }),
+      });
+
+      if (!res.ok || !res.body) {
+        setMsgs((prev) => {
+          const copy = [...prev];
+          copy[aiIndex] = {
+            role: "bot",
+            text: "Sorry — something went wrong. Please try again, or call TURN at 215-940-3900.",
+            time: formatTime(new Date()),
+          };
+          return copy;
+        });
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+      }
+
+      setMsgs((prev) => {
+        const copy = [...prev];
+        copy[aiIndex] = {
+          role: "bot",
+          text: acc,
+          time: formatTime(new Date()),
+        };
+        return copy;
+      });
+    } catch {
+      setMsgs((prev) => {
+        const copy = [...prev];
+        copy[aiIndex] = {
+          role: "bot",
+          text: "Sorry — something went wrong. Please try again, or call TURN at 215-940-3900.",
+          time: formatTime(new Date()),
+        };
+        return copy;
+      });
+    } finally {
+      setIsStreaming(false);
+    }
+  }
 
   return (
     <div className="rturn-root">
@@ -109,38 +209,64 @@ export function RturnChatPage() {
                 </button>
               </header>
 
-              <div className="rturn-thread" aria-live="polite">
-                {MESSAGES.map((m, i) => (
-                  <div
-                    key={i}
-                    className={`rturn-row ${m.role}`}
-                    style={{ animationDelay: `${320 + i * 220}ms` }}
-                  >
-                    {m.role === "user" && <div className="rturn-who">You</div>}
-                    <div className="rturn-bubble">
-                      <span className="rturn-msg">{m.text}</span>
-                      <span className="rturn-time">{m.time}</span>
+              <div className="rturn-thread" aria-live="polite" ref={threadRef}>
+                {msgs.map((m, i) => {
+                  const isLast = i === msgs.length - 1;
+                  const isStreamingBubble =
+                    isLast && isStreaming && m.role === "bot" && !m.text;
+                  return (
+                    <div
+                      key={i}
+                      className={`rturn-row ${m.role}`}
+                      style={
+                        i < 3 && !hasInteracted
+                          ? { animationDelay: `${320 + i * 220}ms` }
+                          : undefined
+                      }
+                    >
+                      {m.role === "user" && <div className="rturn-who">You</div>}
+                      <div className="rturn-bubble">
+                        <div className="rturn-msg">
+                          {isStreamingBubble ? (
+                            "Thinking..."
+                          ) : m.role === "bot" ? (
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                              {m.text}
+                            </ReactMarkdown>
+                          ) : (
+                            m.text
+                          )}
+                        </div>
+                        {m.time && <span className="rturn-time">{m.time}</span>}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
-              <div className="rturn-chips" role="group" aria-label="Quick replies">
-                {CHIPS.map((c, i) => (
-                  <button
-                    type="button"
-                    key={c}
-                    className="rturn-chip"
-                    style={{ animationDelay: `${1180 + i * 90}ms` }}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
+              {!hasInteracted && (
+                <div className="rturn-chips" role="group" aria-label="Quick replies">
+                  {CHIPS.map((c, i) => (
+                    <button
+                      type="button"
+                      key={c}
+                      className="rturn-chip"
+                      style={{ animationDelay: `${1180 + i * 90}ms` }}
+                      onClick={() => send(c)}
+                      disabled={isStreaming}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               <form
                 className="rturn-composer"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  send(input);
+                }}
               >
                 <input
                   type="text"
@@ -148,10 +274,26 @@ export function RturnChatPage() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   aria-label="Type a message"
+                  disabled={isStreaming}
                 />
-                <button type="button" className="rturn-attach" aria-label="Attach a file">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21.44 11.05 12.25 20.24a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                <button
+                  type="submit"
+                  className="rturn-attach"
+                  aria-label="Send message"
+                  disabled={isStreaming || !input.trim()}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
                   </svg>
                 </button>
               </form>

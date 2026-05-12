@@ -3116,14 +3116,18 @@
 }
 
 .rturn-thread {
-  flex: 1 1 auto;
+  flex: 1 1 0;
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 18px 16px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 12px;
   background: var(--rt-white);
+}
+.rturn-thread > .rturn-row:first-child {
+  margin-top: auto;
 }
 .rturn-thread::-webkit-scrollbar { width: 4px; }
 .rturn-thread::-webkit-scrollbar-thumb {
@@ -3169,6 +3173,19 @@
 .rturn-msg {
   display: block;
   padding-right: 52px;
+}
+.rturn-msg > :first-child { margin-top: 0; }
+.rturn-msg > :last-child { margin-bottom: 0; }
+.rturn-msg p { margin: 0 0 0.5em; }
+.rturn-msg p:last-child { margin-bottom: 0; }
+.rturn-msg strong { font-weight: 700; }
+.rturn-msg em { font-style: italic; }
+.rturn-msg ul,
+.rturn-msg ol { margin: 0.4em 0; padding-left: 1.25em; }
+.rturn-msg li { margin: 0.2em 0; }
+.rturn-msg a {
+  color: var(--rt-orange-deep);
+  text-decoration: underline;
 }
 .rturn-time {
   position: absolute;
