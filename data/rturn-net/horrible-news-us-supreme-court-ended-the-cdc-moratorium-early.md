@@ -1,0 +1,8 @@
+Source: https://rturn.net/horrible-news-us-supreme-court-ended-the-cdc-moratorium-early/
+
+# Blogs
+# Horrible News: US Supreme Court ended the CDC Moratorium early
+Aug 27, 2021 | [News](https://rturn.net/category/news/), [Webinars](https://rturn.net/category/webinars/)
+Last night the US Supreme Court ended the CDC Moratorium early, putting hundreds of Philadelphians who thought they were protected by the moratorium through October 3rd at risk for immediate eviction. This will result in more surprise evictions for tenants who thought they had a few more weeks to plan for a stable move.
+If you are a renter facing eviction in Philadelphia, only a Judge can rule to evict you, and only a landlord-tenant officer or sheriff can lock you out with a court order. Your landlord is still required to go through the legal process before they can evict you. There is still rental assistance available.
+Anoche, la Corte Suprema de los Estados Unidos puso fin a la moratoria de los CDC antes de tiempo, poniendo a cientos de habitantes de Filadelfia que pensaban que estaban protegidos por la moratoria hasta el 3 de octubre en riesgo de desalojo inmediato. Esto resultará en más desalojos sorpresa para los inquilinos que pensaban que tenían unas semanas más para planificar una mudanza estable. Si usted es un inquilino que enfrenta un desalojo en Filadelfia, solo un juez puede decidir desalojarlo, y solo un oficial de propietarios-inquilinos o un sheriff pueden completar el desalojo con una orden judicial. Su arrendador todavía está obligado a pasar por el proceso legal antes de que pueda desalojarlo. Todavía hay asistencia de alquiler disponible.
