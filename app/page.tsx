@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { EditorialCard } from "@/components/editorial-card";
+import { Footer } from "@/components/footer";
 
 export default async function Home({
   searchParams,
@@ -14,6 +15,7 @@ export default async function Home({
     <main className="page-transition">
       <Header />
       <EditorialCard initialQuestion={initialQuestion} />
+      <Footer />
     </main>
   );
 }
