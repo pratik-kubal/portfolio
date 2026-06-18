@@ -21,7 +21,7 @@ export const LINKS = {
 
 // ── Hero ────────────────────────────────────────────────────────────────────
 export const hero = {
-  kicker: "Who am I",
+  kicker: "Hello There~! I am",
   name: "Pratik Kubal",
   subhead: "A software Engineer based in Philadelphia, PA.",
   muted: "Doing Pro bono volunteering for Philadelphia nonprofits since 2024",
