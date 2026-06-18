@@ -1,4 +1,6 @@
-// app/api/career-chat/route.ts
+// app/api/bella/route.ts
+// Bella — the recruiter chat assistant. Server-only Claude API streaming, grounded
+// in data/career.md + data/bella-prompt.md.
 import { NextRequest, after } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import fs from "node:fs";
@@ -12,12 +14,14 @@ const KNOWN_SOURCES: ReadonlySet<QuestionSource> = new Set([
   "typed",
   "chip",
   "deeplink",
+  "highlight",
   "unknown",
 ]);
 
+const MAX_MESSAGE_LEN = 2000;
+
 let careerText: string | null = null;
-let promptText: string | null = null;
-let userMessageTemplate: string | null = null;
+let bellaPrompt: string | null = null;
 
 function loadCareer(): string {
   if (!careerText) {
@@ -26,39 +30,46 @@ function loadCareer(): string {
   return careerText;
 }
 
-function loadPrompt(): string {
-  if (!promptText) {
-    promptText = fs.readFileSync(path.resolve("data/prompt.md"), "utf8");
+function loadBellaPrompt(): string {
+  if (!bellaPrompt) {
+    bellaPrompt = fs.readFileSync(path.resolve("data/bella-prompt.md"), "utf8");
   }
-  return promptText;
+  return bellaPrompt;
 }
 
-function loadUserMessage(context: string, message: string): string {
-  if (!userMessageTemplate) {
-    userMessageTemplate = fs.readFileSync(
-      path.resolve("data/user-message.md"),
-      "utf8",
-    );
-  }
-  return userMessageTemplate
-    .replace("{{context}}", context)
-    .replace("{{message}}", message);
+function buildUserMessage(
+  context: string,
+  message: string,
+  quote: string | null,
+): string {
+  const quoteBlock = quote
+    ? `\n\n[HIGHLIGHTED TEXT]\nThe visitor highlighted this text on the page and is asking about it:\n"""${quote}"""`
+    : "";
+  return (
+    `[CONTEXT]\n${context}${quoteBlock}\n\n` +
+    `[QUESTION]\n${message}\n\n` +
+    `[INSTRUCTIONS]\n` +
+    `Answer as Bella — about Pratik, in the third person. Ground every claim in the context. ` +
+    `Lead with impact and numbers. Use Markdown bullets for lists. Keep it tight. Never use emojis.`
+  );
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { message, history, sessionId, source, turnIndex } = body as {
-    message: unknown;
-    history?: unknown;
-    sessionId?: unknown;
-    source?: unknown;
-    turnIndex?: unknown;
-  };
+  const { message, history, sessionId, source, turnIndex, selectedQuote } =
+    body as {
+      message: unknown;
+      history?: unknown;
+      sessionId?: unknown;
+      source?: unknown;
+      turnIndex?: unknown;
+      selectedQuote?: unknown;
+    };
 
   if (typeof message !== "string" || !message.trim()) {
     return new Response("Invalid message", { status: 400 });
   }
-  if (message.length > 2000) {
+  if (message.length > MAX_MESSAGE_LEN) {
     return new Response("Message too long", { status: 400 });
   }
 
@@ -76,12 +87,14 @@ export async function POST(req: NextRequest) {
       }
     }
   }
-  // Cap history to last 20 turns to limit token cost
   const cappedHistory = safeHistory.slice(-20);
 
-  // Fire-and-forget analytics insert. Kicks off in parallel with the LLM
-  // stream; after() keeps the function alive until the promise settles, so
-  // a fast response doesn't kill the write.
+  const safeQuote =
+    typeof selectedQuote === "string" && selectedQuote.trim()
+      ? selectedQuote.trim().slice(0, MAX_MESSAGE_LEN)
+      : null;
+
+  // Fire-and-forget analytics insert (parallel with the stream, kept alive by after()).
   const safeSessionId =
     typeof sessionId === "string" && sessionId.trim() ? sessionId.trim() : null;
   if (safeSessionId) {
@@ -99,6 +112,7 @@ export async function POST(req: NextRequest) {
       turnIndex: safeTurnIndex,
       question: message,
       source: safeSource,
+      selectedQuote: safeQuote,
       model: CLAUDE_MODEL,
       country: headers.get("x-vercel-ip-country"),
       region: headers.get("x-vercel-ip-country-region"),
@@ -107,14 +121,13 @@ export async function POST(req: NextRequest) {
         headers.get("x-real-ip"),
       userAgent: headers.get("user-agent"),
     }).catch((err) => {
-      console.error("[chat-log] unexpected:", err);
+      console.error("[bella-log] unexpected:", err);
     });
     after(logPromise);
   }
 
   const context = loadCareer();
-
-  const systemPrompt = loadPrompt();
+  const systemPrompt = loadBellaPrompt();
 
   const claudeStream = anthropic.messages.stream({
     model: CLAUDE_MODEL,
@@ -122,21 +135,26 @@ export async function POST(req: NextRequest) {
     system: systemPrompt,
     messages: [
       ...cappedHistory,
-      { role: "user", content: loadUserMessage(context, message) },
+      { role: "user", content: buildUserMessage(context, message, safeQuote) },
     ],
   });
 
   const stream = new ReadableStream({
     async start(controller) {
-      for await (const event of claudeStream) {
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
-          controller.enqueue(event.delta.text);
+      try {
+        for await (const event of claudeStream) {
+          if (
+            event.type === "content_block_delta" &&
+            event.delta.type === "text_delta"
+          ) {
+            controller.enqueue(event.delta.text);
+          }
         }
+        controller.close();
+      } catch (err) {
+        console.error("[bella] stream error:", err);
+        controller.error(err);
       }
-      controller.close();
     },
   });
 

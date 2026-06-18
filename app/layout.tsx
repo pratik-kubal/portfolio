@@ -1,7 +1,14 @@
 import type React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
+import {
+  Inter,
+  JetBrains_Mono,
+  Newsreader,
+  Space_Grotesk,
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -26,6 +33,29 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+// "pratik-kubal.com v2" design fonts — scoped to .pk-root via globals.css so they
+// don't disturb the legacy --font-serif/sans/mono used by /solutions + /ucd-faq-demo.
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -190,7 +220,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${geist.variable} ${geistMono.variable}`}
     >
       <head>
         <style>{`
@@ -202,12 +232,21 @@ html {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Pre-paint motion gate (v2 design): hide animated bits only when motion is
+            allowed AND JS runs. 3s failsafe reveals everything if an engine never loads.
+            No-JS / reduced-motion never set data-motion, so the final state shows. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.dataset.motion='on';setTimeout(function(){document.documentElement.removeAttribute('data-motion')},3000)}}catch(e){}})();`,
+          }}
+        />
       </head>
       <body>
         <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
+          attribute={["class", "data-theme"]}
+          themes={["light", "dark", "bw"]}
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <div className="relative z-10 min-h-screen flex flex-col">

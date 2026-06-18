@@ -96,6 +96,27 @@ describe("logQuestion", () => {
     expect((mockSqlTag.mock.calls[0][3] as string).length).toBe(2000);
     expect(mockSqlTag.mock.calls[0][4]).toBe(2000);
   });
+
+  it("accepts the 'highlight' source and persists the selected_quote (last column)", async () => {
+    await logQuestion({
+      ...baseInput,
+      source: "highlight",
+      selectedQuote: "  Neptune → Aurora migration  ",
+    });
+    expect(mockSqlTag.mock.calls[0][5]).toBe("highlight");
+    // selected_quote is the 11th interpolated value (trimmed).
+    expect(mockSqlTag.mock.calls[0][11]).toBe("Neptune → Aurora migration");
+  });
+
+  it("leaves selected_quote null when no quote is provided", async () => {
+    await logQuestion(baseInput);
+    expect(mockSqlTag.mock.calls[0][11]).toBeNull();
+  });
+
+  it("truncates a selected_quote over 2000 characters", async () => {
+    await logQuestion({ ...baseInput, selectedQuote: "q".repeat(3000) });
+    expect((mockSqlTag.mock.calls[0][11] as string).length).toBe(2000);
+  });
 });
 
 describe("uaFamily", () => {

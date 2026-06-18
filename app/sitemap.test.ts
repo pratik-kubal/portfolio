@@ -8,6 +8,13 @@ describe("sitemap", () => {
     expect(urls).toContain("https://pratik-kubal.com");
   });
 
+  it("includes the three legal routes", () => {
+    const urls = sitemap().map((e) => e.url);
+    expect(urls).toContain("https://pratik-kubal.com/privacy");
+    expect(urls).toContain("https://pratik-kubal.com/cookies");
+    expect(urls).toContain("https://pratik-kubal.com/terms");
+  });
+
   it("sets home page priority to 1", () => {
     const entries = sitemap();
     const home = entries.find((e) => e.url === "https://pratik-kubal.com");

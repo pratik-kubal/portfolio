@@ -11,12 +11,18 @@
 import crypto from "node:crypto";
 import { getSql } from "./client";
 
-export type QuestionSource = "typed" | "chip" | "deeplink" | "unknown";
+export type QuestionSource =
+  | "typed"
+  | "chip"
+  | "deeplink"
+  | "highlight"
+  | "unknown";
 
 const KNOWN_SOURCES = new Set<QuestionSource>([
   "typed",
   "chip",
   "deeplink",
+  "highlight",
   "unknown",
 ]);
 
@@ -30,6 +36,8 @@ export type LogQuestionInput = {
   region: string | null;
   ip: string | null;
   userAgent: string | null;
+  // Optional highlight-to-ask quote (the page text the visitor selected).
+  selectedQuote?: string | null;
 };
 
 const MAX_QUESTION_LEN = 2000;
@@ -55,16 +63,20 @@ export async function logQuestion(input: LogQuestionInput): Promise<boolean> {
 
   const ipHash = hashIp(input.ip);
   const ua = uaFamily(input.userAgent);
+  const quote =
+    typeof input.selectedQuote === "string" && input.selectedQuote.trim()
+      ? input.selectedQuote.trim().slice(0, MAX_QUESTION_LEN)
+      : null;
 
   try {
     await sql`
       INSERT INTO chat_questions (
         session_id, turn_index, question, question_length,
-        source, model, country, region, ip_hash, ua_family
+        source, model, country, region, ip_hash, ua_family, selected_quote
       ) VALUES (
         ${sessionId}, ${turnIndex}, ${truncated}, ${truncated.length},
         ${source}, ${input.model}, ${input.country}, ${input.region},
-        ${ipHash}, ${ua}
+        ${ipHash}, ${ua}, ${quote}
       )
     `;
     return true;
