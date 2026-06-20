@@ -188,6 +188,15 @@
   --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
   --spine-gutter: clamp(40px, 5vw, 72px);
 
+  /* content frame — one fluid width shared by every section (hero, projects,
+     about, nonprofit, footer) so the whole page aligns to the same left/right
+     margins. Fluid so it reclaims the side gutters on bigger screens while
+     staying contained on laptops: the clamp floor holds the original width up
+     to ~1366px, then it grows with the viewport and caps so it never sprawls.
+     Paragraph line-lengths stay capped per-element (ch units) for readability,
+     so widening the frame doesn't widen the prose. */
+  --pk-feature-w: clamp(1080px, 80vw, 1400px);
+
   position: relative;
   min-height: 100vh;
   background: var(--bg);
@@ -3343,7 +3352,7 @@
 .pk-main {
   position: relative;
   z-index: 1;
-  max-width: 880px;
+  max-width: var(--pk-feature-w);
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 3rem) clamp(96px, 12vh, 150px);
 }
@@ -3361,14 +3370,15 @@
   display: flex;
   flex-direction: column;
   gap: clamp(18px, 2.5vw, 32px);
-  max-width: 1080px;
+  width: 100%;
+  max-width: var(--pk-feature-w);
   margin: 0 auto;
   padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 4vw, 3rem);
 }
 .pk-hero-top {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(24px, 4vw, 44px);
 }
 .pk-hero-intro { flex: 1 1 360px; min-width: 280px; }
@@ -3409,8 +3419,11 @@
   align-items: center;
 }
 .pk-hero-figure {
-  width: 296px;
-  max-width: 300px;
+  /* Grows with the viewport so it fills the hero's right column on bigger
+     screens; the clamp floor keeps the original size on laptops/mobile, and
+     max-width:100% lets it shrink with its column rather than overflow. */
+  width: clamp(296px, 28vw, 500px);
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   margin-top: clamp(28px, 5vw, 56px);
 }
@@ -3424,8 +3437,8 @@
 .pk-hero-body {
   font-size: var(--step-1);
   color: var(--ink);
-  width: 100%;
-  margin: 0;
+  max-width: 44ch;
+  margin: clamp(16px, 1.8vw, 26px) 0 0;
   text-align: left;
   text-wrap: pretty;
 }
@@ -3463,7 +3476,7 @@
   justify-content: center;
   gap: clamp(28px, 5vw, 64px);
   width: 100%;
-  max-width: 1080px;
+  max-width: var(--pk-feature-w);
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
@@ -3629,15 +3642,32 @@
 .pk-about p:last-child { margin-bottom: 0; }
 
 /* ── FOOTER ──────────────────────────────────────────────────────────────── */
-.pk-footer { margin-top: 3.5rem; padding-top: 2rem; border-top: var(--line-w) solid var(--line); }
+/* Full-bleed (.pk-bleed) so it escapes the narrower reading column, then its
+   inner re-constrains to the hero's feature width with matching padding so the
+   footer's top rule + content line up with the hero on bigger screens. */
+.pk-footer { margin-top: 3.5rem; }
+.pk-footer-inner {
+  max-width: var(--pk-feature-w);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+/* top rule lives on the content row (not the padded inner) so it lines up with
+   the section rules and the copyright divider rather than running 48px wider. */
 .pk-foot-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 36px 40px;
+  gap: 28px 24px;
+  padding-top: 2rem;
+  border-top: var(--line-w) solid var(--line);
 }
-.pk-foot-brand { flex: 0 1 auto; min-width: 0; max-width: 32ch; }
+/* Below the width where all three columns fit, wrap them left-aligned (clean)
+   instead of letting space-between fling them to opposite edges. */
+@media (max-width: 1200px) {
+  .pk-foot-row { justify-content: flex-start; gap: 40px 56px; }
+}
+.pk-foot-brand { flex: 0 1 auto; min-width: 0; max-width: 22ch; }
 .pk-foot-tagline {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -3646,8 +3676,7 @@
   margin: 12px 0 0;
   text-wrap: pretty;
 }
-.pk-foot-divider { width: 100%; max-width: 300px; height: var(--line-w); background: var(--line); margin-top: 22px; }
-.pk-spotify { margin-top: 22px; max-width: 300px; }
+.pk-spotify { max-width: 260px; flex: 0 1 260px; }
 .pk-spotify-meta {
   display: flex;
   align-items: baseline;
@@ -3691,7 +3720,7 @@
 }
 .pk-spotify-cta:hover { color: var(--accent-text); }
 .pk-spotify-cta .ico { width: 12px; height: 12px; border-radius: 999px; background: var(--accent); flex: none; }
-.pk-foot-cols { display: flex; flex-wrap: wrap; gap: 28px 36px; align-content: flex-start; }
+.pk-foot-cols { display: flex; flex-wrap: wrap; gap: 22px 28px; align-content: flex-start; }
 .pk-foot-col { display: flex; flex-direction: column; gap: 10px; }
 .pk-foot-col p {
   font-family: var(--font-mono);

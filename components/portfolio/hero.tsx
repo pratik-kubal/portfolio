@@ -11,6 +11,7 @@ export function Hero() {
             <h1 className="pk-h1">{hero.name}</h1>
             <p className="pk-subhead">{hero.subhead}</p>
             <p className="pk-hero-muted">{hero.muted}</p>
+            <p className="pk-hero-body">{hero.body}</p>
           </div>
           <div className="pk-hero-figwrap">
             <MobiusFigure />
@@ -18,7 +19,6 @@ export function Hero() {
         </div>
 
         <div className="pk-hero-lower">
-          <p className="pk-hero-body">{hero.body}</p>
           <div className="pk-cta-row">
             <a href="#work" className="pk-btn pk-btn-fill">
               My Work
