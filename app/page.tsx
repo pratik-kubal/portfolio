@@ -1,6 +1,4 @@
-import { Header } from "@/components/header";
-import { EditorialCard } from "@/components/editorial-card";
-import { Footer } from "@/components/footer";
+import { PortfolioPage } from "@/components/portfolio/portfolio-page";
 
 export default async function Home({
   searchParams,
@@ -8,14 +6,9 @@ export default async function Home({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const initialQuestion =
-    typeof params?.question === "string" ? params.question : "";
+  // ?ask= deep-links a question into Bella; ?question= kept as a legacy alias.
+  const raw = params?.ask ?? params?.question;
+  const initialQuestion = typeof raw === "string" ? raw : "";
 
-  return (
-    <main className="page-transition">
-      <Header />
-      <EditorialCard initialQuestion={initialQuestion} />
-      <Footer />
-    </main>
-  );
+  return <PortfolioPage initialQuestion={initialQuestion} />;
 }

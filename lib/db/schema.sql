@@ -14,13 +14,18 @@ CREATE TABLE IF NOT EXISTS chat_questions (
   country         TEXT,
   region          TEXT,
   ip_hash         TEXT,
-  ua_family       TEXT
+  ua_family       TEXT,
+  selected_quote  TEXT
 );
 
 -- Add the TTL column to tables that predate it (CREATE TABLE IF NOT EXISTS
 -- above is a no-op once the table exists, so existing deployments need this).
 ALTER TABLE chat_questions
   ADD COLUMN IF NOT EXISTS expires_at TIMESTAMPTZ NOT NULL DEFAULT now() + INTERVAL '1 year';
+
+-- Highlight-to-ask: the page text a visitor selected before asking Bella.
+ALTER TABLE chat_questions
+  ADD COLUMN IF NOT EXISTS selected_quote TEXT;
 
 CREATE INDEX IF NOT EXISTS idx_chat_questions_created_at
   ON chat_questions (created_at DESC);

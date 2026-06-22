@@ -12,8 +12,9 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // /solutions was retired in the v3 redesign; send the legacy /advisor path home.
         source: "/advisor",
-        destination: "/solutions",
+        destination: "/",
         permanent: true,
       },
     ];
