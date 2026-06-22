@@ -40,7 +40,7 @@ export function MobiusFigure() {
     let raf = 0;
     let phi = 0;
     let last = performance.now();
-    let spin = speed;
+    let spin: number = speed;
     let userControl = false;
     let dragging = false;
     let held = false;
