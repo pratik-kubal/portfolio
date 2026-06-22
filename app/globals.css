@@ -162,9 +162,9 @@
   --bg: #f4f5f0;
   --surface: #fcfcf8;
   --ink: #16170f;
-  --muted: #5f6356;
+  --muted: #4c4f44; /* AAA: ~7.5:1 on --bg */
   --line: #d7d9ce;
-  --accent-text: #4f5c00;
+  --accent-text: #475300; /* AAA: ~7.5:1 on --bg */
   --accent: #6f7d00;
   --accent-fill: #c7dd3a;
   --on-accent: #1f2400;
@@ -233,7 +233,7 @@
   --bg: #edeae0;
   --surface: #f6f4ec;
   --ink: #14130f;
-  --muted: #565045; /* darkened for WCAG AA: ~6.6:1 on --bg so grain texture stays ≥4.5:1 */
+  --muted: #4e4940; /* AAA: ~7.4:1 on --bg (grain-min stays well above AA) */
   --line: #14130f;
   --accent-text: #14130f;
   --accent: #14130f;
