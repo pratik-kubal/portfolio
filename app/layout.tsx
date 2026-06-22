@@ -37,7 +37,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 // "pratik-kubal.com v2" design fonts — scoped to .pk-root via globals.css so they
-// don't disturb the legacy --font-serif/sans/mono used by /solutions + /ucd-faq-demo.
+// don't disturb the legacy --font-serif/sans/mono used by /ucd-faq-demo.
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
