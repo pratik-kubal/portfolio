@@ -6,7 +6,8 @@ import { hero } from "@/data/portfolio";
 
 // Hand-drawn (rough.js) 3D Möbius band rendered to <canvas>, auto-rotating, with
 // pointer drag/flick to scrub + fling. Faithful port of
-// design-reference/Mobius Figure (Rough).dc.html. Decorative (aria-hidden).
+// design-reference/Mobius Figure (Rough).dc.html. Exposed to assistive tech as a
+// labeled image (role="img" + hero.figureAlt) rather than hidden.
 export function MobiusFigure() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
@@ -51,6 +52,7 @@ export function MobiusFigure() {
     const cv = document.createElement("canvas");
     cv.style.cssText =
       "position:absolute;inset:0;width:100%;height:100%;display:block;";
+    cv.setAttribute("aria-hidden", "true"); // decorative; the wrapper carries the label
     el.appendChild(cv);
     const ctx = cv.getContext("2d")!;
 
@@ -359,7 +361,8 @@ export function MobiusFigure() {
     <div
       ref={wrapRef}
       className="pk-hero-figure"
-      aria-hidden="true"
+      role="img"
+      aria-label={hero.figureAlt}
       style={{
         position: "relative",
         cursor: "grab",

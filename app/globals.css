@@ -233,7 +233,7 @@
   --bg: #edeae0;
   --surface: #f6f4ec;
   --ink: #14130f;
-  --muted: #645f54;
+  --muted: #565045; /* darkened for WCAG AA: ~6.6:1 on --bg so grain texture stays ≥4.5:1 */
   --line: #14130f;
   --accent-text: #14130f;
   --accent: #14130f;

@@ -17,7 +17,7 @@ const after: CSSProperties = {
 // the same headline-tied progress as the count-up (see usePaperStack).
 export function PaperStackViz({ project }: { project: Project }) {
   return (
-    <div className="pk-viz">
+    <div className="pk-viz" role="img" aria-label={project.vizAlt}>
       <div style={{ position: "relative", width: "100%", height: 20, textAlign: "center" }}>
         <p className="pk-viz-top">{project.vizTop}</p>
       </div>

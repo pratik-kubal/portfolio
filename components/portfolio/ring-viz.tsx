@@ -48,7 +48,7 @@ export function RingViz({ project }: { project: Project }) {
   const r = project.ring;
   if (!r) return null;
   return (
-    <div className="pk-viz">
+    <div className="pk-viz" role="img" aria-label={project.vizAlt}>
       <div style={{ position: "relative", width: "100%", height: 20 }}>
         <p data-state="before" style={capTop}>
           {r.topBefore}

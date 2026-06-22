@@ -27,6 +27,7 @@ function paintBellaRough(mount: HTMLElement, rough: any) {
     s.setAttribute("width", String(w));
     s.setAttribute("height", String(h));
     s.dataset.roughSvg = "1";
+    s.setAttribute("aria-hidden", "true"); // decorative rough.js overlay
     s.style.cssText = `position:absolute;left:0;top:0;overflow:visible;pointer-events:none;z-index:${behind ? "0" : "-1"};`;
     return s;
   };

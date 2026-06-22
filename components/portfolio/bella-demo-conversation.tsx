@@ -8,7 +8,7 @@ import { bellaDemoMsgs, bellaDemoNotes, type Project } from "@/data/portfolio";
 // rough.js repaint.
 export function BellaDemoConversation({ project }: { project: Project }) {
   return (
-    <div className="pk-viz bella">
+    <div className="pk-viz bella" role="img" aria-label={project.vizAlt}>
       <p className="pk-viz-top">{project.vizTop}</p>
 
       <div data-bella-demo="" className="pk-bd-wrap">

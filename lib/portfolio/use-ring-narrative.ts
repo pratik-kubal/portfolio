@@ -84,6 +84,7 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
         const ns = document.createElementNS(NS, "svg");
         ns.setAttribute("viewBox", "0 0 30 30");
         ns.setAttribute("data-rough-node", "");
+        ns.setAttribute("aria-hidden", "true");
         ns.style.cssText =
           "position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;";
         node.appendChild(ns);

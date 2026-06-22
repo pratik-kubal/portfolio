@@ -148,7 +148,7 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
       txt.textContent = code || "DOC";
       svg.appendChild(txt);
       return (
-        '<svg xmlns="' + NS + '" viewBox="0 0 380 260" width="380" height="260" style="position:absolute;left:0;top:0;overflow:visible;display:block;">' +
+        '<svg xmlns="' + NS + '" aria-hidden="true" viewBox="0 0 380 260" width="380" height="260" style="position:absolute;left:0;top:0;overflow:visible;display:block;">' +
         svg.innerHTML +
         "</svg>"
       );
@@ -158,6 +158,7 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
       if (!psMarksEl || !rough || !geo || !pal) return;
       const g = geo;
       const svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("aria-hidden", "true");
       svg.setAttribute("viewBox", "0 0 380 380");
       svg.setAttribute("width", "380");
       svg.setAttribute("height", "380");

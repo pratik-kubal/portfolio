@@ -27,6 +27,7 @@ export const hero = {
   muted: "Involved in Pro bono volunteering for Philadelphia Nonprofits since 2024",
   body: "With five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
   scrollHint: "See what I can do",
+  figureAlt: "Animated hand-drawn Möbius band.",
   // Möbius mount props (from the page's <dc-import>): R=2.6, w=0.8, t=0.48, speed=30, tilt=0.
   mobius: { R: 2.6, w: 0.8, t: 0.48, speed: 30, tilt: 0 },
 } as const;
@@ -62,6 +63,7 @@ export interface Project {
   repo?: { href: string; text: string };
   viz: VizKind;
   vizTop: string; // small mono label above the viz
+  vizAlt: string; // accessible text alternative for the right-column viz (role="img" label)
   /** Bella card viz caption (bold + rest). */
   vizCaption?: { bold: string; rest: string };
   /** Ring viz before/after captions. */
@@ -104,6 +106,7 @@ export const projects: Project[] = [
     repo: { href: LINKS.repo, text: "Github Repo ↗" },
     viz: "bella",
     vizTop: "ChatBot",
+    vizAlt: "Illustration of a scripted chat with Bella, the AI career assistant.",
     vizCaption: {
       bold: "Ask it anything",
       rest: " ·  Answers questions about my background, skills, and impact",
@@ -138,6 +141,8 @@ export const projects: Project[] = [
     },
     viz: "ring",
     vizTop: "",
+    vizAlt:
+      "Diagram of a request orbiting between a client and a database, illustrating the 90% API-latency reduction.",
     ring: {
       topBefore:
         "Before — Risk of SLA breaches and increased costs in bigger loan packages",
@@ -175,6 +180,8 @@ export const projects: Project[] = [
     footnote: { parts: ["Internal tooling on the same Aiva Docs platform"] },
     viz: "paperstack",
     vizTop: "Loan Documents",
+    vizAlt:
+      "Illustration of loan documents stacking into a pile, illustrating 2.4× document-processing throughput.",
     paperstack: {
       after: {
         parts: [
