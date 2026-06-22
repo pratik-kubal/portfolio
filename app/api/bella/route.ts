@@ -19,6 +19,10 @@ const KNOWN_SOURCES: ReadonlySet<QuestionSource> = new Set([
 ]);
 
 const MAX_MESSAGE_LEN = 2000;
+// Bound the client-supplied history: prior turns are forwarded verbatim to Claude,
+// so cap both how many we keep and how long each one can be to limit token cost.
+const MAX_HISTORY_TURNS = 12;
+const MAX_HISTORY_CONTENT_LEN = 4000;
 
 let careerText: string | null = null;
 let bellaPrompt: string | null = null;
@@ -55,7 +59,15 @@ function buildUserMessage(
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return new Response("Invalid JSON", { status: 400 });
+  }
+  if (!body || typeof body !== "object") {
+    return new Response("Invalid JSON", { status: 400 });
+  }
   const { message, history, sessionId, source, turnIndex, selectedQuote } =
     body as {
       message: unknown;
@@ -83,11 +95,14 @@ export async function POST(req: NextRequest) {
         validRoles.has(item.role) &&
         typeof item.content === "string"
       ) {
-        safeHistory.push({ role: item.role, content: item.content });
+        safeHistory.push({
+          role: item.role,
+          content: item.content.slice(0, MAX_HISTORY_CONTENT_LEN),
+        });
       }
     }
   }
-  const cappedHistory = safeHistory.slice(-20);
+  const cappedHistory = safeHistory.slice(-MAX_HISTORY_TURNS);
 
   const safeQuote =
     typeof selectedQuote === "string" && selectedQuote.trim()

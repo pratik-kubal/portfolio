@@ -53,6 +53,16 @@ export function BellaWidget({
   const streamingRef = useRef(isStreaming);
   streamingRef.current = isStreaming;
   const autoSent = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
+  const mountedRef = useRef(true);
+
+  // Cancel any in-flight stream and stop updating state once unmounted.
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+      abortRef.current?.abort();
+    };
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     const el = bodyRef.current;
@@ -72,9 +82,13 @@ export function BellaWidget({
       setIsStreaming(true);
       requestAnimationFrame(scrollToBottom);
 
+      const controller = new AbortController();
+      abortRef.current = controller;
+
       fetch("/api/bella", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           message: m,
           history: nextHistory,
@@ -93,6 +107,7 @@ export function BellaWidget({
             const { done, value } = await reader.read();
             if (done) break;
             acc += decoder.decode(value, { stream: true });
+            if (!mountedRef.current) return;
             setMsgs((h) => {
               const c = [...h];
               c[aiIndex] = { role: "assistant", content: acc };
@@ -102,6 +117,8 @@ export function BellaWidget({
           }
         })
         .catch(() => {
+          // Aborted on unmount (or by a later send) — leave state alone.
+          if (controller.signal.aborted) return;
           setMsgs((h) => {
             const c = [...h];
             c[aiIndex] = {
@@ -113,6 +130,8 @@ export function BellaWidget({
           });
         })
         .finally(() => {
+          if (abortRef.current === controller) abortRef.current = null;
+          if (!mountedRef.current) return;
           setIsStreaming(false);
           requestAnimationFrame(scrollToBottom);
         });

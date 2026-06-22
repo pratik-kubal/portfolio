@@ -90,6 +90,30 @@ describe("POST /api/bella", () => {
     expect(res.status).toBe(400);
   });
 
+  it("returns 400 on a malformed JSON body", async () => {
+    const req = new Request("http://localhost/api/bella", {
+      method: "POST",
+      body: "not json at all",
+      headers: { "Content-Type": "application/json" },
+    });
+    const res = await POST(req as any);
+    expect(res.status).toBe(400);
+  });
+
+  it("caps history to the last 12 turns and truncates long turn content", async () => {
+    const history = Array.from({ length: 20 }, (_, i) => ({
+      role: i % 2 === 0 ? "user" : "assistant",
+      content: "x".repeat(5000),
+    }));
+    await POST(makeRequest({ message: "Next?", history }) as any);
+    const sent = mockMessagesStream.mock.calls.at(-1)![0].messages;
+    // 12 kept history turns + the current user turn
+    expect(sent.length).toBe(13);
+    for (const m of sent.slice(0, 12)) {
+      expect(m.content.length).toBeLessThanOrEqual(4000);
+    }
+  });
+
   it("uses the Bella system prompt from bella-prompt.md", async () => {
     await POST(makeRequest({ message: "Who is Pratik?" }) as any);
     expect(mockMessagesStream).toHaveBeenCalledWith(

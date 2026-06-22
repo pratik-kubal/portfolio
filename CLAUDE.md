@@ -25,9 +25,10 @@ assistant).
 
 - `/` — Single-scroll v2 portfolio (hero with Möbius figure → 3 project narratives → nonprofit →
   about → footer). Accepts `?ask=` (or legacy `?question=`) to deep-link a question into Bella.
-- `/privacy`, `/cookies`, `/terms` — v2 legal pages. **Copy is placeholder, pending the owner's
-  final text** (see `components/portfolio/legal-layout.tsx`). The earlier detailed privacy text is
-  preserved in `components/privacy-policy.tsx`.
+- `/privacy`, `/cookies`, `/terms` — v2 legal pages, rendered via
+  `components/portfolio/legal-layout.tsx`. **Copy is finalized** — each page passes `lastUpdated`
+  (stamped "June 22, 2026"), and `/privacy` is the full formal policy. The earlier detailed privacy
+  text is preserved in `components/privacy-policy.tsx`.
 
 ### v2 Portfolio Design (the landing page)
 
