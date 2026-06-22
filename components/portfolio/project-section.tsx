@@ -20,7 +20,6 @@ export function ProjectSection({
   viz: ReactNode;
   sectionRef?: RefObject<HTMLElement | null>;
 }) {
-  const isBella = project.viz === "bella";
   return (
     <section
       ref={sectionRef}
@@ -31,10 +30,7 @@ export function ProjectSection({
     >
       <div className="pk-split">
         <div className="pk-card">
-          <div
-            data-narr-label=""
-            className={`pk-narr-label${isBella ? "" : " sticky"}`}
-          >
+          <div data-narr-label="" className="pk-narr-label sticky">
             <p>{project.kicker}</p>
           </div>
           <h2

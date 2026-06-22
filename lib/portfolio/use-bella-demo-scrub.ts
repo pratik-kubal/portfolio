@@ -152,6 +152,7 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
       at: Number(el.getAttribute("data-at") || 0),
     }));
     const h2El = root.querySelector<HTMLElement>("[data-narr-h2]");
+    const labelEl = root.querySelector<HTMLElement>("[data-narr-label]");
     if (!mount || !vp || !feed || !rows.length) return;
 
     const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
@@ -230,6 +231,40 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
       loadAnime().then((mod) => {
         if (!disposed) animate = mod && mod.animate;
       });
+      // Settle-into-focus beat (mirrors ring/paper's before→after): once the
+      // headline reaches the top the chatbox window pulse-scales and the kicker
+      // label slides away; scrolling back up restores it.
+      let transitioned = false;
+      const enterAfter = () => {
+        if (transitioned) return;
+        transitioned = true;
+        const win = mount.querySelector<HTMLElement>('[data-r="win"]');
+        if (animate) {
+          if (win) animate(win, { scale: [1, 1.04, 1], duration: 640, ease: "inOut(2)" });
+          if (labelEl)
+            animate(labelEl, {
+              opacity: [1, 0],
+              translateY: [0, -16],
+              duration: 460,
+              ease: "in(2)",
+              onComplete: () => {
+                labelEl.style.position = "static";
+              },
+            });
+        } else if (labelEl) {
+          labelEl.style.opacity = "0";
+          labelEl.style.position = "static";
+        }
+      };
+      const exitAfter = () => {
+        if (!transitioned) return;
+        transitioned = false;
+        if (labelEl) {
+          labelEl.style.position = "sticky";
+          labelEl.style.opacity = "1";
+          labelEl.style.transform = "";
+        }
+      };
       doUpdate = () => {
         const vh = window.innerHeight;
         const h2top = h2El ? h2El.getBoundingClientRect().top : vh;
@@ -242,6 +277,8 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
           proxy.p = target;
           paint();
         }
+        if (h2top <= 76) enterAfter();
+        else if (h2top > 200) exitAfter();
       };
       const onScroll = () => {
         if (!ticking) {

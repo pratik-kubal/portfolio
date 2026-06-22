@@ -325,6 +325,9 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
     }
 
     setNum(1.0);
+    // The metric must be a block box for the enterAfter scale-pop to render (a
+    // transform is a no-op on an inline element) — same as the ring's count-up.
+    if (num) num.style.display = "inline-block";
     beforeEls.forEach((e) => (e.style.opacity = "1"));
     afterEls.forEach((e) => (e.style.opacity = "0"));
 

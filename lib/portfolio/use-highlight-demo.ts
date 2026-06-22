@@ -14,6 +14,7 @@ export function useHighlightDemo(sectionRef: RefObject<HTMLElement | null>) {
     if (!demo) return;
     const words = [...demo.querySelectorAll<HTMLElement>("[data-hl-word]")];
     const pop = demo.querySelector<HTMLElement>("[data-hl-pop]");
+    const h2El = root.querySelector<HTMLElement>("[data-narr-h2]");
     if (!words.length) return;
 
     const lit = (w: HTMLElement, on: boolean) => {
@@ -37,10 +38,12 @@ export function useHighlightDemo(sectionRef: RefObject<HTMLElement | null>) {
     let disposed = false;
 
     const update = () => {
-      const r = demo.getBoundingClientRect();
+      // Key off the headline (same progress as the chatbox scrub / projects 2 & 3),
+      // so the words light up and the popup focuses in together with the diagram.
       const vh = window.innerHeight;
-      const start = vh * 0.78, end = vh * 0.46;
-      const prog = clamp((start - r.top) / (start - end), 0, 1);
+      const h2top = h2El ? h2El.getBoundingClientRect().top : vh;
+      const start = vh * 0.85;
+      const prog = clamp((start - h2top) / (start - 76), 0, 1);
       const n = Math.round(prog * words.length);
       words.forEach((w, i) => lit(w, i < n));
       const done = prog >= 1;
