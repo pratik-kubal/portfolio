@@ -24,7 +24,7 @@ export const hero = {
   kicker: "Hello There~! I am",
   name: "Pratik Kubal",
   subhead: "A Software Engineer based in Philadelphia, PA.",
-  muted: "Doing Pro bono volunteering for Philadelphia nonprofits since 2024",
+  muted: "Involved in Pro bono volunteering for Philadelphia Nonprofits since 2024",
   body: "With five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
   scrollHint: "See what I can do",
   // Möbius mount props (from the page's <dc-import>): R=2.6, w=0.8, t=0.48, speed=30, tilt=0.

@@ -31,24 +31,6 @@ export function Hero() {
             >
               Resume
             </a>
-            <span className="pk-cta-links">
-              <a
-                className="pk-mlink"
-                href={LINKS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub ↗
-              </a>
-              <a
-                className="pk-mlink"
-                href={LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn ↗
-              </a>
-            </span>
           </div>
           <p className="pk-scrollhint">
             {hero.scrollHint} <span aria-hidden="true">↓</span>
