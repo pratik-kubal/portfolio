@@ -37,6 +37,7 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
     };
 
     let disposed = false;
+    let visible = true;
     let streakRaf = 0;
     let scrollTick = false;
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -131,7 +132,10 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
         if (hist.length > 80) hist.pop();
       };
       const renderStreak = () => {
-        if (disposed) return;
+        if (disposed || !visible) {
+          streakRaf = 0;
+          return;
+        }
         const now = performance.now();
         while (hist.length && now - hist[hist.length - 1].t > TRAIL_MS) hist.pop();
         for (let i = 0; i < SEG; i++) {
@@ -148,7 +152,6 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
         }
         streakRaf = requestAnimationFrame(renderStreak);
       };
-      if (segs.length) streakRaf = requestAnimationFrame(renderStreak);
 
       const setSparkColor = (col: string) => {
         if (dot) {
@@ -210,8 +213,12 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
           labelEl.style.transform = "";
         }
       };
+      let tripScheduled = false;
       const loopTrip = () => {
-        if (disposed || !spark) return;
+        if (disposed || !visible || !spark) {
+          tripScheduled = false;
+          return;
+        }
         spark.style.opacity = "1";
         const o = { a: A0 };
         place(A0);
@@ -264,7 +271,30 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
         window.removeEventListener("resize", update);
       });
       update();
-      loopTrip();
+
+      // Pause the spark streak + orbit trip while the section is off-screen so
+      // they aren't burning rAF/anime cycles on a viz nobody can see.
+      const startTrip = () => {
+        if (tripScheduled) return;
+        tripScheduled = true;
+        loopTrip();
+      };
+      const sectionIO = new IntersectionObserver(
+        (entries) => {
+          visible = entries[0].isIntersecting;
+          if (visible) {
+            if (segs.length && !streakRaf)
+              streakRaf = requestAnimationFrame(renderStreak);
+            startTrip();
+          } else if (streakRaf) {
+            cancelAnimationFrame(streakRaf);
+            streakRaf = 0;
+          }
+        },
+        { threshold: 0 },
+      );
+      sectionIO.observe(scrolly);
+      onScrollFns.push(() => sectionIO.disconnect());
     });
 
     return () => {

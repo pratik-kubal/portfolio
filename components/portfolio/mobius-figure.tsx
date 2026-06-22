@@ -36,6 +36,7 @@ export function MobiusFigure() {
     const MAX_SPIN = 320;
 
     let alive = true;
+    let visible = true;
     let raf = 0;
     let phi = 0;
     let last = performance.now();
@@ -252,7 +253,10 @@ export function MobiusFigure() {
     };
 
     const loop = () => {
-      if (!alive) return;
+      if (!alive || !visible) {
+        raf = 0;
+        return;
+      }
       const now = performance.now();
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
@@ -264,6 +268,25 @@ export function MobiusFigure() {
       draw();
       raf = requestAnimationFrame(loop);
     };
+    // Only spin while the hero is on-screen; once scrolled past, pause the rAF
+    // loop instead of redrawing 128 rough.js quads every frame forever.
+    const startLoop = () => {
+      if (!alive || !visible || reduce || !rc || raf) return;
+      last = performance.now();
+      raf = requestAnimationFrame(loop);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible) startLoop();
+        else if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(el);
 
     // ── pointer drag / flick ──
     const onMove = (e: PointerEvent) => {
@@ -315,13 +338,14 @@ export function MobiusFigure() {
         const rough = (m as { default?: unknown }).default || m;
         rc = (rough as { canvas: (c: HTMLCanvasElement) => RoughCanvas }).canvas(cv);
         if (reduce) draw();
-        else raf = requestAnimationFrame(loop);
+        else startLoop();
       })
       .catch(() => {});
 
     return () => {
       alive = false;
       if (raf) cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
       el.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointermove", onMove);

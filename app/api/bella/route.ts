@@ -23,6 +23,19 @@ const MAX_MESSAGE_LEN = 2000;
 // so cap both how many we keep and how long each one can be to limit token cost.
 const MAX_HISTORY_TURNS = 12;
 const MAX_HISTORY_CONTENT_LEN = 4000;
+const MAX_QUOTE_LEN = 500;
+
+// The highlighted snippet is visitor-controlled and gets embedded inside a
+// triple-quote block in the user turn. Collapse whitespace and squash quote/
+// backtick runs so it can't close the block early or fake its own section
+// headers (e.g. a newline followed by "[INSTRUCTIONS]").
+function sanitizeQuote(raw: string): string {
+  return raw
+    .replace(/\s+/g, " ")
+    .replace(/[`"]{2,}/g, '"')
+    .trim()
+    .slice(0, MAX_QUOTE_LEN);
+}
 
 let careerText: string | null = null;
 let bellaPrompt: string | null = null;
@@ -106,7 +119,7 @@ export async function POST(req: NextRequest) {
 
   const safeQuote =
     typeof selectedQuote === "string" && selectedQuote.trim()
-      ? selectedQuote.trim().slice(0, MAX_MESSAGE_LEN)
+      ? sanitizeQuote(selectedQuote)
       : null;
 
   // Fire-and-forget analytics insert (parallel with the stream, kept alive by after()).
