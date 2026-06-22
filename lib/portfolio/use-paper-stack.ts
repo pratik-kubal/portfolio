@@ -254,7 +254,9 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
         const paper = added ? pal.addedPaper : pal.surface;
         const chip = added ? pal.surface : pal.accentFill;
         const chipTxt = added ? pal.ink : pal.onAccent;
-        el.innerHTML = psMakeSheetSVG(i * 7 + 3, w, skew, codes[i % codes.length], pal, paper, chip, chipTxt);
+        // The topmost sheet's tab is the only one fully visible — label it URLA.
+        const code = i === N - 1 ? "URLA" : codes[i % codes.length];
+        el.innerHTML = psMakeSheetSVG(i * 7 + 3, w, skew, code, pal, paper, chip, chipTxt);
         psStackEl.appendChild(el);
         sheets.push({ el, i, restTX: restXoff, restTY, restRot, rainSX, rainSY, rainSRot, phase, launch, fallLen });
       }

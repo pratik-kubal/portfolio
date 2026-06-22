@@ -18,7 +18,7 @@ const after: CSSProperties = {
 export function PaperStackViz({ project }: { project: Project }) {
   return (
     <div className="pk-viz">
-      <div style={{ position: "relative", width: "100%", height: 20 }}>
+      <div style={{ position: "relative", width: "100%", height: 20, textAlign: "center" }}>
         <p className="pk-viz-top">{project.vizTop}</p>
       </div>
 

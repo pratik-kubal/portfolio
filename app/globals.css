@@ -199,6 +199,12 @@
 
   position: relative;
   min-height: 100vh;
+  /* Guard against accidental horizontal overflow (e.g. the decorative
+     highlight-demo popover, full-bleed 100vw sections) expanding the document
+     wider than the viewport, which makes mobile browsers shrink-to-fit / require
+     a zoom-out. `clip` (not hidden/scroll) does NOT create a scroll container, so
+     the sticky nav / labels / vizzes keep sticking to the viewport. */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
@@ -3348,6 +3354,19 @@
   border: var(--line-w) solid var(--accent-fill);
 }
 
+/* Phones: hide the wordmark (it pushed the theme toggle + Resume off-screen) and
+   keep the controls on a single right-aligned row, tightened so they fit down to
+   ~320px. Must live AFTER the .pk-toggle / .pk-btn base rules so equal-
+   specificity overrides win on source order. */
+@media (max-width: 600px) {
+  .pk-nav { gap: 6px 10px; padding: 10px clamp(1rem, 4vw, 1.5rem); }
+  .pk-logo { display: none; }
+  .pk-nav-right { gap: 8px; margin-left: auto; }
+  .pk-toggle { font-size: 0.74rem; }
+  .pk-toggle button { padding: 8px 11px; }
+  .pk-nav-right .pk-btn-outline { padding: 8px 12px; font-size: 0.82rem; }
+}
+
 /* ── MAIN column ─────────────────────────────────────────────────────────── */
 .pk-main {
   position: relative;
@@ -3614,6 +3633,20 @@
 }
 .pk-viz-caption { margin: 0; text-align: center; color: var(--muted); }
 .pk-viz-caption b { color: var(--accent-text); font-weight: 600; }
+/* Drop the project diagrams (Bella demo / ring / paper-stack) once the split can
+   no longer hold the metric card + viz side-by-side. Measured: the row wraps the
+   viz below the text at ≤781px, so on mobile / narrow widths the viz would just
+   sit under the card — hide it there and let the metric card stand alone. */
+@media (max-width: 781px) {
+  .pk-viz { display: none; }
+  /* The card's 7vh top padding and the big inter-section margin (16vh) existed
+     to vertically center each card against the sticky viz. With the viz gone
+     they're just dead space between the projects (~196px of empty gap), so cut
+     them down to a normal section break. */
+  .pk-card { padding-top: 28px; }
+  .pk-section + .pk-section,
+  .pk-section.pk-section-spaced { margin-top: 56px; }
+}
 
 /* ── NONPROFIT / ABOUT ───────────────────────────────────────────────────── */
 .pk-rule {
@@ -4118,6 +4151,46 @@
   transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
 }
 .pk-bella-close:hover { color: var(--ink); box-shadow: var(--shadow-block); transform: translate(-1px, -1px); }
+/* Minimize button — same collapse-to-chip action as the [x], shown only on the
+   mobile full-screen sheet (hidden on desktop where the panel is a small card). */
+.pk-bella-min {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: var(--line-w) solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  border-radius: var(--radius-1);
+  cursor: pointer;
+  line-height: 1;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+}
+.pk-bella-min:hover { color: var(--ink); box-shadow: var(--shadow-block); transform: translate(-1px, -1px); }
+
+/* Phones: the chat becomes a full-screen sheet, the launcher clears the bottom
+   browser bar / home indicator, and the minimize button appears (the small
+   floating card on desktop doesn't need it). */
+@media (max-width: 600px) {
+  .pk-bella { bottom: calc(env(safe-area-inset-bottom, 0px) + 64px); }
+  .pk-bella-min { display: inline-flex; }
+  .pk-bella-panel {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  /* keep the safe areas clear and stop the page behind from rubber-banding */
+  .pk-bella-head { padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
+  .pk-bella-inputrow { padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .pk-bella-body { overscroll-behavior: contain; }
+}
 .pk-bella-body { flex: 1; overflow: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 16px; }
 .pk-bella-greet { display: flex; gap: 10px; align-items: flex-start; }
 .pk-bella-greet .ava {

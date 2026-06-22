@@ -190,6 +190,29 @@ export function BellaWidget({
             </div>
             <button
               type="button"
+              className="pk-bella-min"
+              aria-label="Minimize chat"
+              onClick={(e) => {
+                e.stopPropagation();
+                close();
+              }}
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 6l3.5 3.5L11 6" />
+              </svg>
+            </button>
+            <button
+              type="button"
               className="pk-bella-close"
               aria-label="Close chat"
               onClick={(e) => {

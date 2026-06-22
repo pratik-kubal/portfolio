@@ -23,10 +23,10 @@ export const LINKS = {
 export const hero = {
   kicker: "Hello There~! I am",
   name: "Pratik Kubal",
-  subhead: "A software Engineer based in Philadelphia, PA.",
+  subhead: "A Software Engineer based in Philadelphia, PA.",
   muted: "Doing Pro bono volunteering for Philadelphia nonprofits since 2024",
-  body: "With Five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
-  scrollHint: "What I've done",
+  body: "With five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
+  scrollHint: "See what I can do",
   // Möbius mount props (from the page's <dc-import>): R=2.6, w=0.8, t=0.48, speed=30, tilt=0.
   mobius: { R: 2.6, w: 0.8, t: 0.48, speed: 30, tilt: 0 },
 } as const;
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     metric: "",
     metricCaption: "You can highlight any text on this page to ask Bella about it",
     metricCaptionIsHighlightDemo: true,
-    h3: "Or open an Interactive chat at the bottom right of the page",
+    h3: "Or open an interactive chat at the bottom right of the page",
     body: "Candidates usually have to pick and choose what to put in a resume to the recruiter for a specific job, usually this takes practice and still might not accurate. This wastes time of both recruiter and the candidate. This time can be used either by recruiter to find better suited candidates or by candidates to apply for more jobs. Hence creating a assistant to answer exact questions helps recruiter and me to save time.",
     bullets: [
       "Created API Backend connected to Claude API to drive interactions",
@@ -217,12 +217,12 @@ export const aboutHeading = "My Story & Pitch";
 
 export const about: string[] = [
   "I have 5 years of software work experience, 1.5 years of Masters specialization in Machine Learning in Buffalo, and 1 year of data analytics for a consultancy startup in Mumbai which has given me confidence to tackle full stack in its complete breath. Through pro bono engagements with Non Profits in Philadelphia has taught me what dealing with incomplete requirements and uncertainty looks like.",
-  "That's why I'm a Go-to-Market(GTM) engineer to handle your backend, frontend, or even networking across clients; and be comfortable working with Sales, Finance, or Funding teams to solve their problems. As a team member I'm the engineer who revives quality when it slips like in my organization, I restarted the cross-team code-review program after our senior mentor left, raised org-wide test coverage to 70% through dependency-injection patterns which became go-to in the organization, and replaced a core 50% deployment success to 100% success CI/CD pipeline.",
+  "That's why I'm the right engineer to handle your backend, frontend, or even networking across clients; and be comfortable working with Sales, Finance, or Funding teams to solve their problems. As a team member I'm the engineer who revives quality when it slips like in my organization, I restarted the cross-team code-review program after our senior mentor left, raised org-wide test coverage to 70% through dependency-injection patterns which became go-to in the organization, and replaced a core 50% deployment success to 100% success CI/CD pipeline.",
 ];
 
 // ── Footer ───────────────────────────────────────────────────────────────────
 export const footer = {
-  tagline: "Personal Portfolio website for Pratik Kubal",
+  tagline: "Personal website for Pratik Kubal",
   // Static fallback shown when /api/now-playing has no data / no JS.
   spotifyFallback: { title: "Shadow · Chromatics", album: "Shadow" },
   sitemap: [
