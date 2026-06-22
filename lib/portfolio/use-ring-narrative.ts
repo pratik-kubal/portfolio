@@ -2,6 +2,7 @@
 
 import { useEffect, type RefObject } from "react";
 import { loadAnime, loadRough } from "./engines";
+import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
 
@@ -22,7 +23,6 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
     const wire = scrolly.querySelector<HTMLElement>("[data-wire]");
     const dbNode = scrolly.querySelector<HTMLElement>("[data-db-node]");
     const orbitSvg = scrolly.querySelector<SVGElement>("[data-ring-orbit]");
-    const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
     const setNum = (v: number) => {
       if (num) num.textContent = Math.min(90, Math.round(v)) + "%";
     };
@@ -247,10 +247,7 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
       };
       const update = () => {
         if (!h2El) return;
-        const vh = window.innerHeight;
-        const h2top = h2El.getBoundingClientRect().top;
-        const start = vh * 0.8;
-        const prog = clamp((start - h2top) / (start - 76), 0, 1);
+        const { prog, top: h2top } = headlineProgress(h2El);
         setNum(transitioned ? 90 : prog * 90);
         if (h2top <= 76) enterAfter();
         else if (h2top > 200) exitAfter();

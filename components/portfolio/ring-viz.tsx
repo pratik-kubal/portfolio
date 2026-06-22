@@ -45,7 +45,8 @@ const nodeLabel: CSSProperties = {
 // Hand-drawn ring (Project 01). The rough.js orbit + node outlines and the
 // orbiting spark + before→after crossfade are driven by useRingNarrative.
 export function RingViz({ project }: { project: Project }) {
-  const r = project.ring!;
+  const r = project.ring;
+  if (!r) return null;
   return (
     <div className="pk-viz">
       <div style={{ position: "relative", width: "100%", height: 20 }}>

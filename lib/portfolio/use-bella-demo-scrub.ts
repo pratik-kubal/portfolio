@@ -3,6 +3,7 @@
 import { useEffect, type RefObject } from "react";
 import { useTheme } from "next-themes";
 import { loadAnime, loadRough } from "./engines";
+import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
 
@@ -266,10 +267,7 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
         }
       };
       doUpdate = () => {
-        const vh = window.innerHeight;
-        const h2top = h2El ? h2El.getBoundingClientRect().top : vh;
-        const start = vh * 0.85;
-        const target = clamp((start - h2top) / (start - 76), 0, 1);
+        const { prog: target, top: h2top } = headlineProgress(h2El);
         if (animate) {
           if (tween) tween.pause();
           tween = animate(proxy, { p: target, duration: 480, ease: "out(3)", onUpdate: paint });

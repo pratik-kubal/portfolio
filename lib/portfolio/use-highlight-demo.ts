@@ -2,6 +2,7 @@
 
 import { useEffect, type RefObject } from "react";
 import { loadAnime } from "./engines";
+import { headlineProgress } from "./headline-progress";
 
 // Scroll-scrubbed "user highlights the text" moment in the AI-Engineering caption:
 // words light up as the line rises through a band, then the "Ask Bella about it"
@@ -32,7 +33,6 @@ export function useHighlightDemo(sectionRef: RefObject<HTMLElement | null>) {
       pop.style.transform = "translateY(6px) scale(.92)";
       pop.style.transition = "opacity .28s ease, transform .28s ease";
     }
-    const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
     let ticking = false;
     let shown = false;
     let disposed = false;
@@ -40,10 +40,7 @@ export function useHighlightDemo(sectionRef: RefObject<HTMLElement | null>) {
     const update = () => {
       // Key off the headline (same progress as the chatbox scrub / projects 2 & 3),
       // so the words light up and the popup focuses in together with the diagram.
-      const vh = window.innerHeight;
-      const h2top = h2El ? h2El.getBoundingClientRect().top : vh;
-      const start = vh * 0.85;
-      const prog = clamp((start - h2top) / (start - 76), 0, 1);
+      const { prog } = headlineProgress(h2El);
       const n = Math.round(prog * words.length);
       words.forEach((w, i) => lit(w, i < n));
       const done = prog >= 1;

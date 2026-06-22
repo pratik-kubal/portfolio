@@ -3,6 +3,7 @@
 import { useEffect, type RefObject } from "react";
 import { useTheme } from "next-themes";
 import { loadAnime, loadRough } from "./engines";
+import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
 
@@ -40,7 +41,6 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
     const psShadowEl = scrolly.querySelector<HTMLElement>("[data-ps-shadow]");
     if (!psStackEl) return;
 
-    const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
     const setNum = (v: number) => {
       if (num) num.textContent = v.toFixed(1) + "×";
     };
@@ -376,10 +376,7 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
       };
       const update = () => {
         if (!h2El) return;
-        const vh = window.innerHeight;
-        const h2top = h2El.getBoundingClientRect().top;
-        const start = vh * 0.85;
-        const prog = clamp((start - h2top) / (start - 76), 0, 1);
+        const { prog, top: h2top } = headlineProgress(h2El);
         psP = prog;
         if (ready) psApply(transitioned ? 1 : prog);
         setNum(transitioned ? 2.4 : 1.0 + prog * 1.4);
