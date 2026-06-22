@@ -15,10 +15,10 @@ Single consolidated profile for Pratik Kubal — used as the LLM context for the
 | **LinkedIn** | linkedin.com/in/pratik-kubal |
 | **GitHub** | github.com/pratik-kubal |
 | **Personal Website / Portfolio** | pratik-kubal.com |
-| **Work Authorization** | Marriage-based green-card adjustment of status in progress; currently on B-2 after H-1B lapsed with the May 2025 RIF. Will hold permanent U.S. work authorization — no visa sponsorship required — upon EAD / Green Card issuance |
+| **Work Authorization** | Permanent U.S. work authorization in progress; no sponsorship required |
 | **Remote Work** | Open to fully remote roles anywhere in the United States |
 | **Hybrid / On-site** | Open to hybrid or in-person work within ~10 miles of Philadelphia, PA or Malvern, PA |
-| **Availability** | 40 hrs/week with U.S. timezone overlap; start date contingent on EAD / Green Card issuance (pending) |
+| **Availability** | 40 hrs/week with U.S. timezone overlap; permanent U.S. work authorization in progress (no sponsorship required), with start date subject to that finalizing |
 
 ---
 
@@ -28,7 +28,7 @@ Backend-leaning software engineer with 5 years of production experience in finte
 
 Consistently the engineer who revived quality and process — restarted the cross-team code review program after the senior mentor left, raised org-wide test coverage to 70% via dependency-injection patterns, and replaced a 24-hour deployment cycle with a 4-hour CI/CD pipeline. Comfortable across the stack (React/Next.js for self-service UIs and a personal AI-powered resume Q&A app), and partners well with Product and Data teams.
 
-**Currently (May 2025 – Present):** Actively interviewing after a reduction-in-force at Dark Matter Technologies. H-1B status lapsed with the RIF and transitioned to B-2 while a marriage-based green-card application is processed — so the next role will not require sponsorship, but cannot start until the EAD / Green Card is in hand. Using the transition to lead a Compass Pro Bono engagement as Deputy Project Leader (Children's Scholarship Fund of Philadelphia), volunteer web engineering for West Philly Porchfest, and invest in AI-platform depth (Claude Code training; Azure AI Engineer Associate and AWS certifications in progress). Based in Philadelphia, open to remote (U.S.) or hybrid/in-person around Philadelphia or Malvern, PA.
+**Currently (May 2025 – Present):** Actively interviewing after a reduction-in-force at Dark Matter Technologies. Permanent U.S. work authorization is in progress, so the next role will not require sponsorship — the start date is subject to that finalizing. Using the transition to lead a Compass Pro Bono engagement as Deputy Project Leader (Children's Scholarship Fund of Philadelphia), volunteer web engineering for West Philly Porchfest, and invest in AI-platform depth (Claude Code training; Azure AI Engineer Associate and AWS certifications in progress). Based in Philadelphia, open to remote (U.S.) or hybrid/in-person around Philadelphia or Malvern, PA.
 
 ---
 
@@ -37,7 +37,7 @@ Consistently the engineer who revived quality and process — restarted the cros
 ### Current — Pro Bono Leadership, Volunteer Engineering, AI Upskilling
 **May 2025 – Present · Philadelphia, PA · Actively interviewing**
 
-Position was eliminated at Dark Matter Technologies in May 2025 as part of a company-wide reduction in force. H-1B status lapsed and was replaced with B-2 while a marriage-based green-card application is processed; once the EAD / Green Card issues, will hold permanent U.S. work authorization with no sponsorship required. In the meantime, has stepped into project leadership on a pro bono engagement, contributed volunteer engineering to a local community organization, and invested in AI-platform depth through certifications — while interviewing for the next full-time role.
+Position was eliminated at Dark Matter Technologies in May 2025 as part of a company-wide reduction in force. Permanent U.S. work authorization is in progress; no sponsorship required. In the meantime, has stepped into project leadership on a pro bono engagement, contributed volunteer engineering to a local community organization, and invested in AI-platform depth through certifications — while interviewing for the next full-time role.
 
 - **Pro bono project leadership — Compass Pro Bono (Deputy Project Leader).** Leading the pro bono project team serving the Children's Scholarship Fund of Philadelphia (CSFP). A step up from the 2024 Compass engagement (team member) to a leadership seat responsible for scope, timelines, client communication, and deliverables.
 - **Volunteer web engineering — West Philly Porchfest (westphillyporchfest.com).** Contributing web design and development to the Philadelphia community arts festival.
@@ -158,4 +158,4 @@ Joined Dark Matter Technologies as the first role after completing the M.S. (Apr
 
 - **Primary fit:** Backend / full-stack SWE roles in fintech, AI-platform, or developer-tooling teams. Strongest as a senior IC who owns migrations, performance/reliability work, and self-service tooling end-to-end. Current AI upskilling (Claude Code, Azure AI Engineer Associate in progress, AWS certification in progress) reinforces the AI-platform angle on top of production AI/LLM experience from the AIVA platform and the Resume Q&A project.
 - **Secondary fit:** Forward-deployed / integration-engineer roles (customer-facing scoping + Python/SQL data pipelines + Salesforce experience). Reinforced since May 2025 by the Deputy Project Leader role at Compass Pro Bono — leading scope, timelines, and client communication on a pro bono engagement for a Philadelphia non-profit.
-- **Availability:** Actively interviewing — position eliminated at Dark Matter Technologies (May 2025 RIF). H-1B lapsed; currently on B-2 while a marriage-based green-card application is pending. Cannot start until the EAD / Green Card is in hand; at that point will hold permanent U.S. work authorization with no sponsorship required. Open to fully remote (U.S.) or hybrid/on-site within ~10 miles of Philadelphia or Malvern, PA. 40 hrs/week, U.S. timezone overlap.
+- **Availability:** Actively interviewing — position eliminated at Dark Matter Technologies (May 2025 RIF). Permanent U.S. work authorization in progress; no sponsorship required, with start date subject to that finalizing. Open to fully remote (U.S.) or hybrid/on-site within ~10 miles of Philadelphia or Malvern, PA. 40 hrs/week, U.S. timezone overlap.
