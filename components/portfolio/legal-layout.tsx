@@ -1,13 +1,16 @@
 import type { ReactNode } from "react";
 
 // Shared shell for the v2 legal pages (Privacy / Cookies / Terms): minimal nav,
-// centered 680px column, "Legal" kicker, h1, body, pending pill, back button.
+// centered 680px column, "Legal" kicker, h1, body, last-updated pill, back button.
+// Pass `lastUpdated` once a page's copy is finalized; omit it to show "pending".
 // Renders inside .pk-root so it follows the active theme.
 export function LegalLayout({
   title,
+  lastUpdated,
   children,
 }: {
   title: string;
+  lastUpdated?: string;
   children: ReactNode;
 }) {
   return (
@@ -27,7 +30,7 @@ export function LegalLayout({
         {children}
         <span className="pk-legal-pill">
           <span className="dot" aria-hidden="true" />
-          Last updated — pending
+          Last updated — {lastUpdated ?? "pending"}
         </span>
         <a href="/" className="pk-btn pk-legal-backbtn">
           ← Back to pratik-kubal.com

@@ -1638,19 +1638,20 @@
 }
 /* top rule lives on the content row (not the padded inner) so it lines up with
    the section rules and the copyright divider rather than running 48px wider. */
+/* Pack brand + Spotify + nav columns left-to-right with one consistent gap,
+   rather than using space-between (which spread the three apart and left the
+   Spotify card floating in the middle with a void on either side). */
 .pk-foot-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: 28px 24px;
+  gap: 28px 48px;
   padding-top: 2rem;
   border-top: var(--line-w) solid var(--line);
 }
-/* Below the width where all three columns fit, wrap them left-aligned (clean)
-   instead of letting space-between fling them to opposite edges. */
 @media (max-width: 1200px) {
-  .pk-foot-row { justify-content: flex-start; gap: 40px 56px; }
+  .pk-foot-row { gap: 40px 56px; }
 }
 .pk-foot-brand { flex: 0 1 auto; min-width: 0; max-width: 22ch; }
 .pk-foot-tagline {
@@ -1960,6 +1961,88 @@
   font-size: 0.74rem;
   color: var(--muted);
 }
+
+/* ── Formal multi-section legal copy (Privacy Policy) ─────────────────────
+   Theme-aware port of the legacy .pp-* policy into the v2 legal layout.
+   Numbered sections + h2/h3 + dash lists + a contact definition list. */
+.pk-legal-sec {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 10px;
+  width: 100%;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pk-legal-sec:first-of-type { padding-top: 8px; }
+.pk-legal-sec:last-of-type { border-bottom: none; }
+@media (max-width: 640px) {
+  .pk-legal-sec { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+}
+.pk-legal-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
+  padding-top: 7px;
+}
+.pk-legal-secbody { min-width: 0; }
+.pk-legal-secbody > :last-child { margin-bottom: 0; }
+.pk-legal-h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+.pk-legal-h3 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 24px 0 10px;
+}
+.pk-legal-sec .pk-legal-body { max-width: 62ch; margin: 0 0 14px; }
+.pk-legal-body b,
+.pk-legal-list li b { font-weight: 600; color: var(--ink); }
+.pk-legal-emph { font-style: italic; color: var(--ink); }
+.pk-legal-list {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  max-width: 62ch;
+  color: var(--muted);
+}
+.pk-legal-list li {
+  position: relative;
+  padding-left: 22px;
+  margin: 8px 0;
+  text-wrap: pretty;
+}
+.pk-legal-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-text);
+}
+.pk-legal-contact {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 10px 16px;
+  margin: 4px 0 0;
+  max-width: 62ch;
+}
+.pk-legal-contact > div { display: contents; }
+.pk-legal-contact dt {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  align-self: center;
+}
+.pk-legal-contact dd { margin: 0; color: var(--ink); }
 
 /* ── Pre-paint motion gate ───────────────────────────────────────────────
    Hide only the animated bits, and only while data-motion="on" (set pre-paint

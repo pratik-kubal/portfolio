@@ -236,7 +236,7 @@ export const footer = {
     { label: "Terms", href: "/terms" },
   ],
   elsewhere: [
-    { label: "pratik-kubal@outlook.com ↗", href: `mailto:${LINKS.email}` },
+    { label: "Email ↗", href: `mailto:${LINKS.email}` },
     { label: "GitHub ↗", href: LINKS.github },
     { label: "LinkedIn ↗", href: LINKS.linkedin },
     { label: "Resume ↗", href: LINKS.resume },
