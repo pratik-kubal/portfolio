@@ -19,7 +19,7 @@ Note: `next.config.mjs` has `ignoreBuildErrors: true` and `ignoreDuringBuilds: t
 
 This is a **Next.js 15 (App Router)** personal portfolio. The landing page is the **"v2" design**
 (citron-on-warm-paper, three themes, scroll-driven narratives, and **Bella** — an on-page AI chat
-assistant). An older "editorial" route (`/ucd-faq-demo`) still exists as a legacy page.
+assistant).
 
 ### Pages
 
@@ -28,7 +28,6 @@ assistant). An older "editorial" route (`/ucd-faq-demo`) still exists as a legac
 - `/privacy`, `/cookies`, `/terms` — v2 legal pages. **Copy is placeholder, pending the owner's
   final text** (see `components/portfolio/legal-layout.tsx`). The earlier detailed privacy text is
   preserved in `components/privacy-policy.tsx`.
-- `/ucd-faq-demo` — legacy editorial page (kept working, lower priority).
 
 ### v2 Portfolio Design (the landing page)
 
@@ -99,8 +98,7 @@ request with `source` and `turnIndex` so multi-turn conversations can be reconst
 ### Key Components
 
 The v2 landing-page components live in `components/portfolio/` (see "v2 Portfolio Design" above).
-Legacy editorial components that still serve `/ucd-faq-demo`: `ucd-faq-page.tsx`,
-`force-light-theme.tsx`, `components/ui/button.tsx`. `mailto-link.tsx` is used by
+`components/ui/button.tsx` is an unused shadcn-style primitive. `mailto-link.tsx` is used by
 `components/privacy-policy.tsx`. `theme-provider.tsx` wraps next-themes in `layout.tsx`.
 `lib/utils.ts` — `cn()` + `handleScroll()`. (`components/privacy-policy.tsx` is the old detailed
 privacy copy, kept as a source for the final legal pages.)
@@ -110,7 +108,6 @@ privacy copy, kept as a source for the final legal pages.)
 - `app/api/bella/route.ts` — POST: Bella's streaming assistant (career.md + bella-prompt.md context)
 - `app/api/now-playing/route.ts` — GET: Spotify currently-playing / recently-played (shapes track,
   falls back, caches). The v2 footer `spotify-card.tsx` consumes this, with a static design fallback.
-- `app/api/ucd-faq-chat/route.ts` — POST: chat for the legacy `/ucd-faq-demo`.
 
 ### Testing
 
@@ -127,7 +124,7 @@ swap, Bella open, highlight-to-ask, and the legal pages. First run needs `npx pl
 
 Tailwind CSS v4. The v2 design is hand-authored CSS scoped under `.pk-root` in `app/globals.css`
 (signature citron `#C7DD3A` accent, `data-theme` three-mode swap, hard `3px 3px 0` block shadows).
-Legacy editorial/UCD styles remain in the same file under their own scopes.
+Legacy editorial styles remain in the same file under their own scopes.
 
 ### Data Flow: Updating Resume Content
 

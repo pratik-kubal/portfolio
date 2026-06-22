@@ -101,7 +101,7 @@ export const projects: Project[] = [
       "Anime.js",
       "Rough.js",
     ],
-    repo: { href: LINKS.repo, text: "Repo ↗" },
+    repo: { href: LINKS.repo, text: "Github Repo ↗" },
     viz: "bella",
     vizTop: "ChatBot",
     vizCaption: {
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     count: { from: 0, to: 90, suffix: "%", decimals: 0 },
     metricCaption: "API latency cut · ~100K req/day",
     h3: "Refactor & Re-Architect Migration",
-    body: "Our idea was to transition core functionality to Aurora and carefully switch the API used by services through feature flags to ensure business continuity. I would have to plan the change to Data structure and Application queries; with a Data migration and Application code.",
+    body: "Our idea was to transition core functionality to Aurora and carefully switch the API used by services through feature flags to ensure business continuity. I would have to plan the change to data structure and application queries; with a data migration and application code.",
     bullets: [
       "Created a migration roadmap with clear timelines and risk mitigation steps.",
       "Engaged all stakeholders such as Product, DevOps, QA and other Engineers to align on requirements and success metrics.",
