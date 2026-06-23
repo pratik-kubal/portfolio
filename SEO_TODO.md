@@ -134,8 +134,8 @@ Audit LinkedIn headline, GitHub bio, X bio, any conference bios: same one-line d
 
 ## Performance / hygiene notes
 
-### 18. Apollo tracker
-`app/layout.tsx` loads `assets.apollo.io/.../tracker.iife.js` on every page via `afterInteractive`. Mild Core Web Vitals cost; not an SEO blocker but worth knowing.
+### 18. Apollo tracker — ✅ removed
+Previously `app/layout.tsx` loaded `assets.apollo.io/.../tracker.iife.js` on every page. Removed because it was the sole cause of three Lighthouse Best Practices failures (third-party cookies, console `ERR_CONNECTION_REFUSED` errors from `aplo-evnt.com`, and DevTools Issues) — and it was non-functional in production anyway. Legal pages (`/privacy`, `/cookies`) updated to drop the Apollo references.
 
 ### 19. `next.config.mjs`
 `ignoreBuildErrors: true` and `ignoreDuringBuilds: true` mean TypeScript / ESLint errors never fail CI. Unrelated to SEO but worth fixing since SEO work touches typed metadata.

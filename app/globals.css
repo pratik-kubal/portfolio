@@ -1397,6 +1397,14 @@
   aspect-ratio: 1 / 1;
   margin-top: clamp(28px, 5vw, 56px);
 }
+/* Drop the decorative Möbius figure on phones: it eats a screenful of vertical
+   space below the hero copy and adds the rough.js canvas cost on the exact
+   devices we most want to keep lean. display:none also keeps it out of the
+   a11y tree and (via the IntersectionObserver in MobiusFigure) stops rough.js
+   from ever loading for the hero here. */
+@media (max-width: 640px) {
+  .pk-hero-figwrap { display: none; }
+}
 .pk-hero-lower {
   display: flex;
   flex-direction: column;
@@ -2209,6 +2217,10 @@
    floating card on desktop doesn't need it). */
 @media (max-width: 600px) {
   .pk-bella { bottom: calc(env(safe-area-inset-bottom, 0px) + 64px); }
+  /* The collapsed pill is fixed and raised to 64px + safe-area above (its top
+     lands ~114px above the viewport bottom). Reserve enough room beneath the
+     page so the footer copyright line clears it instead of sitting underneath. */
+  .pk-main { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 144px); }
   .pk-bella-min { display: inline-flex; }
   .pk-bella-panel {
     position: fixed;

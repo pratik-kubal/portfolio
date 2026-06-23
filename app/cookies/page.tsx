@@ -5,7 +5,7 @@ import { LINKS } from "@/data/portfolio";
 export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
-    "How pratik-kubal.com uses cookies and similar technologies, including third-party visitor analytics and the AI chat assistant.",
+    "How pratik-kubal.com uses cookies and similar technologies, including local storage for theme preferences and the AI chat assistant.",
   alternates: {
     canonical: "https://pratik-kubal.com/cookies",
   },
@@ -30,23 +30,10 @@ export default function CookiesPage() {
         email, and both stay on your device.
       </p>
       <p className="pk-legal-body">
-        To understand who&rsquo;s visiting, in aggregate, the Site uses a
-        third-party visitor-analytics tool (Apollo.io). It may set its own
-        cookies to recognize repeat visits. That data is handled under{" "}
-        <a
-          className="pk-mlink"
-          href="https://www.apollo.io/privacy-policy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Apollo&rsquo;s privacy policy
-        </a>
-        , not mine.
-      </p>
-      <p className="pk-legal-body">
-        The Site also links to or embeds third-party services — such as GitHub,
-        LinkedIn, and Spotify — that I don&rsquo;t control and that may set their
-        own cookies governed by their own terms.
+        The Site doesn&rsquo;t use any third-party advertising or
+        visitor-tracking cookies. It does link to or embed third-party services —
+        such as GitHub, LinkedIn, and Spotify — that I don&rsquo;t control and
+        that may set their own cookies governed by their own terms.
       </p>
       <p className="pk-legal-body">
         You&rsquo;re in control. Most browsers let you block or delete cookies

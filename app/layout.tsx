@@ -1,43 +1,16 @@
 import type React from "react";
 import type { Metadata } from "next";
-import Script from "next/script";
-import {
-  Inter,
-  JetBrains_Mono,
-  Newsreader,
-  Space_Grotesk,
-  Geist,
-  Geist_Mono,
-} from "next/font/google";
+import { Space_Grotesk, Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const siteUrl = "https://pratik-kubal.com";
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-// "pratik-kubal.com v2" design fonts — scoped to .pk-root via globals.css so they
-// don't disturb the legacy --font-serif/sans/mono used by the editorial styles.
+// "pratik-kubal.com v2" design fonts — the only families the live site renders
+// (everything is inside .pk-root). The legacy editorial fonts (Newsreader/Inter/
+// JetBrains Mono) were dropped: their only consumer, components/privacy-policy.tsx,
+// isn't routed, so preloading them just delayed the Geist body font that gates
+// mobile LCP. If that legacy page is ever revived, re-add its fonts here.
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
@@ -220,12 +193,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${newsreader.variable} ${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`${spaceGrotesk.variable} ${geist.variable} ${geistMono.variable}`}
     >
       <head>
         <style>{`
 html {
-  font-family: var(--font-serif);
+  font-family: var(--font-geist), system-ui, sans-serif;
 }
         `}</style>
         <script
@@ -253,24 +226,6 @@ html {
             {children}
           </div>
         </ThemeProvider>
-        <Script
-          id="apollo-tracker"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              function initApollo(){
-                var n=Math.random().toString(36).substring(7),
-                    o=document.createElement("script");
-                o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n;
-                o.async=true;
-                o.defer=true;
-                o.onload=function(){window.trackingFunctions.onLoad({appId:"69c1476f4668580011e33138"})};
-                document.head.appendChild(o)
-              }
-              initApollo();
-            `,
-          }}
-        />
       </body>
     </html>
   );

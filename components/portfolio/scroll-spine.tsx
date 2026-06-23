@@ -24,6 +24,11 @@ export function ScrollSpine() {
     const dots = els.map((el) => {
       const d = document.createElement("button");
       d.type = "button";
+      // The spine is aria-hidden (decorative; screen readers navigate via the
+      // section <h2>s). Keep these jump dots out of the tab order so the
+      // aria-hidden region has no focusable descendants — they stay clickable
+      // by mouse but aren't phantom tab stops for keyboard/AT users.
+      d.tabIndex = -1;
       d.style.cssText =
         "position:absolute;left:50%;top:0;width:24px;height:24px;border-radius:50%;border:none;background:transparent;padding:0;margin:0;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;";
       const full = el.getAttribute("data-screen-label") || "";
