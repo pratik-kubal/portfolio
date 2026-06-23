@@ -86,7 +86,7 @@ export const projects: Project[] = [
     metric: "",
     metricCaption: "You can highlight any text on this page to ask Bella about it",
     metricCaptionIsHighlightDemo: true,
-    h3: "Or open an interactive chat at the bottom right of the page",
+    h3: "You can open an interactive chat at the bottom right of the page",
     body: "Candidates usually have to pick and choose what to put in a resume to the recruiter for a specific job, usually this takes practice and still might not accurate. This wastes time of both recruiter and the candidate. This time can be used either by recruiter to find better suited candidates or by candidates to apply for more jobs. Hence creating a assistant to answer exact questions helps recruiter and me to save time.",
     bullets: [
       "Created API Backend connected to Claude API to drive interactions",

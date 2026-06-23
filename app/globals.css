@@ -1459,14 +1459,7 @@
   padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
 .pk-card { flex: 1 1 0; min-width: 300px; max-width: 460px; padding: 7vh 0 0; }
-.pk-narr-label { margin: 0 0 10px; }
-.pk-narr-label.sticky {
-  position: sticky;
-  top: 72px;
-  z-index: 5;
-  padding: 10px 0;
-  background: var(--bg);
-}
+.pk-narr-label { margin: 0 0 10px; padding: 10px 0; }
 .pk-narr-label p {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -1507,6 +1500,13 @@
   letter-spacing: 0.03em;
 }
 .pk-metric small.pk-metric-hl { padding-bottom: 46px; }
+/* Drop the "highlight any text → Ask Bella" teaser on phones: text selection is
+   awkward on touch and the popover overflows the narrow column. This is the AI-
+   Engineering project's only metric caption (metric is empty), so hiding the whole
+   line leaves no gap. The real highlight-to-ask feature still works if used. */
+@media (max-width: 640px) {
+  .pk-metric:has(.pk-metric-hl) { display: none; }
+}
 .pk-h3 {
   font-family: var(--font-display);
   font-weight: 600;
