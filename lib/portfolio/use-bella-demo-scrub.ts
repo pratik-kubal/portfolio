@@ -2,7 +2,7 @@
 
 import { useEffect, type RefObject } from "react";
 import { useTheme } from "next-themes";
-import { loadAnime, loadRough } from "./engines";
+import { loadAnimeWhenVisible, loadRoughWhenVisible } from "./engines";
 import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
@@ -230,7 +230,7 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
           apply(proxy.p);
         }
       };
-      loadAnime().then((mod) => {
+      loadAnimeWhenVisible(root).then((mod) => {
         if (!disposed) animate = mod && mod.animate;
       });
       // Settle-into-focus beat (mirrors ring/paper's before→after): once the
@@ -306,7 +306,8 @@ export function useBellaDemoScrub(sectionRef: RefObject<HTMLElement | null>) {
     // (the sketched borders change heights) and re-apply the current progress.
     const fonts =
       document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-    Promise.all([loadRough(), fonts]).then(([rough]) => {
+    // loadRoughWhenVisible defers the repaint chunk until the section is on screen.
+    Promise.all([loadRoughWhenVisible(root), fonts]).then(([rough]) => {
       if (disposed || !rough) return;
       try {
         paintBellaRough(mount, rough);

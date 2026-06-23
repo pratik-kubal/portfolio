@@ -2,7 +2,7 @@
 
 import { useEffect, type RefObject } from "react";
 import { useTheme } from "next-themes";
-import { loadAnime, loadRough } from "./engines";
+import { loadAnimeWhenVisible, loadRoughWhenVisible } from "./engines";
 import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
@@ -306,7 +306,8 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
 
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    loadRough().then((r) => {
+    // Deferred until the section scrolls into view (see engines.ts).
+    loadRoughWhenVisible(scrolly).then((r) => {
       if (disposed || !r) return;
       rough = r;
       psBuildSheets();
@@ -332,7 +333,7 @@ export function usePaperStack(sectionRef: RefObject<HTMLElement | null>) {
     beforeEls.forEach((e) => (e.style.opacity = "1"));
     afterEls.forEach((e) => (e.style.opacity = "0"));
 
-    loadAnime().then((mod) => {
+    loadAnimeWhenVisible(scrolly).then((mod) => {
       if (disposed) return;
       const animate = mod && mod.animate;
       let transitioned = false;

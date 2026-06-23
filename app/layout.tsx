@@ -11,6 +11,13 @@ const siteUrl = "https://pratik-kubal.com";
 // JetBrains Mono) were dropped: their only consumer, components/privacy-policy.tsx,
 // isn't routed, so preloading them just delayed the Geist body font that gates
 // mobile LCP. If that legacy page is ever revived, re-add its fonts here.
+//
+// display:"swap" + next/font preload + adjustFontFallback (default): the hero h1
+// (Space Grotesk) / body (Geist) are the LCP elements. We A/B-tested display:"optional"
+// to skip the late font swap, but under applied throttling it was a wash (~2ms) —
+// once these are preloaded and the family count is small, the hero's LCP render delay
+// is render-path bound (render-blocking CSS), not font-swap bound. So swap stays
+// (keeps the brand font on the first visit) and the font isn't the lever to chase.
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
