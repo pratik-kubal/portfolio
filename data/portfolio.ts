@@ -26,7 +26,7 @@ export const hero = {
   subhead: "A Software Engineer based in Philadelphia, PA.",
   muted: "Involved in Pro bono volunteering for Philadelphia Nonprofits since 2024",
   body: "With five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
-  scrollHint: "See what I can do",
+  scrollHint: "What I can do",
   figureAlt: "Animated hand-drawn Möbius band.",
   // Möbius mount props (from the page's <dc-import>): R=2.6, w=0.8, t=0.48, speed=30, tilt=0.
   mobius: { R: 2.6, w: 0.8, t: 0.48, speed: 30, tilt: 0 },
