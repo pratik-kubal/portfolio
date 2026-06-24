@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type RefObject } from "react";
-import { loadAnime, loadRough } from "./engines";
+import { loadAnimeWhenVisible, loadRoughWhenVisible } from "./engines";
 import { headlineProgress } from "./headline-progress";
 
 const NS = "http://www.w3.org/2000/svg";
@@ -44,7 +44,8 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
     const onScrollFns: (() => void)[] = [];
 
     // ── rough.js orbit + node outlines (colors are CSS vars → theme-tracking) ──
-    loadRough().then((rough) => {
+    // Deferred until the section scrolls into view (see engines.ts).
+    loadRoughWhenVisible(scrolly).then((rough) => {
       if (disposed || !rough || !wire) return;
       const inkStroke = (el: Element) =>
         el.querySelectorAll("path").forEach((p) => {
@@ -103,7 +104,7 @@ export function useRingNarrative(sectionRef: RefObject<HTMLElement | null>) {
       };
     }
 
-    loadAnime().then((mod) => {
+    loadAnimeWhenVisible(scrolly).then((mod) => {
       if (disposed) return;
       const animate = mod && mod.animate;
       if (!animate) {

@@ -277,11 +277,32 @@ export function MobiusFigure() {
       last = performance.now();
       raf = requestAnimationFrame(loop);
     };
+    // rough.js is a lazy chunk; only fetch it the first time the figure is
+    // actually on screen. It's display:none on phones (see the .pk-hero-figwrap
+    // mobile rule), so the IntersectionObserver never reports it visible there —
+    // meaning mobile never downloads rough.js or runs the canvas loop.
+    let roughReq = false;
+    const ensureRough = () => {
+      if (roughReq || !alive || !visible) return;
+      roughReq = true;
+      import("roughjs")
+        .then((m) => {
+          const rough = (m as { default?: unknown }).default || m;
+          rc = (rough as { canvas: (c: HTMLCanvasElement) => RoughCanvas }).canvas(cv);
+          if (reduce) draw();
+          else startLoop();
+        })
+        .catch(() => {
+          roughReq = false;
+        });
+    };
     const io = new IntersectionObserver(
       (entries) => {
         visible = entries[0].isIntersecting;
-        if (visible) startLoop();
-        else if (raf) {
+        if (visible) {
+          ensureRough();
+          startLoop();
+        } else if (raf) {
           cancelAnimationFrame(raf);
           raf = 0;
         }
@@ -333,16 +354,6 @@ export function MobiusFigure() {
       e.preventDefault();
     };
     if (!reduce) el.addEventListener("pointerdown", onDown);
-
-    // rough.js loads async; poll until ready, then either animate or draw once.
-    import("roughjs")
-      .then((m) => {
-        const rough = (m as { default?: unknown }).default || m;
-        rc = (rough as { canvas: (c: HTMLCanvasElement) => RoughCanvas }).canvas(cv);
-        if (reduce) draw();
-        else startLoop();
-      })
-      .catch(() => {});
 
     return () => {
       alive = false;

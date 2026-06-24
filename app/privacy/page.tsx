@@ -79,8 +79,8 @@ export default function PrivacyPage() {
 
         <h3 className="pk-legal-h3">3.2 — Automatically collected information</h3>
         <p className="pk-legal-body">
-          Like most websites, the Site (and its hosting and analytics providers)
-          may automatically collect certain technical information when you visit,
+          Like most websites, the Site (and its hosting provider) may
+          automatically collect certain technical information when you visit,
           including:
         </p>
         <ul className="pk-legal-list">
@@ -95,9 +95,8 @@ export default function PrivacyPage() {
         <p className="pk-legal-body">
           The Site saves two small items in your browser&rsquo;s local storage:
           the theme you pick (light, dark, or noir) and the random session ID the
-          chat assistant uses. The visitor-analytics tool described below may set
-          its own cookies. No advertising cookies are used. For the full details,
-          see the{" "}
+          chat assistant uses. No advertising or third-party tracking cookies are
+          used. For the full details, see the{" "}
           <a className="pk-mlink" href="/cookies">
             Cookie
           </a>{" "}
@@ -111,7 +110,6 @@ export default function PrivacyPage() {
         </p>
         <ul className="pk-legal-list">
           <li><b>Anthropic (Claude API)</b> — generates the AI assistant&rsquo;s replies</li>
-          <li><b>Apollo.io</b> — a visitor-analytics tracker that helps me understand traffic in aggregate</li>
           <li><b>Vercel</b> — hosts the Site; <b>Neon</b> — hosts the database that stores chat questions</li>
           <li><b>Spotify</b> — powers the &ldquo;now playing&rdquo; card in the footer</li>
           <li><b>GitHub, LinkedIn, and X/Twitter</b> — linked profiles</li>
@@ -161,7 +159,7 @@ export default function PrivacyPage() {
           limited cases:
         </p>
         <ul className="pk-legal-list">
-          <li><b>Service providers</b> — the tools listed in section 3.4 (for example Anthropic, Apollo.io, Vercel, and Neon) that process data on my behalf to run the Site</li>
+          <li><b>Service providers</b> — the tools listed in section 3.4 (for example Anthropic, Vercel, and Neon) that process data on my behalf to run the Site</li>
           <li><b>Legal requirements</b> — if required by law, court order, or a government authority</li>
           <li><b>Protection of rights</b> — to protect the integrity of the Site or the rights and safety of others</li>
         </ul>

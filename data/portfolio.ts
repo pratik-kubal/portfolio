@@ -26,7 +26,7 @@ export const hero = {
   subhead: "A Software Engineer based in Philadelphia, PA.",
   muted: "Involved in Pro bono volunteering for Philadelphia Nonprofits since 2024",
   body: "With five years building the AI loan-document platform behind a top mortgage-tech SaaS.",
-  scrollHint: "See what I can do",
+  scrollHint: "What I can do",
   figureAlt: "Animated hand-drawn Möbius band.",
   // Möbius mount props (from the page's <dc-import>): R=2.6, w=0.8, t=0.48, speed=30, tilt=0.
   mobius: { R: 2.6, w: 0.8, t: 0.48, speed: 30, tilt: 0 },
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     metric: "",
     metricCaption: "You can highlight any text on this page to ask Bella about it",
     metricCaptionIsHighlightDemo: true,
-    h3: "Or open an interactive chat at the bottom right of the page",
+    h3: "You can open an interactive chat at the bottom right of the page",
     body: "Candidates usually have to pick and choose what to put in a resume to the recruiter for a specific job, usually this takes practice and still might not accurate. This wastes time of both recruiter and the candidate. This time can be used either by recruiter to find better suited candidates or by candidates to apply for more jobs. Hence creating a assistant to answer exact questions helps recruiter and me to save time.",
     bullets: [
       "Created API Backend connected to Claude API to drive interactions",

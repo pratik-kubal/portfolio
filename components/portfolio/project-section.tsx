@@ -9,8 +9,10 @@ function finalMetric(p: Project): string {
 }
 
 // Generic sticky-scroll metric card; the right sticky viz is passed as `viz`.
-// Animated hooks (data-narr-num / data-narr-h2 / data-narr-label) are read by the
-// per-section motion effects. With no JS / reduced motion the final value shows.
+// Animated hooks (data-narr-num / data-narr-h2) are read by the per-section
+// motion effects. With no JS / reduced motion the final value shows. The kicker
+// label is intentionally NOT tagged (no data-narr-label) and not sticky — it's a
+// plain static section label that scrolls with the card, not an animated element.
 export function ProjectSection({
   project,
   viz,
@@ -30,7 +32,7 @@ export function ProjectSection({
     >
       <div className="pk-split">
         <div className="pk-card">
-          <div data-narr-label="" className="pk-narr-label sticky">
+          <div className="pk-narr-label">
             <p>{project.kicker}</p>
           </div>
           <h2
