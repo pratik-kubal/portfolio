@@ -93,10 +93,11 @@ export default function PrivacyPage() {
 
         <h3 className="pk-legal-h3">3.3 — Cookies and local storage</h3>
         <p className="pk-legal-body">
-          The Site saves two small items in your browser&rsquo;s local storage:
-          the theme you pick (light, dark, or noir) and the random session ID the
-          chat assistant uses. No advertising or third-party tracking cookies are
-          used. For the full details, see the{" "}
+          The Site saves three small items in your browser&rsquo;s local storage:
+          the theme you pick (light, dark, or noir), the random session ID the
+          chat assistant uses, and a cached carbon estimate for the footer badge.
+          No advertising or third-party tracking cookies are used. For the full
+          details, see the{" "}
           <a className="pk-mlink" href="/cookies">
             Cookie
           </a>{" "}
@@ -112,6 +113,7 @@ export default function PrivacyPage() {
           <li><b>Anthropic (Claude API)</b> — generates the AI assistant&rsquo;s replies</li>
           <li><b>Vercel</b> — hosts the Site; <b>Neon</b> — hosts the database that stores chat questions</li>
           <li><b>Spotify</b> — powers the &ldquo;now playing&rdquo; card in the footer</li>
+          <li><b>Website Carbon</b> — measures the per-page CO<sub>2</sub> estimate shown in the footer badge</li>
           <li><b>GitHub, LinkedIn, and X/Twitter</b> — linked profiles</li>
         </ul>
       </Section>
