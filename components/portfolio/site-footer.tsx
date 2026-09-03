@@ -1,5 +1,6 @@
 import { footer } from "@/data/portfolio";
 import { SpotifyCard } from "./spotify-card";
+import { CarbonBadge } from "./carbon-badge";
 
 const isExternal = (href: string) => /^https?:|^mailto:/.test(href);
 
@@ -54,6 +55,8 @@ export function SiteFooter() {
 
         <div className="pk-copyright">
           <span>{footer.copyrightLeft}</span>
+          {/* Live per-page CO2 estimate — sits between the two copyright lines. */}
+          <CarbonBadge />
           <span>{footer.copyrightRight}</span>
         </div>
       </div>

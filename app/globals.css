@@ -884,6 +884,45 @@
   color: var(--muted);
 }
 
+/* Website Carbon badge. The vendor script injects its markup *and* a <style>
+   block inside #wcb, so these rules re-skin it with the .pk-root tokens (which
+   also covers Noir, a theme the vendor has no variant for). The extra
+   .carbonbadge class gives every selector below one more class than the vendor's
+   `#wcb #wcb_x` / `#wcb.wcb-d #wcb_x` rules, so they win on specificity. */
+.pk-root #wcb.carbonbadge {
+  --b1: var(--accent-text);
+  --b2: var(--line);
+  flex: 0 1 auto;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  color: var(--muted);
+}
+.pk-root #wcb.carbonbadge :is(#wcb_g, #wcb_a, #wcb_2) {
+  font-family: var(--font-mono);
+  border-radius: var(--radius-0);
+  margin: 0;
+}
+.pk-root #wcb.carbonbadge #wcb_g {
+  background: var(--surface);
+  color: var(--ink);
+  border: var(--line-w) solid var(--line);
+  border-right: 0;
+}
+.pk-root #wcb.carbonbadge #wcb_a {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  border: var(--line-w) solid var(--accent-fill);
+  border-left: 0;
+  font-weight: 500;
+}
+.pk-root #wcb.carbonbadge #wcb_a:hover { text-decoration: underline; }
+.pk-root #wcb.carbonbadge #wcb_2 {
+  color: var(--muted);
+  font-size: 0.95em;
+  margin-top: 4px;
+}
+
+
 /* ── VIZ columns (shared box + ring + paper-stack + bella demo) ───────────── */
 .pk-viz-box {
   position: relative;

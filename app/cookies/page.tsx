@@ -22,18 +22,21 @@ export default function CookiesPage() {
       </p>
       <p className="pk-legal-body">
         To keep things working, pratik-kubal.com (the &ldquo;Site&rdquo;) saves
-        two small items in your browser&rsquo;s local storage — not traditional
+        three small items in your browser&rsquo;s local storage — not traditional
         cookies, but the same idea. One remembers the theme you pick (light,
-        dark, or noir) so the Site looks the way you left it. The other is a
+        dark, or noir) so the Site looks the way you left it. Another is a
         random ID that lets the AI assistant (&ldquo;Bella&rdquo;) keep track of
-        a single conversation across messages. Neither is tied to your name or
-        email, and both stay on your device.
+        a single conversation across messages. The third caches the carbon
+        estimate shown in the footer badge so the page isn&rsquo;t re-measured on
+        every visit. None is tied to your name or email, and all stay on your
+        device.
       </p>
       <p className="pk-legal-body">
         The Site doesn&rsquo;t use any third-party advertising or
         visitor-tracking cookies. It does link to or embed third-party services —
-        such as GitHub, LinkedIn, and Spotify — that I don&rsquo;t control and
-        that may set their own cookies governed by their own terms.
+        such as GitHub, LinkedIn, Spotify, and Website Carbon — that I
+        don&rsquo;t control and that may set their own cookies governed by their
+        own terms.
       </p>
       <p className="pk-legal-body">
         You&rsquo;re in control. Most browsers let you block or delete cookies
